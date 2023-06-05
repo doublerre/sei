@@ -114,5 +114,12 @@
     </div>
 </body>
 <script src="{% static 'dist/assets/js/app.js' %}"></script>
-
+<script type="text/javascript">
+    document.addEventListener("DOMContentLoaded", () => {
+        const form = document.querySelector("form");
+        form.addEventListener("keydown", event => {
+            if(event.key === "Enter") event.preventDefault();
+        });
+    });
+</script>
 </html>
