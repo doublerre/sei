@@ -1,0 +1,114 @@
+{% extends 'vinculacion/perfil_base.html' %}
+{% load static %}
+
+{% block contenido_perfil %}
+
+<div class="row w-100 p-2 m-0">
+  <div class="col-md-4">
+    <div class="card">
+      <div class="card-header">
+        <h4>Agregar investigación</h4>
+      </div>
+      <div class="card-body">
+        <a href="{% url 'investigadores:investigacion_nuevo' %}"><span class="badge bg-success">Crear</span></a>
+      </div>
+    </div>
+  </div>
+<!--
+  <div class="col-md-4">
+    <div class="card">
+      <div class="card-header">
+        <h4>Cargar investigaciones desde google scholar</h4>
+      </div>
+      <div class="card-body">
+        <form class="form form-vertical" method="POST" action="{% url 'investigadores:investigaciones_fetch' %}">
+          {% csrf_token %}
+          <div class="form-body">
+            <div class="row">
+              <div class="col-12">
+                <div class="form-group">
+                  <label for="profile-url">Ingresa enlace a tu perfil de google scholar</label>
+                  <input class="form-control" name="profile-url" id="profile-url">
+                </div>
+              </div>
+
+              <div class="col-12 d-flex justify-content-end">
+                <button name="cargar" type="submit" class="btn btn-primary me-1 mb-1" data-bs-toggle="modal"
+                    data-bs-target="#exampleModalScrollable">
+                    Cargar investigaciones
+                </button>
+
+                scrolling content Modal
+                <div class="modal fade" id="exampleModalScrollable" tabindex="-1" role="dialog"
+                    aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
+                    <div class="modal-dialog modal-sm" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalScrollableTitle">Cargando investigaciones</h5>
+                            </div>
+                            <div class="modal-body d-flex flex-column align-items-center justify-content-center">
+                              <div class="spinner-border mb-4" style="width: 10rem; height: 10rem" role="status">
+                                <span class="visually-hidden">Loading...</span>
+                              </div>
+                              <p>Esto puede tardar varios minutos</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+-->
+
+<div class="row w-100 p-2 m-0 d-flex justify-content-center">
+  <div class="col-md-9">
+    <div class="card p-3">
+      <div class="table-responsive">
+          <table class="table table-lg">
+              <thead>
+                  <tr>
+                      <th>Título</th>
+                      <th>Opciones</th>
+                  </tr>
+              </thead>
+              <tbody>
+  {% for investigacion in object_list %}
+                  <tr>
+                    <td>{{investigacion.titulo}}</td>
+                    <td>{{investigacion.categorias.all|join:", "}}</td>
+                  </tr>
+  {% endfor %}
+              </tbody>
+          </table>
+      </div>
+      <div class="d-flex justify-content-center mt-3">
+      <ul class="pagination pagination-primary">
+          {% if page_obj.has_previous %}
+          <li class="page-item"><a class="page-link" href="?page={{ page_obj.previous_page_number }}">
+                  <span aria-hidden="true"><i class="bi bi-chevron-left"></i></span>
+              </a></li>
+          <li class="page-item"><a class="page-link" href="?page={{ page_obj.previous_page_number }}">{{page_obj.previous_page_number}}</a></li>
+          {% endif %}
+
+          <li class="page-item active"><a class="page-link" href="#">{{page_obj.number}}</a></li>
+
+          {% if page_obj.has_next %}
+          <li class="page-item"><a class="page-link" href="?page={{ page_obj.next_page_number }}">{{page_obj.next_page_number}}</a></li>
+          <li class="page-item"><a class="page-link" href="?page={{ page_obj.next_page_number }}">
+                  <span aria-hidden="true"><i class="bi bi-chevron-right"></i></span>
+              </a></li>
+          {% endif %}
+      </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}
+
+{% block elemento_activo %}investigaciones{% endblock %}

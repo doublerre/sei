@@ -1,0 +1,22 @@
+{% extends 'administracion/base.html' %}
+
+{% block contenido %}
+<section class="section">
+  <div class="card">
+    <div class="card-header">
+      <h4 class="card-title">¿Estás seguro de que deseas eliminar a el/la {{nombre_modelo}} "{{object}}"?</h4>
+    </div>
+    <div class="card-body">
+      <form method="POST">
+        {% csrf_token %}
+        {{ form }}
+        <button type="submit" name="confirmar" class="btn btn-danger me-1 mb-1">Confirmar</button>
+      </form>
+    </div>
+  </div>
+
+</section>
+
+{% endblock %}
+
+{% block marcar_activo %}tablas{% endblock %}

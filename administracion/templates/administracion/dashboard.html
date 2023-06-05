@@ -1,0 +1,107 @@
+{% extends 'administracion/base.html' %}
+{% load static %}
+
+{% block contenido %}
+
+{% for message in messages %}
+{% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR %}
+<div class="alert alert-danger">{{message}}</div>
+{% else %}
+<div class="alert alert-success">{{message}}</div>
+{% endif %}
+{% endfor %}
+
+<section class="section">
+  <div class="row">
+    <div class="col-4">
+      <div class="card">
+        <div class="card-body d-flex justify-content-center">
+          <a href="{% url 'administracion:investigadores_solicitud' %}" type="button" class="btn btn-success">
+            Solicitudes investigadores <span class="badge bg-transparent">{{solicitudes.investigadores}}</span>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-4">
+      <div class="card">
+        <div class="card-body d-flex justify-content-center">
+          <a href="{% url 'administracion:empresas_solicitud' %}" type="button" class="btn btn-success">
+            Solicitudes empresas <span class="badge bg-transparent">{{solicitudes.empresas}}</span>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-4">
+      <div class="card">
+        <div class="card-body d-flex justify-content-center">
+          <a href="{% url 'administracion:instituciones_educativas_solicitud' %}" type="button" class="btn btn-success">
+            Solicitudes instituciones educativas <span
+              class="badge bg-transparent">{{solicitudes.instituciones_educativas}}</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card">
+        <div class="card-header">
+          Usuarios registrados por mes
+        </div>
+        <div class="card-body">
+          <div id="usuarios-mes"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-6">
+      <div class="card">
+        <div class="card-header">
+          Distribución usuarios
+        </div>
+        <div class="card-body">
+          <div id="usuarios-distribucion"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-6">
+      <div class="card">
+        <div class="card-header">
+          Actividad último mes
+        </div>
+        <div class="card-body">
+          <div id="actividad-usuarios"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}
+
+{% block scripts %}
+<script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+<script src="{% static 'js/graficas.js' %}"></script>
+{% endblock %}
+
+{% block marcar_activo %}dashboard{% endblock %}
+
+{% block extra_scripting %}
+renderizarGraficaUsuariosMes(
+[{% for fecha_mes, numeros_mes in registros_mes %} {{numeros_mes}}, {% endfor %}],
+[{% for fecha_mes, numeros_mes in registros_mes %} "{{fecha_mes}}", {% endfor %}]
+);
+renderizarGraficaUsuariosDistribucion(
+[{% for fecha_mes, numeros_mes in usuarios_tipo %} {{numeros_mes}}, {% endfor %}],
+[{% for fecha_mes, numeros_mes in usuarios_tipo %} "{{fecha_mes}}", {% endfor %}]
+);
+renderizarGraficaActividadUsuarios(
+[{% for label, numeros_mes in actividad_usuarios %} {{numeros_mes}}, {% endfor %}],
+[{% for label, numeros_mes in actividad_usuarios %} "{{label}}", {% endfor %}]
+);
+{% endblock %}

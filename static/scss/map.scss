@@ -1,0 +1,145 @@
+@import "colorscheme.scss";
+
+.theme-dark, .theme-light {
+  .screen-container {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .main-scroll {
+    width: 100%;
+    flex-grow: 1;
+    position: relative;
+    overflow: scroll;
+    display: flex;
+    flex-direction: column;
+  }  
+  
+  .notificador {
+    width: 400px;
+    z-index: 10000;
+    right: 0;
+  }
+
+  .titulo-seccion {
+    margin: 50px;
+  }
+  
+  .noticia {
+    min-height: 600px;
+    border: 1px solid lightgray;
+  
+    img {
+      object-fit: cover;
+      width: 100%;
+      height: 250px;
+    }
+  }  
+  
+  .filtro {
+    width: 300px;
+    margin-right: 10px;
+  }
+  
+  .map {
+    flex-grow: 1;
+  }
+
+  .barra-precision {
+    width: 100%;
+    display: flex;
+    margin: 0;
+    padding: 0;
+  }
+
+  .nivel-precision {
+    background: none;
+    color: inherit;
+    border: 1px solid lightgray;
+    padding: 0;
+    font: inherit;
+    cursor: pointer;
+    outline: inherit;
+    flex: 1 1 0px;
+    color: #455a64;
+  }
+
+  .nivel-0.activo {
+    background-color: #CBCBCB;
+  }
+
+  .nivel-1.activo {
+    background-color: #81D87A;
+  }
+
+  .nivel-2.activo {
+    background-color: #72B4E3;
+  
+  }
+
+  .nivel-3.activo {
+    background-color: #D47EF8;
+  }
+
+  .nivel-4.activo {
+    background-color: #F1E37D;
+  }
+
+  .filtro-btn-out {
+    position: absolute;
+    backgroud-color: white;
+    top: 80px;
+    left: 0px;
+    margin: 10px;
+    z-index: 1000;
+  }  
+
+  .perfil-opcion {
+    h2 {
+      color: white;
+    }
+    background-image: url("https://cdn.searchenginejournal.com/wp-content/uploads/2020/02/3-alternative-link-building-strategies-to-use-now-5e4e62aec939e.png");
+    background-size: auto 100%;
+    background-repeat: no-repeat;
+  }
+
+  .oculto {
+    display: none !important;
+  }
+  
+  @media (max-width:884px) {
+    .app-navbar {
+      ul {
+        flex-direction: column;
+
+        li {
+          display: none;
+        }
+        
+        .menu-item-show {
+          display: flex;
+        }
+      
+        .toggle-menu {
+          display: flex;
+        }
+      }
+    }
+
+  }
+}
+
+.theme-dark {
+  .leaflet-popup-content-wrapper {
+    background-color: #1E1E2D;
+  }
+}
+
+.leaflet-popup-content-wrapper {
+  color: inherit;
+  
+  * {
+    color: inherit;
+  }
+}

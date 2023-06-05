@@ -1,0 +1,487 @@
+/*
+    0. Globales
+    1. Index
+    2. Login
+    3. Empresas
+*/
+
+/*
+============
+    Globales
+============
+*/
+html {
+    font-size: 62.5%;
+    box-sizing: border-box;
+}
+
+*,
+*:before,
+*:after {
+    box-sizing: inherit;
+}
+
+body {
+    font-family: "Roboto", sans-serif;
+    font-size: 1.6rem;
+}
+
+p {
+    color: #000;
+    font-size: 2rem;
+}
+
+.contenedor {
+    width: 95%;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+a {
+    text-decoration: none;
+}
+
+img {
+    max-width: 100%;
+    display: block;
+}
+
+h1,
+h2,
+h3 {
+    margin: 0 0 5rem 0;
+}
+
+h1 {
+    font-size: 4rem;
+}
+
+h2 {
+    font-size: 3.6rem;
+}
+
+h3 {
+    font-size: 3.2rem;
+}
+
+
+
+/*
+===========
+    Index
+===========
+*/
+
+/* Header */
+.header {
+    display: flex;
+    flex-direction: column;
+    padding: 5rem 0;
+    align-items: center;
+}
+
+@media (min-width: 1024px) {
+    .header {
+        flex-direction: row;
+        justify-content: space-between;
+    }
+}
+
+.header__logo {
+    width: 30rem;
+    margin-bottom: 5rem;
+}
+
+@media (min-width: 1024px) {
+    .header__logo {
+        margin-bottom: 0;
+    }
+}
+
+/* Navegación */
+.navegacion {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
+    width: 100%;
+}
+
+@media (min-width: 1024px) {
+    .navegacion {
+        width: auto;
+        flex-direction: row;
+    }
+}
+
+.navegacion__link {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #000;
+}
+
+.navegacion__link--registrar {
+    background-color: #83292b;
+    font-size: 2rem;
+    padding: 1.2rem 3rem;
+    border-radius: 1rem;
+    font-weight: 700;
+    display: block;
+    width: 100%;
+    text-align: center;
+    color: #FFFFFF;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+    border: none;
+}
+
+.navegacion__link--registrar:hover {
+    cursor: pointer;
+    background-color: #e22331;
+}
+
+@media (min-width: 768px) {
+    .navegacion__link--registrar {
+        width: auto;
+    }
+}
+
+
+/* Formulario de busqueda index */
+@media (min-width: 768px) {
+    .formulario__grid {
+        display: grid;
+        gap: 5rem;
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+.formulario__contenido {
+    background-color: #83292b;
+    padding: 5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+}
+
+.formulario__heading {
+    color: #FFFFFF;
+    text-align: center;
+}
+
+.formulario__campo {
+    margin-bottom: 1rem;
+}
+
+.formulario__label {
+    display: block;
+    text-transform: uppercase;
+    color: #FFFFFF;
+    margin: 1rem 0;
+}
+
+.formulario__input {
+    width: 100%;
+    padding: 1.5rem;
+    border: none;
+}
+
+.formulario__submit {
+    margin-top: 2rem;
+    background-color: #455a64;
+    font-size: 2rem;
+    padding: 1.2rem 3rem;
+    border-radius: 1rem;
+    font-weight: 700;
+    display: block;
+    width: 100%;
+    text-align: center;
+    color: #FFFFFF;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+    border: none;
+}
+
+.formulario__submit:hover {
+    cursor: pointer;
+    background-color: #303f46;
+}
+
+@media (min-width: 768px) {
+    .formulario__submit {
+        width: auto;
+    }
+}
+
+@media (min-width: 768px) {
+    .formulario__submit {
+        width: 100%;
+    }
+}
+
+.formulario__imagen-contenedor {
+    margin-top: 5rem;
+    display: flex;
+    justify-content: center;
+}
+
+.formulario__imagen {
+    width: 30rem;
+}
+
+@media (min-width: 1024px) {
+    .formulario__imagen {
+        width: 100%;
+    }
+}
+
+/* wave */
+.pasos {
+    margin-top: 5rem;
+}
+
+.pasos__wave {
+    margin-bottom: -1px;
+}
+
+/*
+===========
+    Login
+===========
+*/
+.body-login {
+    font-family: 'Roboto', sans-serif;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-image: url(../img/fondologin.png);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    color: #fff;
+}
+.body-login p {
+    color: #fff;
+    font-family: 'Roboto', sans-serif;
+}
+
+.container-form {
+    width: 90%;
+    height: 105vh;
+    display: flex;
+    justify-content: space-around;
+    transition:  all .5s ease-out;
+}
+
+.welcome-back {
+    display: flex;
+    align-items: center;
+    text-align: center;
+}
+
+.message {
+    padding: 1.5rem;
+}
+
+.message h2 {
+    font-size: 2.7rem;
+    padding: 1.5rem 0;
+}
+
+.message button {
+    padding: 1.5rem;
+    font-weight: 400;
+    background-color: #4ab2ee;
+    border-radius: 2rem;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    font-size: 2rem;
+    margin-top: 2rem;
+    transition: all .3s ease-in;
+    color: #fff;
+}
+
+.message button:hover {
+    background-color: #64daf8;
+}
+
+.form {
+    width: 400px;
+    padding: 1.5rem;
+    margin: 2.5rem;
+    background-color: rgb(51, 51, 51, 0.602);
+    text-align: center;
+}
+
+.create-account {
+    padding: 3.5rem 0;
+    font-size: 2.5rem;
+    margin-bottom: 1.8rem;
+}
+
+.iconos {
+    width: 250px;
+    display: flex;
+    justify-content: space-around;
+    margin: auto;
+}
+
+.border-icon {
+    height: 20px;
+    width: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2.2rem;
+    border: solid thin white;
+    border-radius: 50%;
+    font-size: 2.5rem;
+    transition: all .3s ease-in;
+}
+
+.border-icon:hover {
+    background-color: #4adbee;
+    cursor: pointer;
+}
+
+.cuenta-gratis {
+    padding: 2rem 0;
+}
+
+.form input, .tipoCuenta {
+    width: 70%;
+    display: block;
+    margin: auto;
+    margin-bottom: 2rem;
+    background-color: transparent;
+    border: none;
+    border-bottom: white thin solid;
+    text-align: center;
+    outline: none;
+    padding: .2rem 0;
+    font-size: 1.4rem;
+    color: white;
+}
+
+.form input[type="button"], .tipoCuenta {
+    width: 60%;
+    margin: auto;
+    border: solid thin white;
+    padding: 1.2rem;
+    border-radius: 2rem;
+    background-color: white;
+    font-weight: 600;
+    margin-top: 3rem;
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: #222;
+}
+
+.tipoCuenta { 
+    margin-top: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.sign-in {
+    height: 90vh;
+    position: absolute;
+    opacity: 0;
+    visibility: hidden;
+}
+
+.sign-in.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.sign-up.active {
+    opacity: 0;
+    visibility: hidden;
+}
+
+/*
+ ===========
+  Empresas
+ ===========
+*/
+.empresas {
+    background-color: #eceeef;
+    padding: 5rem 0;
+    height: 100%;
+    overflow: scroll;
+  }
+  .empresas__heading {
+    text-align: center;
+    color: #455a64;
+  }
+  @media (min-width: 768px) {
+    .empresas__grid {
+      display: grid;
+      gap: 4rem;
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+  
+  .empresa {
+    background-color: #FFFFFF;
+    padding: 4rem;
+    margin-bottom: 2rem;
+    box-shadow: 0px 0px 2.6rem -0.8rem #99a4a9;
+    border-radius: 1rem;
+  }
+  .empresa:last-of-type {
+    margin-bottom: 0;
+  }
+  @media (min-width: 768px) {
+    .empresa {
+      margin-bottom: 0;
+    }
+  }
+  @media (min-width: 768px) {
+    .empresa__grid {
+      display: grid;
+      grid-template-columns: 2fr 3fr;
+      gap: 2rem;
+      align-items: center;
+    }
+  }
+  @media (min-width: 1024px) {
+    .empresa__grid {
+      grid-template-columns: 1fr 3fr;
+      gap: 4rem;
+    }
+  }
+  .empresa__imagen {
+    max-width: 20rem;
+    margin: 0 auto 2rem auto;
+  }
+  .empresa__contenido {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  @media (min-width: 768px) {
+    .empresa__contenido {
+      align-items: flex-start;
+    }
+  }
+  .empresa__nombre {
+    margin: 1rem 0;
+    color: #83292b;
+    font-size: 2.4rem;
+  }
+  .empresa__descripcion {
+    margin: 0.5rem 0;
+    text-align: center;
+    font-size: 1.6rem;
+    color: #455a64;
+    line-height: 1.7;
+  }
+  @media (min-width: 768px) {
+    .empresa__descripcion {
+      text-align: left;
+    }
+  }
+  

@@ -1,0 +1,88 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Inicio de sesión</title>
+  <link rel="stylesheet" href="{% static 'dist/assets/css/main/app.css'%}">
+  <link rel="stylesheet" href="{%static 'dist/assets/css/pages/auth.css'%}">
+  <link rel="shortcut icon" href="{% static 'dist/assets/images/logo/favicon.png' %}" type="image/png">
+</head>
+
+<body>
+  <div id="auth">
+
+    <div class="row h-100">
+      <div class="col-lg-5 col-12">
+        <div style="padding: 2.5rem 10%;">
+          <div class="mb-3 d-flex justify-content-center">
+            <a href="{% url 'vinculacion:dashboard' %}"><img src="{% static 'img/Logocozcyt.jpg' %}"
+                alt="Logo" style="height: 70px;"></a>
+          </div>
+          <h3>Iniciar sesión</h3>
+          <p class="mb-3" style="font-size: 1.1rem">Bienvenido al Sistema Estatal de Investigadores de Zacatecas</p>
+
+          {% for message in messages %}
+          {% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR %}
+          <div class="alert alert-danger">{{message}}</div>
+          {% else %}
+          <div class="alert alert-success">{{message}}</div>
+          {% endif %}
+          {% endfor %}
+
+          {% if form.non_field_errors %}
+          <div class="alert alert-danger">
+            Por favor introduzca nombre de usuario y contraseña correctos. Note que ambos
+             campos son estrictos en relación a diferencias entre mayúsculas y minúsculas.
+          </div>
+          {% endif %}
+
+          <form method="post">
+            {% csrf_token %}
+            <div class="form-group position-relative has-icon-left mb-3">
+              <input required="" type="text" name="username" class="form-control form-control-l" placeholder="Nombre de usuario">
+              <div class="form-control-icon">
+                <i class="bi bi-person"></i>
+              </div>
+              {% for error in form.username.errors %}
+              <div class="alert alert-danger">{{error}}</div>
+              {% endfor %}
+            </div>
+            <div class="form-group position-relative has-icon-left mb-3">
+              <input required="" type="password" name="password" class="form-control form-control-l" placeholder="Contraseña">
+              <div class="form-control-icon">
+                <i class="bi bi-shield-lock"></i>
+              </div>
+              {% for error in form.password.errors %}
+              <div class="alert alert-danger">{{error}}</div>
+              {% endfor %}
+            </div>
+
+            <button class="btn btn-primary btn-block shadow-lg mt-3">Iniciar sesión</button>
+          </form>
+          <div class="text-center mt-4 text-lg fs-5">
+            <p class="text-gray-600">¿Aún no tiene cuenta? <a href="{% url 'usuarios:registrar' %}"
+                class="font-bold">Registrarse</a>.</p>
+            <!--<p><a class="font-bold" href="auth-forgot-password.html">Forgot password?</a>.</p>-->
+          </div>
+          <div class="text-center mt-4 text-lg fs-5">
+            <p class="text-gray-600">¿Olvidó su contraseña? <a href="{% url 'password_reset' %}"
+                class="font-bold">Restablecer contraseña</a>.</p>
+            <!--<p><a class="font-bold" href="auth-forgot-password.html">Forgot password?</a>.</p>-->
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-7 d-none d-lg-block">
+        <div id="auth-right">
+
+        </div>
+      </div>
+    </div>
+
+  </div>
+</body>
+
+</html>

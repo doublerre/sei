@@ -1,0 +1,70 @@
+{% extends 'administracion/base.html' %}
+{% load static %}
+
+{% block extracss %}
+<link rel="stylesheet" href="{% static 'dist/assets/css/pages/datatables.css' %}">
+<link rel="stylesheet" href="{% static 'dist/assets/css/pages/fontawesome.css' %}">
+{% endblock %}
+
+{% block contenido %}
+<section class="section">
+  <div class="card">
+    <div class="card-header">
+      <h4 class="card-title">Registrar nueva institución educativa</h4>
+      {% for message in messages %}
+      {% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR %}
+      <div class="alert alert-danger">{{message}}</div>
+      {% else %}
+      <div class="alert alert-success">{{message}}</div>
+      {% endif %}
+      {% endfor %}
+    </div>
+    <div class="card-body">
+      <a href="{% url 'administracion:instituciones_educativas_nuevo' %}"><span
+          class="badge bg-success">Crear</span></a>
+    </div>
+  </div>
+
+</section>
+
+<!-- Basic Tables start -->
+<section class="section">
+  <div class="card">
+    <div class="card-header">
+      <h4 class="card-title">Instituciones Educativas</h4>
+    </div>
+    <div class="card-body">
+      <table class="table" id="table1" name="instituciones-educativas">
+        <thead>
+          <tr>
+            <th>Encargado</th>
+            <th>Nombre empresa</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for institucion_educativa in instituciones_educativas %}
+          <tr>
+            <td>{{institucion_educativa.encargado.username}}</td>
+            <td>{{institucion_educativa.nombre_institucion}}</td>
+            <td>
+              <a href="{% url 'administracion:instituciones_educativas_editar' institucion_educativa.pk %}"><span
+                  class="badge bg-info">Editar</span></a>
+              <a href="{% url 'administracion:instituciones_educativas_eliminar' institucion_educativa.pk %}"><span
+                  class="badge bg-danger">Eliminar</span></a>
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+</section>
+{% endblock %}
+
+{% block scripts %}
+<script src="{% static 'dist/assets/js/extensions/datatables.js' %}"></script>
+{% endblock %}
+
+{% block marcar_activo %}tablas{% endblock %}

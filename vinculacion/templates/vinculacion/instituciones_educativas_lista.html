@@ -1,0 +1,77 @@
+{% extends 'vinculacion/base.html' %}
+{% load static %}
+
+{% block extraresources %}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+{% endblock %}
+
+{% block contenido %}
+
+<div class="d-flex flex-column justify-content-center align-items-center">
+
+  <h1 class="titulo-seccion">Instituciones educativas</h1>
+
+  <div class="row w-75">
+
+    {% for institucion_educativa in instituciones %}
+    <div class="col-md-6">
+      <div class="card">
+        <div class="row no-gutters">
+          <div class="col-4">
+            {% if institucion_educativa.imagen %}
+            <img src="{{MEDIA_URL}}/{{institucion_educativa.imagen}}" class="card-img m-2" alt="...">
+            {% else %}
+            <img src="{% static 'img/empresa.jpg' %}" class="card-img m-2" alt="...">
+            {% endif %}
+          </div>
+          <div class="col-8">
+            <div class="card-body">
+              <h5 class="card-title">{{institucion_educativa.encargado.username|capfirst}}</h5>
+              <p class="card-text">
+              </p>
+            </div>
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item">Especialidades: {{institucion_educativa.especialidades.all|join:", "}}</li>
+              {% if user.tipo_usuario.tipo == "Investigador" and institucion_educativa.es_posible_solicitar == True%}
+              <li class="list-group-item">
+                <a href="{% url 'instituciones_educativas:crear_solicitud_ingreso' institucion_educativa.pk %}" class="btn btn-info">Solicitar ingreso</a>
+              </li>
+              {% endif %}
+              {% if user.tipo_usuario.tipo == "Investigador" and institucion_educativa.es_miembro == True%}
+                <li class="list-group-item"><span class="badge bg-light-success">Miembro</span></li>
+              {% endif %}
+              {% if user.tipo_usuario.tipo == "Investigador" and institucion_educativa.es_posible_solicitar == False%}
+                <li class="list-group-item"><span class="badge bg-light-warning">Solicitud enviada</span></li>
+              {% endif %}
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+
+    <div class="d-flex justify-content-center mt-3">
+    <ul class="pagination pagination-primary">
+        {% if instituciones.has_previous %}
+        <li class="page-item"><a class="page-link" href="?page={{ instituciones.previous_page_number }}">
+                <span aria-hidden="true"><i class="bi bi-chevron-left"></i></span>
+            </a></li>
+        <li class="page-item"><a class="page-link" href="?page={{ instituciones.previous_page_number }}">{{instituciones.previous_page_number}}</a></li>
+        {% endif %}
+
+        <li class="page-item active"><a class="page-link" href="#">{{instituciones.number}}</a></li>
+
+        {% if instituciones.has_next %}
+        <li class="page-item"><a class="page-link" href="?page={{ instituciones.next_page_number }}">{{instituciones.next_page_number}}</a></li>
+        <li class="page-item"><a class="page-link" href="?page={{ instituciones.next_page_number }}">
+                <span aria-hidden="true"><i class="bi bi-chevron-right"></i></span>
+            </a></li>
+        {% endif %}
+    </ul>
+    </div>
+
+  </div>
+
+</div>
+
+{% endblock %}

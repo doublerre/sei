@@ -1,0 +1,187 @@
+{% load static %}
+{% load user_extras %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title></title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  {% block extraresources %}
+  {% endblock %}
+  <link rel="stylesheet" href="{% static 'dist/assets/css/main/app.css' %}">
+  <link rel="stylesheet" href="{% static 'dist/assets/css/main/app-dark.css' %}">
+  <link rel="shortcut icon" href="{% static 'dist/assets/images/logo/favicon.png' %}" type="image/png">
+  <link rel="stylesheet" href="{% static 'css/map.css' %}">
+</head>
+
+<body>
+
+  <div id="app">
+    <div id="main" class="layout-horizontal screen-container">
+      <header>
+        <div class="header-top">
+          <div class="container">
+            <div class="logo">
+              <a href="{% url 'vinculacion:dashboard' %}"><img src="{% static 'img/Logocozcyt.jpg' %}" alt="Logo"></a>
+            </div>
+            <div class="header-top-right">
+
+              <div class="dropdown">
+                <a href="#" id="topbarUserDropdown"
+                  class="user-dropdown d-flex align-items-center dropend dropdown-toggle " data-bs-toggle="dropdown"
+                  aria-expanded="false">
+                  <div class="avatar avatar-md2">
+                    {% if user|user_image %}
+                    <img src="{{MEDIA_URL}}/{{user|user_image}}" alt="Avatar">
+                    {% else %}
+                    <img src="{% static 'dist/assets/images/faces/1.jpg' %}" alt="Avatar">
+                    {% endif %}
+                  </div>
+                  <div class="text">
+                    <h6 class="user-dropdown-name">{{user.username|capfirst}}</h6>
+                    <p class="user-dropdown-status text-sm text-muted">{% if user.tipo_usuario %}{{user.tipo_usuario.tipo}}{% else %}Visitante{% endif %}</p>
+                  </div>
+                </a>
+                <ul class="dropdown-menu dropdown-menu-end shadow-lg" aria-labelledby="topbarUserDropdown">
+                  <li><a class="dropdown-item" href="{% url 'vinculacion:perfil' %}">{% if user.is_staff %}Administración{% else %}Perfil{%endif%}</a></li>
+                  <li>
+                    <hr class="dropdown-divider">
+                  </li>
+                  <li><a class="dropdown-item" href="{% url 'administracion:logout' %}">Cerrar sesión</a></li>
+                </ul>
+              </div>
+
+              <!-- Burger button responsive -->
+              <a href="#" class="burger-btn d-block d-xl-none">
+                <i class="bi bi-justify fs-3"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+        <nav class="main-navbar">
+          <div class="container">
+            <ul>
+
+              <li class='menu-item'>
+                <a class="menu-link">
+                  <i class="bi bi-brightness-high-fill"></i>
+                  <div class="form-check form-switch fs-6">
+                    <input class="form-check-input  me-0" type="checkbox" id="toggle-dark">
+                    <label class="form-check-label"></label>
+                  </div>
+                  <i class="bi bi-moon"></i>
+                </a>
+              </li>
+
+              <!--
+              <li class="menu-item  ">
+                <a href="{% url 'vinculacion:dashboard' %}" class='menu-link'>
+                  <i class="bi bi-house-fill"></i>
+                  <span>Inicio</span>
+                </a>
+              </li>
+              -->
+
+              <li class='menu-item'>
+                <a class="menu-link" name="perfil" href="{% url 'vinculacion:perfil' %}">
+                  <i class="bi bi-person-fill"></i>
+                  <span>{% if user.is_staff %}Administración{% else %}Perfil{%endif%}</span>
+                </a>
+              </li>
+
+              <li class="menu-item active has-sub">
+                <a name="usuarios" href="#" class='menu-link'>
+                  <i class="bi bi-grid-1x2-fill"></i>
+                  <span>Usuarios</span>
+                </a>
+                <div class="submenu ">
+                  <!-- Wrap to submenu-group-wrapper if you want 3-level submenu. Otherwise remove it. -->
+                  <div class="submenu-group-wrapper">
+
+
+                    <ul class="submenu-group">
+                      <li class="submenu-item  ">
+                        <a href="{% url 'investigadores:investigadores_lista' %}" class='submenu-link'>Investigadores</a>
+                      </li>
+
+                      <li class="submenu-item  ">
+                        <a name="empresas" href="{% url 'empresas:empresas_lista' %}" class='submenu-link'>Empresas</a>
+                      </li>
+
+                      <li class="submenu-item  ">
+                        <a href="{% url 'instituciones_educativas:instituciones_educativas_lista' %}"
+                          class='submenu-link'>Instituciones Educativas</a>
+                      </li>
+                    </ul>
+
+
+                  </div>
+                </div>
+              </li>
+
+              <li class='menu-item'>
+                <a name="noticias" class="menu-link" href="{% url 'vinculacion:noticias' %}">
+                  <i class="bi bi-envelope-paper-fill"></i>
+                  <span>Noticias</span>
+                </a>
+              </li>
+
+              <li class='menu-item'>
+                <a class="menu-link" href="{% url 'vinculacion:contacto' %}">
+                  <i class="bi bi-ui-radios"></i>
+                  <span>Contacto</span></a>
+              </li>
+              <li class='menu-item'>
+                <a class="menu-link" href="{% url 'vinculacion:acerca_de' %}">
+                  <i class="bi bi-chat-square-fill"></i>
+                  <span>Acerca de</span>
+                </a>
+              </li>
+
+            </ul>
+          </div>
+        </nav>
+
+      </header>
+
+      <div class="main-scroll">
+        <div class="position-absolute notificador p-3">
+          {% for message in messages %}
+          {% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR %}
+          <div class="alert alert-danger alert-dismissible show fade">{{message}}<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button></div>
+          {% else %}
+          <div class="alert alert-success alert-dismissible show fade">{{message}}<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button></div>
+          {% endif %}
+          {% endfor %}
+        </div>
+        {% block contenido %}
+        {% endblock %}
+      </div>
+    </div>
+  </div>
+
+  <script src="{% static 'dist/assets/js/app.js' %}"></script>
+  <script src="{% static 'dist/assets/js/pages/horizontal-layout.js' %}"></script>
+  <script src="{% static 'js/toggleMenu.js' %}"></script>
+
+  {% block scripts %}
+  {% endblock %}
+
+  <footer class="flex-shrink-0 py-4">
+    <div class="container d-flex justify-content-between align-items-center">
+      <div>
+        <img src="{% static 'img/gplv3.png'%}" alt="Licencia GPLv3" style="height: 50px;">
+      </div>
+      <div class="text-center">
+        <small>Desarrollado en LABSOL - 2022</small>
+      </div>
+      <div>
+        <img src="{% static 'dist/assets/images/logo/logo.png'%}" alt="Logo LABSOL" style="height: 50px;">
+      </div>
+    </div>
+  </footer>
+
+</body>
+
+</html>

@@ -1,0 +1,71 @@
+{% extends 'administracion/base.html' %}
+{% load static %}
+
+{% block extracss %}
+<link rel="stylesheet" href="{% static 'dist/assets/css/pages/datatables.css' %}">
+<link rel="stylesheet" href="{% static 'dist/assets/css/pages/fontawesome.css' %}">
+{% endblock %}
+
+{% block contenido %}
+<section class="section">
+  <div class="card">
+    <div class="card-header">
+      <h4 class="card-title">Registrar nueva investigación</h4>
+      {% for message in messages %}
+      {% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR %}
+      <div class="alert alert-danger">{{message}}</div>
+      {% else %}
+      <div class="alert alert-success">{{message}}</div>
+      {% endif %}
+      {% endfor %}
+    </div>
+    <div class="card-body">
+      <a href="{% url 'administracion:investigaciones_nuevo' %}"><span class="badge bg-success">Crear</span></a>
+    </div>
+  </div>
+
+</section>
+
+<!-- Basic Tables start -->
+<section class="section">
+  <div class="card">
+    <div class="card-header">
+      <h4 class="card-title">Investigaciones</h4>
+    </div>
+    <div class="card-body">
+      <table class="table" id="table1">
+        <thead>
+          <tr>
+            <th>Titulo</th>
+            <th>Categorías</th>
+            <th>Autores</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for investigacion in investigaciones %}
+          <tr>
+            <td>{{investigacion.titulo}}</td>
+            <td>{{investigacion.categorias.all|slice:"3"|join:", "}}{% if investigacion.categorias.all.count > 3 %}...{% endif %}</td>
+            <td>{{investigacion.autores.all|slice:"3"|join:", "}}{% if investigacion.autores.all.count > 3 %}...{% endif %}</td>
+            <td>
+              <a href="{% url 'administracion:investigaciones_editar' investigacion.pk %}"><span
+                  class="badge bg-info">Editar</span></a>
+              <a href="{% url 'administracion:investigaciones_eliminar' investigacion.pk %}"><span
+                  class="badge bg-danger">Eliminar</span></a>
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+</section>
+{% endblock %}
+
+{% block scripts %}
+<script src="{% static 'dist/assets/js/extensions/datatables.js' %}"></script>
+{% endblock %}
+
+{% block marcar_activo %}tablas{% endblock %}

@@ -1,0 +1,51 @@
+{% extends 'vinculacion/perfil_base.html' %}
+{% load static %}
+
+{% block contenido_perfil %}
+
+<div class="row w-100 p-2 m-0">
+
+<section class="section">
+  <div class="card">
+    <div class="card-header">
+      <h4 class="card-title">Miembros</h4>
+    </div>
+    <div class="card-body">
+      <table class="table" id="table1">
+        <thead>
+          <tr>
+            <th>Investigador</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for miembro in miembros %}
+            <tr>
+              <td>
+                <div class="d-flex align-items-center overflow-auto">
+                  <div class="avatar avatar-xl">
+                    <img src="{% static 'dist/assets/images/faces/1.jpg' %}" alt="Face 1">
+                  </div>
+                  <div class="ms-3 name">
+                    <h5 class="font-bold">{{miembro}}</h5>
+                  </div>
+                </div>
+              </td>
+              <td>
+                <a href="{% url 'instituciones_educativas:miembro_eliminar' miembro.pk%}"><span
+                    class="badge bg-danger">Eliminar</span></a>
+              </td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+</section>
+
+</div>
+
+{% endblock %}
+
+{% block elemento_activo %}miembros{% endblock %}

@@ -1,0 +1,64 @@
+{% extends 'vinculacion/base.html' %}
+{% load static %}
+
+{% block contenido %}
+
+<div class="row w-100 p-2 m-0">
+  <div class="col-md-12">
+
+    <div class="card text-center">
+      <div class="card-header">
+        <ul class="nav nav-tabs card-header-tabs">
+          <li class="nav-item">
+            <a class="nav-link" id="perfil" href="{% url 'vinculacion:perfil' %}">Perfil</a>
+          </li>
+          <li class="nav-item">
+            <a name="actualizar" class="nav-link" {% if user.tipo_usuario.tipo == "Investigador" %}
+              href="{% url 'investigadores:investigador_actualizar' %}" {% elif user.tipo_usuario.tipo == "Empresa" %}
+              href="{% url 'empresas:empresa_actualizar' %}" {% else %}
+              href="{% url 'instituciones_educativas:institucion_educativa_actualizar' %}" {% endif %}
+              id="actualizar_datos">Actualizar
+              datos</a>
+          </li>
+          {% if user.tipo_usuario.tipo == "Institucion Educativa"%}
+            <li class="nav-item">
+              <a class="nav-link" id="solicitudes" href="{% url 'instituciones_educativas:institucion_educativa_solicitudes' %}">Solicitudes de ingreso</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" id="miembros" href="{% url 'instituciones_educativas:institucion_educativa_miembros' %}">Miembros</a>
+            </li>
+          {% endif %}
+          {% if user.tipo_usuario.tipo == "Investigador" %}
+            <li class="nav-item">
+              <a name="investigaciones" class="nav-link" id="investigaciones" href="{% url 'investigadores:investigaciones_lista' %}">Investigaciones</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" id="solicitudes_trabajo" href="{% url 'investigadores:solicitudes_trabajo_lista' %}">Solicitudes de colaboración</a>
+            </li>
+          {% endif %}
+          <li class="nav-item">
+            <a class="nav-link" id="trabajo_en_curso" href="{% url 'vinculacion:trabajos_lista' %}">Colaboraciones en curso</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" id="historial_de_trabajo" href="{% url 'vinculacion:trabajos_historial' %}">Historial de colaboraciones</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" id="eliminar" href="{% url 'vinculacion:usuario_eliminar' %}">Eliminar mi cuenta</a>
+          </li>
+        </ul>
+      </div>
+      <div class="card-body">
+      </div>
+    </div>
+
+  </div>
+</div>
+
+{% block contenido_perfil %}
+{% endblock %}
+
+<script>
+  document.getElementById('{% block elemento_activo %}{% endblock %}'.trim()).classList.add("active");
+</script>
+
+{% endblock %}

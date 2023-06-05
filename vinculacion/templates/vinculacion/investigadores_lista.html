@@ -1,0 +1,82 @@
+{% extends 'vinculacion/base.html' %}
+{% load static %}
+
+{% block extraresources %}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+{% endblock %}
+
+{% block contenido %}
+
+<div class="d-flex flex-column justify-content-center align-items-center">
+
+  <h1 class="titulo-seccion">Investigadores</h1>
+
+  <div class="card w-75">
+    <div class="row no-gutters">
+      <div class="col-md-6 d-flex align-items-center">
+        <img src="{% static 'img/anfitrion.jpg' %}" class="card-img" alt="...">
+      </div>
+      <div class="col-md-6">
+        <div class="card-body">
+          <h5 class="card-title">Investigadores</h5>
+          <p class="card-text">Conoce a los investigadores del estado de Zacatecas</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row w-75">
+
+    {% for investigador in object_list %}
+    <div class="col-md-6">
+      <div class="card">
+        <div class="row no-gutters">
+          <div class="col-4 d-flex justify-content-center align-items-center">
+            <div>
+              {% if investigador.imagen %}
+              <img src="{{MEDIA_URL}}/{{investigador.imagen}}" class="rounded-3" style="width: 100px; height: 100px;" alt="...">
+              {% else %}
+              <img src="{% static 'dist/assets/images/faces/1.jpg' %}" class="rounded-3" style="width: 100px; height: 100px;" alt="...">
+              {% endif %}
+            </div>
+          </div>
+          <div class="col-8">
+            <div class="card-body">
+              <h5 class="card-title">{{investigador.user.username|capfirst}}</h5>
+              <p class="card-text">
+              </p>
+            </div>
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item"><a href="{% url 'investigadores:investigador_perfil' investigador.pk%}" class="btn btn-primary">Ver perfil</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+
+    <div class="d-flex justify-content-center mt-3">
+    <ul class="pagination pagination-primary">
+        {% if page_obj.has_previous %}
+        <li class="page-item"><a class="page-link" href="?page={{ page_obj.previous_page_number }}">
+                <span aria-hidden="true"><i class="bi bi-chevron-left"></i></span>
+            </a></li>
+        <li class="page-item"><a class="page-link" href="?page={{ page_obj.previous_page_number }}">{{page_obj.previous_page_number}}</a></li>
+        {% endif %}
+
+        <li class="page-item active"><a class="page-link" href="#">{{page_obj.number}}</a></li>
+
+        {% if page_obj.has_next %}
+        <li class="page-item"><a class="page-link" href="?page={{ page_obj.next_page_number }}">{{page_obj.next_page_number}}</a></li>
+        <li class="page-item"><a class="page-link" href="?page={{ page_obj.next_page_number }}">
+                <span aria-hidden="true"><i class="bi bi-chevron-right"></i></span>
+            </a></li>
+        {% endif %}
+    </ul>
+    </div>
+
+  </div>
+
+</div>
+
+{% endblock %}

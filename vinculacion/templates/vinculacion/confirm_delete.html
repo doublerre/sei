@@ -1,0 +1,27 @@
+{% extends 'vinculacion/perfil_base.html' %}
+{% load static %}
+
+{% block contenido_perfil %}
+
+<div class="d-flex justify-content-center">
+
+  <div class="w-75">
+    <div class="card">
+      <div class="card-header">
+        <h4 class="card-title">¿Estás seguro de que deseas eliminar tu cuenta? (Esta acción no se puede deshacer)</h4>
+      </div>
+      <div class="card-body">
+        <form method="POST">
+          {% csrf_token %}
+          {{ form }}
+          <button type="submit" name="confirmar" class="btn btn-danger me-1 mb-1">Confirmar</button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+{% endblock %}
+
+{% block elemento_activo %}eliminar{% endblock %}

@@ -1,0 +1,119 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro</title>
+    <link rel="stylesheet" href="{% static 'dist/assets/css/main/app.css' %}">
+    <link rel="stylesheet" href="{% static 'dist/assets/css/pages/auth.css'%}">
+    <link rel="shortcut icon" href="{% static 'dist/assets/images/logo/favicon.png' %}" type="image/png">
+</head>
+
+<body>
+    <div id="auth">
+
+        <div class="row h-100">
+            <!-- Modal -->
+            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                aria-hidden="true">
+                <div class="modal-dialog modal-xl">
+                    <div class="modal-content">
+                        <div class="modal-body">
+                            <embed src="{% static 'dist/assets/files/AdP.pdf' %}" frameborder="0" width="100%" height="1080px">
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Rechazar</button>
+                            <button type="button" class="btn btn-primary">Aceptar aviso de privacidad</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-5 col-12">
+                <div style="padding: 2.5rem 10%;">
+                    <div class="mb-3 d-flex justify-content-center">
+                        <a href="{% url 'vinculacion:dashboard' %}"><img src="{% static 'img/Logocozcyt.jpg' %}"
+                                alt="Logo" style="height: 70px;"></a>
+                    </div>
+                    <h3>Registro</h3>
+                    <p class="mb-3" style="font-size: 1.1rem">Bienvenido al Sistema Estatal de Investigadores de
+                        Zacatecas</p>
+
+                    {% for message in messages %}
+                    {% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR %}
+                    <div class="alert alert-danger">{{message}}</div>
+                    {% else %}
+                    <div class="alert alert-success">{{message}}</div>
+                    {% endif %}
+                    {% endfor %}
+
+                    <form method="POST">
+                        {% csrf_token%}
+
+                        <div class="form-group position-relative has-icon-left mb-3">
+                            {{form.email}}
+                            <div class="form-control-icon">
+                                <i class="bi bi-envelope"></i>
+                            </div>
+                            {% for error in form.email.errors %}
+                            <div class="alert alert-danger">{{error}}</div>
+                            {% endfor %}
+                        </div>
+
+                        <div class="form-group position-relative has-icon-left mb-3">
+                            {{form.username}}
+                            <div class="form-control-icon">
+                                <i class="bi bi-person"></i>
+                            </div>
+                        </div>
+                        {% for error in form.username.errors %}
+                        <div class="alert alert-danger">{{error}}</div>
+                        {% endfor %}
+
+                        <div class="form-group position-relative has-icon-left mb-3">
+                            <input type="password" class="form-control form-control-l" name="password"
+                                placeholder="Contraseña">
+                            <div class="form-control-icon">
+                                <i class="bi bi-shield-lock"></i>
+                            </div>
+                        </div>
+                        {% for error in form.password.errors %}
+                        <div class="alert alert-danger">{{error}}</div>
+                        {% endfor %}
+
+                        <div class="form-group position-relative has-icon-left mb-3">
+                            <input type="password" class="form-control form-control-l" name="repassword"
+                                placeholder="Confirmar contraseña">
+                            <div class="form-control-icon">
+                                <i class="bi bi-shield-lock"></i>
+                            </div>
+                        </div>
+                        {% for error in form.repassword.errors %}
+                        <div class="alert alert-danger">{{error}}</div>
+                        {% endfor %}
+
+                        <button class="btn btn-primary btn-block shadow-lg mt-3">Crear cuenta</button>
+
+                    </form>
+                    <div class="text-center mt-4 text-lg fs-5">
+                        <p class='text-gray-600'>¿Ya tiene una cuenta? <a href="{% url 'usuarios:login' %}"
+                                class="font-bold">Iniciar sesión</a>.</p>
+                    </div>
+                </div>
+                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                    Launch demo modal
+                </button>
+            </div>
+            <div class="col-lg-7 d-none d-lg-block">
+                <div id="auth-right">
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+</body>
+<script src="{% static 'dist/assets/js/app.js' %}"></script>
+
+</html>

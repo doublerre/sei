@@ -1,0 +1,51 @@
+{% extends 'vinculacion/perfil_base.html' %}
+{% load static %}
+
+{% block extraresources %}
+<link rel="stylesheet" href="{% static 'dist/assets/css/pages/form-element-select.css' %}">
+{% endblock %}
+
+{% block contenido_perfil %}
+<div class="d-flex justify-content-center">
+
+  <div class="w-75">
+    <div class="card">
+      <div class="card-header">
+        <h5>Datos de usuario</h5>
+      </div>
+      <div class="card-body">
+        <form method="POST" {% if formulario_archivos %}enctype="multipart/form-data"{% endif %}>
+          {% csrf_token %}
+          {% for field in form.visible_fields %}
+          <div class="col-12">
+            <div class="form-group">
+              <label for="{{field.auto_id}}">{{ field.label }}</label>
+              {{ field }}
+              {% for error in field.errors %}
+              <div class="alert alert-danger">{{error}}</div>
+              {% endfor %}
+              {% if field.errors %}
+              <script>
+                document.getElementById("{{field.auto_id}}").classList.add("is-invalid");
+              </script>
+              {% endif %}
+            </div>
+          </div>
+          {% endfor %}
+          <div class="col-12 d-flex justify-content-end">
+            <button type="submit" class="btn btn-primary me-1 mb-1">Guardar</button>
+            <button type="reset" class="btn btn-dark me-1 mb-1">Reiniciar</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+</div>
+{% endblock %}
+
+{% block elemento_activo %}actualizar_datos{% endblock %}
+
+{% block scripts %}
+<script src="{% static 'dist/assets/js/extensions/form-element-select.js' %}"></script>
+{% endblock %}

@@ -1,0 +1,4 @@
+[behave]
+paths=pruebas_aceptacion/features
+lang=es
+

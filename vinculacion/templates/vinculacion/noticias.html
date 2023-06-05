@@ -1,0 +1,38 @@
+{% extends 'vinculacion/base.html' %}
+{% load static %}
+
+{% block contenido %}
+
+<div class="d-flex flex-column justify-content-center align-items-center">
+
+  <h1 class="titulo-seccion">Noticias</h1>
+
+  {% if not noticias %}
+    <div class="alert alert-secondary">No existen noticias</div>
+  {% endif %}
+
+  <div class="row w-75">
+    {% for noticia in noticias %}
+
+    <div class="col-md-4">
+      <div class="card noticia">
+        <img class="card-img-top" src="{{MEDIA_URL}}/{{noticia.imagen}}" alt="Card image cap">
+        <div class="card-body">
+          <h5 class="card-title">{{noticia.titulo}}</h5>
+          <p class="card-text">{{noticia.contenido|truncatechars:100}}</p>
+        </div>
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item"><a id="leer-mas" href="{% url 'vinculacion:noticia' noticia.id %}" class="btn btn-primary">Leer
+              más</a></li>
+          <li class="list-group-item">Escrito por: {{noticia.escritor}}</li>
+          <li class="list-group-item">{{noticia.fecha}}</li>
+        </ul>
+      </div>
+    </div>
+
+    {% endfor %}
+  </div>
+
+</div>
+
+{% endblock %}

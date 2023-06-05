@@ -1,0 +1,230 @@
+{% extends 'administracion/base.html' %}
+{% load static %}
+
+{% block extracss %}
+<link rel="stylesheet" href="{% static 'dist/assets/css/pages/datatables.css' %}">
+<link rel="stylesheet" href="{% static 'dist/assets/css/pages/fontawesome.css' %}">
+{% endblock %}
+
+{% block contenido %}
+
+<!-- Basic Tables start -->
+<section class="section">
+  <div class="card">
+    <div class="card-header">
+      <h4 class="card-title">Empresas</h4>
+    </div>
+    <div class="card-body">
+      <table class="table" id="table1" name="solicitudes-de-empresas">
+        <thead>
+          <tr>
+            <th>Encargado</th>
+            <th>Nombre empresa</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for empresa in empresas %}
+          <tr>
+            <td>{{empresa.encargado.username}}</td>
+            <td>{{empresa.nombre_empresa}}</td>
+            <td>
+                            <!-- Button trigger for scrolling content modal -->
+                            <button type="button" class="btn btn-outline-success" data-bs-toggle="modal"
+                                data-bs-target="#exampleModalScrollable{{empresa.pk}}">
+                                Ver detalles
+                            </button>
+
+                            <!--scrolling content Modal -->
+                            <div class="modal fade" id="exampleModalScrollable{{empresa.pk}}" tabindex="-1" role="dialog"
+                                aria-labelledby="exampleModalScrollable{{empresa.pk}}Title" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="exampleModalScrollable{{empresa.pk}}Title">Detalles</h5>
+                                            <button type="button" class="close" data-bs-dismiss="modal"
+                                                aria-label="Close">
+                                                <i data-feather="x"></i>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">
+
+                            <form class="form form-horizontal">
+                                <div class="form-body">
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <label>Encargado</label>
+                                        </div>
+                                        <div class="col-md-8">
+                                            <div class="form-group has-icon-left">
+                                                <div class="position-relative">
+                                                    <p class="form-control"
+                                                        id="first-name-icon">{{empresa.encargado.username}}</p>
+                                                    <div class="form-control-icon">
+                                                        <i class="bi bi-person"></i>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-4">
+                                            <label>Email</label>
+                                        </div>
+                                        <div class="col-md-8">
+                                            <div class="form-group has-icon-left">
+                                                <div class="position-relative">
+                                                    <p class="form-control"
+                                                        id="first-name-icon">{{empresa.encargado.email}}</p>
+                                                    <div class="form-control-icon">
+                                                        <i class="bi bi-envelope"></i>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-4">
+                                            <label>Nombre empresa</label>
+                                        </div>
+                                        <div class="col-md-8">
+                                            <div class="form-group has-icon-left">
+                                                <div class="position-relative">
+                                                    <p class="form-control"
+                                                        id="first-name-icon">{{empresa.nombre_empresa}}</p>
+                                                    <div class="form-control-icon">
+                                                        <i class="bi bi-fonts"></i>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-4">
+                                            <label>Código postal</label>
+                                        </div>
+                                        <div class="col-md-8">
+                                            <div class="form-group has-icon-left">
+                                                <div class="position-relative">
+                                                    <p class="form-control"
+                                                        id="first-name-icon">{{empresa.codigo_postal}}</p>
+                                                    <div class="form-control-icon">
+                                                        <i class="bi bi-map"></i>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-4">
+                                            <label>Municipio</label>
+                                        </div>
+                                        <div class="col-md-8">
+                                            <div class="form-group has-icon-left">
+                                                <div class="position-relative">
+                                                    <p class="form-control"
+                                                        id="first-name-icon">{{empresa.municipio}}</p>
+                                                    <div class="form-control-icon">
+                                                        <i class="bi bi-bag-dash"></i>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-4">
+                                            <label>Colonia</label>
+                                        </div>
+                                        <div class="col-md-8">
+                                            <div class="form-group has-icon-left">
+                                                <div class="position-relative">
+                                                    <p class="form-control"
+                                                        id="first-name-icon">{{empresa.colonia}}</p>
+                                                    <div class="form-control-icon">
+                                                        <i class="bi bi-people-fill"></i>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-4">
+                                            <label>Calle</label>
+                                        </div>
+                                        <div class="col-md-8">
+                                            <div class="form-group has-icon-left">
+                                                <div class="position-relative">
+                                                    <p class="form-control"
+                                                        id="first-name-icon">{{empresa.calle}}</p>
+                                                    <div class="form-control-icon">
+                                                        <i class="fa fa-road"></i>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-4">
+                                            <label>Número exterior</label>
+                                        </div>
+                                        <div class="col-md-8">
+                                            <div class="form-group has-icon-left">
+                                                <div class="position-relative">
+                                                    <p class="form-control"
+                                                        id="first-name-icon">{{empresa.numero_exterior}}</p>
+                                                    <div class="form-control-icon">
+                                                        <i class="fa fa-registered"></i>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-4">
+                                            <label>Acerca de</label>
+                                        </div>
+                                        <div class="col-md-8">
+                                            <div class="form-group has-icon-left">
+                                                <div class="position-relative">
+                                                    <p class="form-control"
+                                                        id="first-name-icon">{{empresa.acerca_de}}</p>
+                                                    <div class="form-control-icon">
+                                                        <i class="fa fa-info-circle"></i>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+
+
+
+                                    </div>
+                                </div>
+                            </form>
+
+
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-light-secondary"
+                                                data-bs-dismiss="modal">
+                                                <i class="bx bx-x d-block d-sm-none"></i>
+                                                <span class="d-none d-sm-block">Cerrar</span>
+                                            </button>
+                                            <a href="{% url 'administracion:aprobar_perfil' empresa.encargado.pk %}"><span
+                                                class="btn btn-success ml-1">Aceptar</span></a>
+                                            <a href="{% url 'administracion:empresas_eliminar' empresa.pk %}"><span
+                                                class="btn btn-danger ml-1">Rechazar</span></a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+</section>
+{% endblock %}
+
+{% block scripts %}
+<script src="{% static 'dist/assets/js/extensions/datatables.js' %}"></script>
+{% endblock %}
+
+{% block marcar_activo %}solicitudes{% endblock %}

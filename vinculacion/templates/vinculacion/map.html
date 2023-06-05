@@ -1,0 +1,136 @@
+{% extends 'vinculacion/base.html' %}
+{% load static %}
+
+{% block extraresources %}
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.8.0/dist/leaflet.css"
+  integrity="sha512-hoalWLoI8r4UszCkZ5kL8vayOGVae1oxXe/2A4AO6J9+580uKHDO3JdHb7NzwwzK5xr/Fs0W40kiNHxM9vyTtQ=="
+  crossorigin="" />
+<script src="https://unpkg.com/leaflet@1.8.0/dist/leaflet.js"
+  integrity="sha512-BB3hKbKWOc9Ez/TAwyWxNXeoV9c1v6FIeYiBieIWkpLjauysF18NzgR1MBNBXf8/KABdlkX68nAhlwcDFLGPCQ=="
+  crossorigin=""></script>
+<link rel="stylesheet" href="{% static 'dist/assets/css/pages/form-element-select.css' %}">
+{% endblock %}
+
+{% block contenido %}
+
+<div class="d-flex flex-wrap flex-grow-1 w-100 p-3">
+  <div class="card filtro mr-5" id="search-side">
+    <div class="card-body">
+      <button type="button" class="mb-4 btn btn-primary filtro-btn-in" onclick="hideSearchSide(); reescalarMapa()"><i
+          class="bi bi-list"></i></button>
+
+      <div class="form-group">
+        <label for="areas-conocimiento">
+          <h5>Área de conocimiento</h5>
+        </label>
+
+        <select id="areas-conocimiento" autocomplete="off" onchange="setAreaRequerida(this.textContent)" class="choices form-select">
+          <option value="">Cualquiera</option>
+          {% for area_conocimiento in areas_conocimiento %}
+            <option value="0">{{area_conocimiento.area}}</option>
+          {% endfor %}
+        </select>
+      </div>
+
+      <hr />
+
+      <div class="form-group">
+        <label for="sugerencias">
+          <h5>Categorías a buscar</h5>
+        </label>
+
+        <select id="sugerencias" autocomplete="off" onchange="setTimeout(filtrarAreaConocimiento, 50)" class="choices form-select multiple-remove"
+          multiple="multiple">
+          {% for area_conocimiento in areas_conocimiento %}
+            <optgroup label="{{area_conocimiento.area}}">
+              {% for categoria in area_conocimiento.categorias %}
+              <option value="{{categoria.pk}}">{{categoria.nombre}}</option>
+              {% endfor %}
+            </optgroup>
+          {% endfor %}
+        </select>
+      </div>
+
+      <hr />
+
+      <div class="form-group">
+        <label for="municipio">
+          <h5>Municipio</h5>
+        </label>
+
+        <select id="municipio" autocomplete="off" onchange="recargarUsuariosMapa()" class="choices form-select">
+          <option value="">Cualquiera</option>
+          {% for id_municipio, municipio in municipios %}
+          <option value="{{id_municipio}}">{{municipio}}</option>
+          {% endfor %}
+        </select>
+      </div>
+
+      <hr />
+
+      <div class="form-group">
+        <h5>Interés</h5>
+
+        <div id="filtro_tipo_usuario">
+          {% for tipo_usuario, tipo_usuario_snake_case in tipos_usuario %}
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="" id="filtro_{{tipo_usuario_snake_case}}"
+              onchange="recargarUsuariosMapa()" checked>
+            <label class="form-check-label" for="filtro_{{tipo_usuario_snake_case}}">
+              {{tipo_usuario}}
+            </label>
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+
+      <hr />
+
+      <div class="form-group">
+        <h5>Precisión</h5>
+
+        <input type="hidden" id="precision" value="2">
+
+        <div class="barra-precision" id="barra-precision">
+          <button type="button" class="nivel-precision nivel-4" onclick="cambiarPrecision(this)" value="4">100%</button>
+          <button type="button" class="nivel-precision nivel-3" onclick="cambiarPrecision(this)" value="3">75%</button>
+          <button type="button" class="nivel-precision nivel-2" onclick="cambiarPrecision(this)" value="2">50%</button>
+          <button type="button" class="nivel-precision nivel-1" onclick="cambiarPrecision(this)" value="1">25%</button>
+          <button type="button" class="nivel-precision nivel-0" onclick="cambiarPrecision(this)" value="0">0%</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="card map" id="map">
+    <div class="card-body">
+      <button type="button" class="btn btn-primary filtro-btn-out oculto" id="filtro-btn-out"
+        onclick="showSearchSide(); reescalarMapa()"><i class="bi bi-list"></i></button>
+    </div>
+  </div>
+</div>
+
+{% endblock %}
+
+{% block scripts %}
+<script src="{% static 'dist/assets/js/extensions/form-element-select.js' %}"></script>
+<script src="{% static 'js/vinculacion.js' %}"></script>
+<script src="{% static 'js/display_filtros.js' %}"></script>
+
+<script>
+  obtenerUsuarios([
+    {% for usuario in usuarios %}
+  {
+    "username": "{{usuario.username}}",
+    "latitud": {{usuario.latitud}},
+    "longitud": {{usuario.longitud}},
+    "tipoUsuario": "{{usuario.tipoUsuario}}",
+    "categorias": [{% for categoria in usuario.categorias %} "{{categoria}}",{% endfor %}],
+    "municipio": {{usuario.municipio}},
+    "url": "{{usuario.url}}",
+  },
+  {% endfor %}
+]);
+</script>
+{% endblock %}

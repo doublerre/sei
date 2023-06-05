@@ -1,0 +1,71 @@
+{% extends 'administracion/base.html' %}
+{% load static %}
+
+{% block extracss %}
+<link rel="stylesheet" href="{% static 'dist/assets/css/pages/datatables.css' %}">
+<link rel="stylesheet" href="{% static 'dist/assets/css/pages/fontawesome.css' %}">
+{% endblock %}
+
+{% block contenido %}
+<section class="section">
+  <div class="card">
+    <div class="card-header">
+      <h4 class="card-title">Registrar nueva noticia</h4>
+      {% for message in messages %}
+      {% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR %}
+      <div class="alert alert-danger">{{message}}</div>
+      {% else %}
+      <div class="alert alert-success">{{message}}</div>
+      {% endif %}
+      {% endfor %}
+    </div>
+    <div class="card-body">
+      <a href="{% url 'administracion:noticias_nuevo' %}" name="crear"><span class="badge bg-success">Crear</span></a>
+    </div>
+  </div>
+
+</section>
+
+<!-- Basic Tables start -->
+<section class="section">
+  <div class="card">
+    <div class="card-header">
+      <h4 class="card-title">Noticias</h4>
+    </div>
+    <div class="card-body">
+      <table class="table" id="table1" name="noticias">
+        <thead>
+          <tr>
+            <th>Titulo</th>
+            <th>Fecha</th>
+            <th>Escritor</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for noticia in noticias %}
+          <tr>
+            <td>{{noticia.titulo}}</td>
+            <td>{{noticia.fecha}}</td>
+            <td>{{noticia.escritor}}</td>
+            <td>
+              <a id="editar" href="{% url 'administracion:noticias_editar' noticia.pk %}"><span
+                  class="badge bg-info">Editar</span></a>
+              <a id="eliminar" href="{% url 'administracion:noticias_eliminar' noticia.pk %}"><span
+                  class="badge bg-danger">Eliminar</span></a>
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+</section>
+{% endblock %}
+
+{% block scripts %}
+<script src="{% static 'dist/assets/js/extensions/datatables.js' %}"></script>
+{% endblock %}
+
+{% block marcar_activo %}tablas{% endblock %}

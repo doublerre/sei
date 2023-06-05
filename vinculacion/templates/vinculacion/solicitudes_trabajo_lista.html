@@ -1,0 +1,162 @@
+{% extends 'vinculacion/perfil_base.html' %}
+{% load static %}
+
+{% block contenido_perfil %}
+
+<div class="row w-100 p-2 m-0 d-flex justify-content-center">
+  <div class="col-md-9">
+    <div class="card p-3">
+      <div class="table-responsive">
+          <table class="table table-lg">
+              <thead>
+                  <tr>
+                      <th>Título</th>
+                      <th>Solicitante</th>
+                      <th>Opciones</th>
+                  </tr>
+              </thead>
+              <tbody>
+  {% for solicitud in object_list %}
+                  <tr>
+                    <td>{{solicitud.titulo}}</td>
+                    <td>{{solicitud.usuario_solicitante}}</td>
+                    <td>
+                            <!-- Button trigger for scrolling content modal -->
+                            <button type="button" class="btn btn-outline-success" data-bs-toggle="modal"
+                                data-bs-target="#exampleModalScrollable{{solicitud.pk}}">
+                                Ver detalles
+                            </button>
+
+                            <!--scrolling content Modal -->
+                            <div class="modal fade" id="exampleModalScrollable{{solicitud.pk}}" tabindex="-1" role="dialog"
+                                aria-labelledby="exampleModalScrollable{{solicitud.pkTitle" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-scrollable modal-md" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="exampleModalScrollable{{solicitud.pkTitle">Detalles</h5>
+                                            <button type="button" class="close" data-bs-dismiss="modal"
+                                                aria-label="Close">
+                                                <i data-feather="x"></i>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">
+
+                            <form class="form form-horizontal">
+                                <div class="form-body">
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <label>Título</label>
+                                        </div>
+                                        <div class="col-md-8">
+                                            <div class="form-group has-icon-left">
+                                                <div class="position-relative">
+                                                    <p class="form-control"
+                                                        id="first-name-icon">{{solicitud.titulo}}</p>
+                                                    <div class="form-control-icon">
+                                                        <i class="bi bi-fonts"></i>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-4">
+                                            <label>Solicitante</label>
+                                        </div>
+                                        <div class="col-md-8">
+                                            <div class="form-group has-icon-left">
+                                                <div class="position-relative">
+                                                    <p class="form-control"
+                                                        id="first-name-icon">{{solicitud.usuario_solicitante}}</p>
+                                                    <div class="form-control-icon">
+                                                        <i class="bi bi-person"></i>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-4">
+                                            <label>Fecha</label>
+                                        </div>
+                                        <div class="col-md-8">
+                                            <div class="form-group has-icon-left">
+                                                <div class="position-relative">
+                                                    <p class="form-control"
+                                                        id="first-name-icon">{{solicitud.fecha}}</p>
+                                                    <div class="form-control-icon">
+                                                        <i class="bi bi-clock"></i>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-4">
+                                            <label>Descripcion</label>
+                                        </div>
+                                        <div class="col-md-8">
+                                            <div class="form-group has-icon-left">
+                                                <div class="position-relative">
+                                                    <p class="form-control"
+                                                        id="first-name-icon">{{solicitud.descripcion}}</p>
+                                                    <div class="form-control-icon">
+                                                        <i class="bi bi-map"></i>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+
+
+
+
+                                    </div>
+                                </div>
+                            </form>
+
+
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-light-secondary"
+                                                data-bs-dismiss="modal">
+                                                <i class="bx bx-x d-block d-sm-none"></i>
+                                                <span class="d-none d-sm-block">Cerrar</span>
+                                            </button>
+                                            <a href="{% url 'vinculacion:aceptar_solicitud' solicitud.pk %}"><span
+                                                class="btn btn-success ml-1">Aceptar</span></a>
+                                            <a href="{% url 'vinculacion:rechazar_solicitud' solicitud.pk %}"><span
+                                                class="btn btn-danger ml-1">Rechazar</span></a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                    </td>
+                  </tr>
+  {% endfor %}
+              </tbody>
+          </table>
+      </div>
+      <div class="d-flex justify-content-center mt-3">
+      <ul class="pagination pagination-primary">
+          {% if page_obj.has_previous %}
+          <li class="page-item"><a class="page-link" href="?page={{ page_obj.previous_page_number }}">
+                  <span aria-hidden="true"><i class="bi bi-chevron-left"></i></span>
+              </a></li>
+          <li class="page-item"><a class="page-link" href="?page={{ page_obj.previous_page_number }}">{{page_obj.previous_page_number}}</a></li>
+          {% endif %}
+
+          <li class="page-item active"><a class="page-link" href="#">{{page_obj.number}}</a></li>
+
+          {% if page_obj.has_next %}
+          <li class="page-item"><a class="page-link" href="?page={{ page_obj.next_page_number }}">{{page_obj.next_page_number}}</a></li>
+          <li class="page-item"><a class="page-link" href="?page={{ page_obj.next_page_number }}">
+                  <span aria-hidden="true"><i class="bi bi-chevron-right"></i></span>
+              </a></li>
+          {% endif %}
+      </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}
+
+{% block elemento_activo %}solicitudes_trabajo{% endblock %}

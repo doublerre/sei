@@ -1,0 +1,34 @@
+version: '3.3'
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    container_name: curso
+    stdin_open: true
+    #restart: always
+    depends_on:
+      - db-vinculacion
+    ports:
+      - 8000:8000
+    volumes: 
+      - ./:/app
+
+  db-vinculacion:
+    image: mariadb
+    container_name: db-vinculacion
+    #restart: always
+    environment:
+      MYSQL_DATABASE: vinculacion
+      MYSQL_USER: vinculacion_user
+      MYSQL_PASSWORD: vinculacion_password
+      MYSQL_ROOT_PASSWORD: vinculacion_root_password
+    volumes:
+      - db-vinculacion:/var/lib/mysql
+    ports:
+      - 3310:3306
+ 
+volumes:
+  db-vinculacion:
+
