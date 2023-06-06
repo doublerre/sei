@@ -34,7 +34,7 @@ class Investigador(models.Model):
         verbose_name="Usuario",
         on_delete=models.CASCADE,
         primary_key=True)
-    name = models.CharField(max_length = 50)
+    nombre_completo = models.CharField(max_length = 50, null=True, blank=True)
     last_name = models.CharField(max_length = 50)
     nivel = models.ForeignKey(NivelInvestigador,
                               on_delete=models.DO_NOTHING)
