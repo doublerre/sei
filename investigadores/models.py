@@ -34,6 +34,7 @@ class Investigador(models.Model):
         verbose_name="Usuario",
         on_delete=models.CASCADE,
         primary_key=True)
+    name = models.CharField(max_length = 50)
     nivel = models.ForeignKey(NivelInvestigador,
                               on_delete=models.DO_NOTHING)
     curp = models.CharField(max_length=18,
