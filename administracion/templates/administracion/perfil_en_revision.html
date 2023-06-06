@@ -1,0 +1,66 @@
+{% extends 'administracion/base.html' %}
+{% load static %}
+
+{% block extraresources %}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+{% endblock %}
+
+{% block contenido %}
+
+<div class="row w-75 p-2 m-0">
+    <div class="col-md-5 col-sm-12">
+
+        <div class="card">
+            <div class="card-body">
+                <div class="d-flex align-items-center overflow-auto">
+                    <div class="avatar avatar-xl">
+                        {% if investigador.imagen %}
+                        <img src="{{MEDIA_URL}}/{{investigador.imagen}}" alt="Face 1">
+                        {% else %}
+                        <img src="{% static 'dist/assets/images/faces/1.jpg' %}" alt="Avatar">
+                        {% endif %}
+                    </div>
+                    <div class="ms-3 name">
+                        <h5 class="font-bold">{{investigador.nombre_completo|capfirst}}</h5>
+                        <h6 class="text-muted mb-0">Usuario: {{investigador.user.username}}</h6>
+                        <h6 class="text-muted mb-0">Correo: {{investigador.user.email}}</h6>
+                        <h6 class="text-muted mb-0">Curp: {{investigador.curp}}</h6>
+                        {% if investigador.link_google_scholar %}
+                            <a target="_blank" href="{{investigador.link_google_scholar}}"><span
+                                    class="badge bg-info">Google Scholar</span></a>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-content">
+                <div class="card-body">
+                    <h3 class="card-title">Más información</h4>
+                        <p class="card-text" style="text-align:justify; text-justify:inter-word">
+                            {{investigador.acerca_de}}
+                        </p>
+                        <p class="card-text">
+                            <h4>Acciones:</h4>
+                            {% if investigador.user != user%}
+                            <a href="{% url 'vinculacion:solicitud_trabajo_nueva' investigador.pk%}"
+                                class="btn btn-primary">Aceptar solicitud</a>
+                            <a href="{% url 'vinculacion:solicitud_trabajo_nueva' investigador.pk%}"
+                                class="btn btn-secondary">Rechazar solicitud</a>
+                            {% endif %}
+                        </p>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+
+    <div class="col-md-7">
+        <h3 class="py-4">Curriculum Vitae</h3>
+        <iframe src="{% url 'investigadores:mostrar_cv' investigador.pk%}" width="1000px" height="800px"></iframe>
+    </div>
+</div>
+
+{% endblock %}

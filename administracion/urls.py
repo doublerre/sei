@@ -57,6 +57,10 @@ urlpatterns = [
           'investigadores/eliminar/<int:pk>',
           views.InvestigadorEliminar.as_view(),
           name='investigadores_eliminar'),
+    path(
+          'investigadores/perfil/<int:id>',
+          views.perfil,
+          name='investigadores_perfil'),
 
     # Empresas
     path(

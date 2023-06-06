@@ -43,6 +43,7 @@ from administracion.helpers import (
     enviar_correo_respuesta_solicitud_ingreso
 )
 from django.utils import timezone as datetime
+from investigadores.models import Investigador
 
 
 @user_passes_test(user_is_staff_member)
@@ -117,6 +118,10 @@ def aprobar_perfil(request, pk):
     )
 
     return redirect('administracion:dashboard')
+
+def perfil(request, id):
+    investigador = Investigador.objects.get(user_id=id)
+    return render(request, "administracion/perfil_en_revision.html", {"investigador": investigador})
 
 # Usuarios
 
