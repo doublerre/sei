@@ -50,6 +50,8 @@ class Investigador(models.Model):
     colonia = models.CharField(max_length=100)
     calle = models.CharField(max_length=100)
     numero_exterior = models.PositiveIntegerField()
+    es_sni = models.BooleanField()
+    es_sei = models.BooleanField()
     acerca_de = models.TextField(
         verbose_name="Semblanza",
         max_length=1000,
