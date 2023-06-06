@@ -8,12 +8,14 @@ class FormInvestigador(forms.ModelForm):
 
     class Meta:
         model = Investigador
-        exclude = ['latitud', 'longitud', 'aprobado']
+        exclude = ['latitud', 'longitud', 'aprobado', 'es_sei', 'es_sni']
 
     def __init__(self, *args, **kwargs):
         super(FormInvestigador, self).__init__(*args, **kwargs)
         self.fields["user"].queryset = User.objects.filter(
             tipo_usuario__isnull=True)
+        self.fields["nombre_completo"].widget.attrs['class'] = 'form-control'
+        self.fields["nombre_completo"].widget.attrs['placeholder'] = ('Escribe tu nombre')
         self.fields["user"].widget.attrs['class'] = 'form-select'
         self.fields["nivel"].widget.attrs['class'] = 'form-select'
         self.fields["curp"].widget.attrs['class'] = 'form-control'
@@ -43,10 +45,12 @@ class FormInvestigadorUpdate(forms.ModelForm):
 
     class Meta:
         model = Investigador
-        exclude = ['latitud', 'longitud', 'user', 'aprobado']
+        exclude = ['latitud', 'longitud', 'user', 'aprobado', 'es_sei', 'es_sni']
 
     def __init__(self, *args, **kwargs):
         super(FormInvestigadorUpdate, self).__init__(*args, **kwargs)
+        self.fields["nombre_completo"].widget.attrs['class'] = 'form-control'
+        self.fields["nombre_completo"].widget.attrs['placeholder'] = ('Escribe tu nombre')
         self.fields["nivel"].widget.attrs['class'] = (
             'form-select')
         self.fields["curp"].widget.attrs['class'] = (
@@ -85,10 +89,12 @@ class FormInvestigadorBase(forms.ModelForm):
 
     class Meta:
         model = Investigador
-        exclude = ['latitud', 'longitud', 'user', 'aprobado', 'nivel']
+        exclude = ['latitud', 'longitud', 'user', 'aprobado', 'nivel', 'es_sei', 'es_sni']
 
     def __init__(self, *args, **kwargs):
         super(FormInvestigadorBase, self).__init__(*args, **kwargs)
+        self.fields["nombre_completo"].widget.attrs['class'] = 'form-control'
+        self.fields["nombre_completo"].widget.attrs['placeholder'] = ('Escribe tu nombre')
         self.fields["curp"].widget.attrs['class'] = (
             'form-control')
         self.fields["curp"].widget.attrs['placeholder'] = (
