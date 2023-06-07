@@ -59,7 +59,9 @@
 
     <div class="col-md-7">
         <h3 class="py-4">Curriculum Vitae</h3>
-        <iframe src="{% url 'investigadores:mostrar_cv' investigador.pk%}" width="1000px" height="800px"></iframe>
+        <div style="width: 100%; padding-bottom: 56.25%; position: relative;">
+            <iframe src="{% url 'investigadores:mostrar_cv' investigador.pk%}" style="position: absolute; width: 150%; height: 150%; top: 0; left: 0;"></iframe>
+          </div>
     </div>
 </div>
 
