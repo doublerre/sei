@@ -45,7 +45,7 @@ class FormInvestigadorUpdate(forms.ModelForm):
 
     class Meta:
         model = Investigador
-        exclude = ['latitud', 'longitud', 'user', 'aprobado', 'es_sei', 'es_sni']
+        exclude = ['latitud', 'longitud', 'user', 'aprobado']
 
     def __init__(self, *args, **kwargs):
         super(FormInvestigadorUpdate, self).__init__(*args, **kwargs)
@@ -82,6 +82,8 @@ class FormInvestigadorUpdate(forms.ModelForm):
         self.fields["acerca_de"].widget.attrs['placeholder'] = (
             'Ingresa una breve descripción tuya')
         self.fields["imagen"].widget.attrs['class'] = (
+            'form-control')
+        self.fields["curriculum_vitae"].widget.attrs['class'] = (
             'form-control')
 
 
