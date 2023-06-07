@@ -26,8 +26,8 @@
                         <h6 class="text-muted mb-0">Correo: {{investigador.user.email}}</h6>
                         <h6 class="text-muted mb-0">Curp: {{investigador.curp}}</h6>
                         {% if investigador.link_google_scholar %}
-                            <a target="_blank" href="{{investigador.link_google_scholar}}"><span
-                                    class="badge bg-info">Google Scholar</span></a>
+                        <a target="_blank" href="{{investigador.link_google_scholar}}"><span
+                                class="badge bg-info">Google Scholar</span></a>
                         {% endif %}
                     </div>
                 </div>
@@ -42,13 +42,13 @@
                             {{investigador.acerca_de}}
                         </p>
                         <p class="card-text">
-                            <h4>Acciones:</h4>
-                            {% if investigador.user != user%}
-                            <a href="{% url 'vinculacion:solicitud_trabajo_nueva' investigador.pk%}"
-                                class="btn btn-primary">Aceptar solicitud</a>
-                            <a href="{% url 'vinculacion:solicitud_trabajo_nueva' investigador.pk%}"
-                                class="btn btn-secondary">Rechazar solicitud</a>
-                            {% endif %}
+                        <h4>Acciones:</h4>
+                        {% if investigador.user != user%}
+                            <a href="{% url 'administracion:aprobar_perfil' investigador.user.pk %}"><span
+                                    class="btn btn-success ml-1">Aceptar</span></a>
+                            <a href="{% url 'administracion:investigadores_eliminar' investigador.pk %}"><span
+                                    class="btn btn-danger ml-1">Rechazar</span></a>
+                        {% endif %}
                         </p>
                 </div>
             </div>
