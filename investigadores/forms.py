@@ -39,6 +39,8 @@ class FormInvestigador(forms.ModelForm):
         self.fields["acerca_de"].widget.attrs['placeholder'] = (
             'Ingresa una breve descripción tuya')
         self.fields["imagen"].widget.attrs['class'] = 'form-control'
+        self.fields["grado"].widget.attrs['class'] = (
+            'form-control')
 
 
 class FormInvestigadorUpdate(forms.ModelForm):
@@ -85,6 +87,8 @@ class FormInvestigadorUpdate(forms.ModelForm):
             'form-control')
         self.fields["curriculum_vitae"].widget.attrs['class'] = (
             'form-control')
+        self.fields["grado"].widget.attrs['class'] = (
+            'form-control')
 
 
 class FormInvestigadorBase(forms.ModelForm):
@@ -130,6 +134,8 @@ class FormInvestigadorBase(forms.ModelForm):
         self.fields["link_google_scholar"].widget.attrs['class'] = (
             'form-control')
         self.fields["curriculum_vitae"].widget.attrs['class'] = (
+            'form-control')
+        self.fields["grado"].widget.attrs['class'] = (
             'form-control')
 
 
