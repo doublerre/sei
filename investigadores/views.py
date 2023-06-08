@@ -197,3 +197,8 @@ def mostrar_cv(request, investigador_id):
     investigador = get_object_or_404(Investigador, user=investigador_id)
     filepath = os.path.join('media', '{0}'.format(investigador.curriculum_vitae.name))
     return FileResponse(open(filepath, 'rb'), content_type='application/pdf')
+
+def mostrar_cg(request, investigador_id):
+    investigador = get_object_or_404(Investigador, user=investigador_id)
+    filepath = os.path.join('media', '{0}'.format(investigador.grado.name))
+    return FileResponse(open(filepath, 'rb'), content_type='application/pdf')

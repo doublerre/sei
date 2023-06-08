@@ -41,5 +41,10 @@ urlpatterns = [
         'investigadores/<int:investigador_id>/CV',
         views.mostrar_cv,
         name='mostrar_cv'
+    ),
+    path(
+        'investiadores/<int:investigador_id>/CG',
+        views.mostrar_cg,
+        name="mostrar_cg"
     )
 ]
