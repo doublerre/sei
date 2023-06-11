@@ -59,14 +59,22 @@
 
     <div class="col-md-7">
         <h3 class="py-4">Curriculum Vitae</h3>
+        {% if investigador.curriculum_vitae %}
         <div style="width: 100%; padding-bottom: 56.25%; position: relative;">
-            <iframe src="{% url 'investigadores:mostrar_cv' investigador.pk%}" style="position: absolute; width: 150%; height: 150%; top: 0; left: 0;"></iframe>
+            <iframe src="{{MEDIA_URL}}/{{investigador.curriculum_vitae}}" style="position: absolute; width: 150%; height: 150%; top: 0; left: 0;"></iframe>
         </div>
+        {% else %}
+        <p>Error: Documento no encontrado en el servidor.</p>
+        {% endif %}
         <br><br><br><br><br><br><br><br><br><br>
         <h3 class="py-4">Comprobante de grado</h3>
+        {% if investigador.grado %}
         <div style="width: 100%; padding-bottom: 56.25%; position: relative;">
             <iframe src="{% url 'investigadores:mostrar_cg' investigador.pk%}" style="position: absolute; width: 150%; height: 150%; top: 0; left: 0;"></iframe>
         </div>
+        {% else %}
+        <p>Error: Documento no encontrado en el servidor.</p>
+        {% endif %}
     </div>
 </div>
 
