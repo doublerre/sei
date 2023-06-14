@@ -4,47 +4,55 @@
 {% block contenido_perfil %}
 
 <div class="row w-100 p-2 m-0">
-  <div class="col-md-4">
-    <div class="card">
-      <div class="card-body">
+	<div class="col-md-4">
+		<div class="card">
+			<div class="card-body">
 
-        <div class="d-flex align-items-center overflow-auto">
-          <div class="avatar avatar-xl">
-            {% if usuario_data.imagen %}
-            <img src="{{MEDIA_URL}}/{{usuario_data.imagen}}" alt="Face 1">
-            {% else %}
-            <img src="{% static 'dist/assets/images/faces/1.jpg' %}" alt="Avatar">
-            {% endif %}
-          </div>
-          <div class="ms-3 name">
-            <h5 class="font-bold">{{user.username|capfirst}}</h5>
-            <h6 class="text-muted mb-0">{{user.email}}</h6>
-            {% if user.tipo_usuario.tipo == "Investigador" and usuario_data.link_google_scholar %}
-              <a target="_blank" href="{{usuario_data.link_google_scholar}}"><span class="badge bg-info">Google Scholar</span></a>
-            {% endif %}
-            {% if user.tipo_usuario.tipo == "Investigador" and usuario_data.curriculum_vitae %}
-              <a target="_blank" href="{% url 'investigadores:mostrar_cv' user.pk%}" class="badge bg-secondary">Curriculum Vitae</a>
-            {% endif %}
-          </div>
-        </div>
+				<div class="d-flex align-items-center overflow-auto">
+					<div class="avatar avatar-xl">
+						{% if usuario_data.imagen %}
+						<img src="{{MEDIA_URL}}/{{usuario_data.imagen}}" alt="Face 1">
+						{% else %}
+						<img src="{% static 'dist/assets/images/faces/1.jpg' %}" alt="Avatar">
+						{% endif %}
+					</div>
+					<div class="ms-3 name">
+						<h5 class="font-bold">{{user.username|capfirst}}</h5>
+						<h6 class="text-muted mb-0">{{user.email}}</h6>
+						{% if user.tipo_usuario.tipo == "Investigador" and usuario_data.link_google_scholar %}
+						<a target="_blank" href="{{usuario_data.link_google_scholar}}"><span
+								class="badge bg-info">Google Scholar</span></a>
+						{% endif %}
+						{% if user.tipo_usuario.tipo == "Investigador" and usuario_data.curriculum_vitae %}
+						<a target="_blank" href="{% url 'investigadores:mostrar_cv' user.pk%}"
+							class="badge bg-secondary">Curriculum Vitae</a>
+						{% endif %}
+						{% if usuario_data.es_sei %}
+						<span class="badge bg-primary">SEI</span>
+						{% endif %}
+						{% if usuario_data.es_sni %}
+						<span class="badge bg-primary">SNI</span>
+						{% endif %}
+					</div>
+				</div>
 
-      </div>
-    </div>
-  </div>
+			</div>
+		</div>
+	</div>
 
 
-  <div class="col-md-8">
-    <div class="card">
-      <div class="card-body px-5 py-4">
-        <h5>{{user.tipo_usuario.tipo}}</h5>
-        
-        <hr/>
-        
-        <h5>Especialidades</h5>
-        
-      </div>
-    </div>
-  </div>
+	<div class="col-md-8">
+		<div class="card">
+			<div class="card-body px-5 py-4">
+				<h5>{{user.tipo_usuario.tipo}}</h5>
+
+				<hr />
+
+				<h5>Especialidades</h5>
+
+			</div>
+		</div>
+	</div>
 </div>
 
 {% endblock %}

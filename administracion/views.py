@@ -104,7 +104,10 @@ def dashboard(request):
 @user_passes_test(user_is_staff_member)
 def aprobar_perfil(request, pk):
     usuario = User.objects.get(pk=pk)
+    investigador = Investigador.objects.get(user_id=pk)
+    investigador.es_sei = True
     usuario.aprobado = True
+    investigador.save()
     usuario.save()
     messages.success(request, "Solicitud aceptada")
     sitio = get_current_site(request)
