@@ -14,6 +14,10 @@ urlpatterns = [
           views.aprobar_perfil,
           name='aprobar_perfil'),
     path(
+          'aprobar_empresa/<int:pk>',
+          views.aprobar_empresa,
+          name='aprobar_empresa'),
+    path(
           'salir',
           LogoutView.as_view(),
           name='logout'),

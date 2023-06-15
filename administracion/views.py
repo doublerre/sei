@@ -122,6 +122,24 @@ def aprobar_perfil(request, pk):
 
     return redirect('administracion:dashboard')
 
+@user_passes_test(user_is_staff_member)
+def aprobar_empresa(request, pk):
+    usuario = User.objects.get(pk=pk)
+    usuario.aprobado = True
+    usuario.save()
+    messages.success(request, "Solicitud aceptada")
+    sitio = get_current_site(request)
+    enviar_correo_respuesta_solicitud_ingreso(
+        "Respuesta de solicitud de ingreso",
+        "Su solicitud a sido aprobada por un administrador",
+        [usuario.email],
+        True,
+        usuario,
+        sitio
+    )
+
+    return redirect('administracion:dashboard')
+
 def perfil(request, id):
     investigador = Investigador.objects.get(user_id=id)
     return render(request, "administracion/perfil_en_revision.html", {"investigador": investigador})
