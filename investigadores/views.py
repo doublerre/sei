@@ -25,6 +25,7 @@ from vinculacion.helpers import (
 from usuarios.models import TipoUsuario
 from urllib.parse import urlparse, parse_qs
 from django.http import FileResponse
+from docxtpl import DocxTemplate
 import os
 
 
@@ -202,3 +203,13 @@ def mostrar_cg(request, investigador_id):
     investigador = get_object_or_404(Investigador, user=investigador_id)
     filepath = os.path.join('media', '{0}'.format(investigador.grado.name))
     return FileResponse(open(filepath, 'rb'), content_type='application/pdf')
+
+def constancia_sei(request, investigador_id):
+    investigador = get_object_or_404(Investigador, user_id = investigador_id)
+    doc = DocxTemplate("static/doc/constancia.docx")
+    fullname = investigador.nombre_completo
+    id_user = investigador.pk
+    date_access = "Hoy"
+    context = {'fullname': fullname, 'id_user': id_user, 'date_access': date_access}
+    doc.render(context)
+    doc.save("generated_doc.docx")
