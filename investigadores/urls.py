@@ -46,5 +46,8 @@ urlpatterns = [
         'investiadores/<int:investigador_id>/CG',
         views.mostrar_cg,
         name="mostrar_cg"
-    )
+    ),
+    path('investigadores/<int:investigador_id>/constancia',
+         views.constancia_sei,
+         name="constancia_sei")
 ]
