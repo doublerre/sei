@@ -33,8 +33,9 @@
 						{% if usuario_data.es_sni %}
 						<span class="badge bg-primary">SNI</span>
 						{% endif %}
-						{% if usuario_data.es_sei %}
-						<span class="badge bg-primary">Constancia</span>
+						{% if usuario_data.constancia %}
+						<a target="_blank" download="proposed_file_name" href="{{MEDIA_URL}}/{{usuario_data.constancia}}"><span
+							class="badge bg-primary">Constancia</span></a>
 						{% endif %}
 					</div>
 				</div>

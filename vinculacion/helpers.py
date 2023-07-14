@@ -80,7 +80,8 @@ def get_user_specific_data(usuario):
             'link_google_scholar': usuario_investigador.link_google_scholar,
             'curriculum_vitae': usuario_investigador.curriculum_vitae,
             'es_sei': usuario_investigador.es_sei,
-            'es_sni': usuario_investigador.es_sni
+            'es_sni': usuario_investigador.es_sni,
+            'constancia': usuario_investigador.constancia
         }
 
     elif tipo_usuario == "empresa":
