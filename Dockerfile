@@ -1,15 +1,20 @@
-FROM archlinux:latest
+FROM debian:bullseye-slim
 
-RUN pacman -Syu --noconfirm
-RUN pacman -S apache python python-pip mysql gcc \
-    git openssh neovim fish --noconfirm
+RUN apt-get update
+RUN apt-get install python3 python3-pip apache2 libmariadb-dev-compat libmariadb-dev libapache2-mod-wsgi-py3 \
+    apache2-dev nano build-essential fish -y
 
-# Application environment
+# Configure timezone
+ENV TZ=America/Mexico_City
+RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
+
 WORKDIR /app
 
 COPY ./requirements.txt /app/requirements.txt
 
 RUN pip3 install -r /app/requirements.txt
+
+RUN python3 -m pip install --upgrade pip
 
 EXPOSE 80
 
