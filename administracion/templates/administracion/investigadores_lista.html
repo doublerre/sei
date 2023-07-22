@@ -58,6 +58,10 @@
                             {% else %} <i class="fas fa-times" style="color: red;"></i> {% endif %}
                         </td>
                         <td>
+                            {% if investigador.es_sei %}
+                                <a href="{% url 'investigadores:constancia_sei' investigador.pk %}"><span
+                                class="badge bg-primary">Regenerar Constancia</span></a>
+                            {% endif %}
                             <a href="{% url 'administracion:investigadores_editar' investigador.pk %}"><span
                                     class="badge bg-info">Editar</span></a>
                             <a href="{% url 'administracion:investigadores_eliminar' investigador.pk %}"><span

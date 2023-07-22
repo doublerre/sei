@@ -204,6 +204,7 @@ def mostrar_cg(request, investigador_id):
     filepath = os.path.join('media', '{0}'.format(investigador.grado.name))
     return FileResponse(open(filepath, 'rb'), content_type='application/pdf')
 
+@login_required
 def constancia_sei(request, investigador_id):
     investigador = get_object_or_404(Investigador, user_id = investigador_id)
     doc = DocxTemplate("static/doc/constancia.docx")
