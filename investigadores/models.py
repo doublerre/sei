@@ -35,6 +35,13 @@ def rutaCGInvestigador(instance, filename):
         extension
     )
 
+def rutaConstanciaInvestigador(instance, filename):
+    extension = Path(filename).suffix
+    return 'usuarios/investigadores/Constancias/{0}{1}.'.format(
+        instance.curp,
+        extension
+    )
+
 class Investigador(models.Model):
     user = models.OneToOneField(
         User,
@@ -85,6 +92,14 @@ class Investigador(models.Model):
     grado = models.FileField(
         upload_to = rutaCGInvestigador,
         verbose_name="Comprobante de grado",
+        blank=True,
+        null=True,
+        default=None,
+        validators=[FileExtensionValidator(['pdf']), limiteTamanioArchivo]
+    )
+    constancia = models.FileField(
+        upload_to = rutaConstanciaInvestigador,
+        verbose_name="Constancia SEI",
         blank=True,
         null=True,
         default=None,
