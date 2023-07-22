@@ -2,7 +2,7 @@ FROM debian:bullseye-slim
 
 RUN apt-get update
 RUN apt-get install python3 python3-pip apache2 libmariadb-dev-compat libmariadb-dev libapache2-mod-wsgi-py3 \
-    apache2-dev nano build-essential fish -y
+    apache2-dev nano build-essential fish libreoffice -y
 
 # Configure timezone
 ENV TZ=America/Mexico_City

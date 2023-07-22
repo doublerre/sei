@@ -4,9 +4,11 @@ from django.contrib import messages
 from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse_lazy
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.decorators import user_passes_test
 from django.contrib.auth.mixins import UserPassesTestMixin, LoginRequiredMixin
 from administracion.helpers import obtener_coordenadas
 from administracion.user_tests import user_is_visitant
+from administracion.user_tests import user_is_staff_member
 from investigadores.models import (
     Investigador,
     Investigacion,
@@ -207,7 +209,7 @@ def mostrar_cg(request, investigador_id):
     filepath = os.path.join('media', '{0}'.format(investigador.grado.name))
     return FileResponse(open(filepath, 'rb'), content_type='application/pdf')
 
-@login_required
+@user_passes_test(user_is_staff_member)
 def constancia_sei(request, investigador_id):
     mes = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre']
 
@@ -226,5 +228,8 @@ def constancia_sei(request, investigador_id):
     temp_output_file = f"{os.path.splitext(output_docx)[0]}.pdf"
     docxFile.save(temp_output_file)
 
-    subprocess.run(["unoconv", "-f", "pdf", "-o", output_pdf, temp_output_file], check=True)
+    try:
+        subprocess.run(["unoconv", "-f", "pdf", "-o", output_pdf, temp_output_file], check=True)
+    except:
+        print("Error.")
     os.remove(temp_output_file)
