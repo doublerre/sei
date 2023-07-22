@@ -27,6 +27,7 @@ from vinculacion.helpers import (
 from usuarios.models import TipoUsuario
 from urllib.parse import urlparse, parse_qs
 from django.http import FileResponse
+from django.contrib import messages
 from docxtpl import DocxTemplate
 from docx import Document
 import datetime
@@ -233,3 +234,9 @@ def constancia_sei(request, investigador_id):
     except:
         print("Error.")
     os.remove(temp_output_file)
+
+    investigador.constancia = f"usuarios/investigadores/Constancias/{investigador.curp}.pdf"
+    investigador.save();
+    
+    messages.success(request, "Constancia creada correctamente.")
+    return redirect("administracion:investigadores_lista")
