@@ -26,6 +26,7 @@ from usuarios.models import TipoUsuario
 from urllib.parse import urlparse, parse_qs
 from django.http import FileResponse
 from docxtpl import DocxTemplate
+import datetime
 import os
 
 
@@ -206,11 +207,13 @@ def mostrar_cg(request, investigador_id):
 
 @login_required
 def constancia_sei(request, investigador_id):
+    mes = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre']
+
     investigador = get_object_or_404(Investigador, user_id = investigador_id)
-    doc = DocxTemplate("static/doc/constancia.docx")
+    doc = DocxTemplate("static/doc/formato.docx")
     fullname = investigador.nombre_completo
     id_user = investigador.pk
-    date_access = "Hoy"
-    context = {'fullname': fullname, 'id_user': id_user, 'date_access': date_access}
+    date = f"Zacatecas, Zac. a {datetime.datetime.today().day} de {mes[datetime.datetime.today().month - 1]} de {datetime.datetime.today().year}"
+    context = {'fullname': fullname, 'id_user': id_user, 'fulldate': date}
     doc.render(context)
-    doc.save("generated_doc.docx")
+    doc.save(f"media/usuarios/investigadores/Constancias/Word/{investigador.curp}.docx")
