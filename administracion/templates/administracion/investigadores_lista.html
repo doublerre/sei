@@ -41,7 +41,6 @@
                         <th>Email</th>
                         <th>Nivel</th>
                         <th>Status</th>
-                        <th>SNI</th>
                         <th>SEI</th>
                         <th></th>
                     </tr>
@@ -54,10 +53,6 @@
                         <td>{{investigador.user.email}}</td>
                         <td>{{investigador.nivel}}</td>
                         <td>{% if investigador.user.is_active %} Activo {% else %} Inactivo {% endif %}</td>
-                        <td>
-                            {% if investigador.es_sni %} <i class="fas fa-check" style="color: #0ee127;"></i>
-                            {% else %} <i class="fas fa-times" style="color: red;"></i> {% endif %}
-                        </td>
                         <td>
                             {% if investigador.es_sei %} <i class="fas fa-check" style="color: #0ee127;"></i>
                             {% else %} <i class="fas fa-times" style="color: red;"></i> {% endif %}
