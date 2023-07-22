@@ -26,7 +26,9 @@ from usuarios.models import TipoUsuario
 from urllib.parse import urlparse, parse_qs
 from django.http import FileResponse
 from docxtpl import DocxTemplate
+from docx import Document
 import datetime
+import subprocess
 import os
 
 
@@ -216,4 +218,13 @@ def constancia_sei(request, investigador_id):
     date = f"Zacatecas, Zac. a {datetime.datetime.today().day} de {mes[datetime.datetime.today().month - 1]} de {datetime.datetime.today().year}"
     context = {'fullname': fullname, 'id_user': id_user, 'fulldate': date}
     doc.render(context)
-    doc.save(f"media/usuarios/investigadores/Constancias/Word/{investigador.curp}.docx")
+    output_docx = f"media/usuarios/investigadores/Constancias/Word/{investigador.curp}.docx"
+    output_pdf = f"media/usuarios/investigadores/Constancias/{investigador.curp}.pdf"
+    doc.save(output_docx)
+
+    docxFile = Document(output_docx)
+    temp_output_file = f"{os.path.splitext(output_docx)[0]}.pdf"
+    docxFile.save(temp_output_file)
+
+    subprocess.run(["unoconv", "-f", "pdf", "-o", output_pdf, temp_output_file], check=True)
+    os.remove(temp_output_file)
