@@ -60,7 +60,7 @@
                         </td>
                         <td>
                             {% if investigador.es_sei and investigador.constancia %} 
-                                <a href="{{MEDIA_URL}}/{{investigador.constancia}}" target=”_blank”><span class="badge bg-primary">Ver Constancia</span></a> 
+                                <a href="{{MEDIA_URL}}{{investigador.constancia}}" target=”_blank”><span class="badge bg-primary">Ver Constancia</span></a> 
                             {% else %}
                                 <span class="badge bg-danger">Sin Constancia</span>
                             {% endif %}
