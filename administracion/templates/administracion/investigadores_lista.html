@@ -42,6 +42,7 @@
                         <th>Nivel</th>
                         <th>Status</th>
                         <th>SEI</th>
+                        <th>Constancia</th>
                         <th></th>
                     </tr>
                 </thead>
@@ -56,6 +57,13 @@
                         <td>
                             {% if investigador.es_sei %} <i class="fas fa-check" style="color: #0ee127;"></i>
                             {% else %} <i class="fas fa-times" style="color: red;"></i> {% endif %}
+                        </td>
+                        <td>
+                            {% if investigador.es_sei and investigador.constancia %} 
+                                <a href="{{MEDIA_URL}}/{{investigador.constancia}}" target=”_blank”><span class="badge bg-primary">Ver Constancia</span></a> 
+                            {% else %}
+                                <span class="badge bg-danger">Sin Constancia</span>
+                            {% endif %}
                         </td>
                         <td>
                             {% if investigador.es_sei %}
