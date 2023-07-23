@@ -229,7 +229,7 @@ def constancia_sei(request, investigador_id):
     temp_output_file = f"{os.path.splitext(output_docx)[0]}.pdf"
     docxFile.save(temp_output_file)
 
-    subprocess.run(["unoconv", "-f", "pdf", "-o", output_pdf, temp_output_file], check=True)
+    subprocess.run(["sudo unoconv -f pdf -o", output_pdf, temp_output_file], check=True)
     os.remove(temp_output_file)
 
     investigador.constancia = f"usuarios/investigadores/Constancias/{investigador.curp}.pdf"
