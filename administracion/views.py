@@ -44,7 +44,10 @@ from administracion.helpers import (
 )
 from django.utils import timezone as datetime
 from investigadores.models import Investigador
-
+from docxtpl import DocxTemplate
+from docx import Document
+import os
+import subprocess
 
 @user_passes_test(user_is_staff_member)
 def dashboard(request):
@@ -103,10 +106,34 @@ def dashboard(request):
 
 @user_passes_test(user_is_staff_member)
 def aprobar_perfil(request, pk):
+    mes = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre']
+
     usuario = User.objects.get(pk=pk)
     investigador = Investigador.objects.get(user_id=pk)
     investigador.es_sei = True
     usuario.aprobado = True
+
+    doc = DocxTemplate("static/doc/formato.docx")
+    fullname = investigador.nombre_completo
+    id_user = investigador.pk
+    date = f"Zacatecas, Zac. a {datetime.datetime.today().day} de {mes[datetime.datetime.today().month - 1]} de {datetime.datetime.today().year}"
+    context = {'fullname': fullname, 'id_user': id_user, 'fulldate': date}
+    doc.render(context)
+    output_docx = f"media/usuarios/investigadores/Constancias/Word/{investigador.curp}.docx"
+    output_pdf = f"media/usuarios/investigadores/Constancias/{investigador.curp}.pdf"
+    doc.save(output_docx)
+
+    docxFile = Document(output_docx)
+    temp_output_file = f"{os.path.splitext(output_docx)[0]}.pdf"
+    docxFile.save(temp_output_file)
+
+    try:
+        subprocess.run(["unoconv", "-f", "pdf", "-o", output_pdf, temp_output_file], check=True)
+    except:
+        print("Error.")
+    os.remove(temp_output_file)
+
+    investigador.constancia = f"usuarios/investigadores/Constancias/{investigador.curp}.pdf"
     investigador.save()
     usuario.save()
     messages.success(request, "Solicitud aceptada")
