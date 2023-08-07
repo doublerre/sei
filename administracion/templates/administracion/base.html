@@ -135,6 +135,13 @@
             </li>
 
             <li id="acerca_de" class="sidebar-item">
+              <a href="{% url 'administracion:acerca_de' %}" class='sidebar-link'>
+                <i class="bi bi-question-circle"></i>
+                <span>Premios estatales</span>
+              </a>
+            </li>
+
+            <li id="acerca_de" class="sidebar-item">
               <form action="{% url 'administracion:toggle_convocatoria' %}" method="POST">
                 {% csrf_token %}
                 <button type="submit" class="sidebar-link btn">
