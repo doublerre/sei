@@ -11,3 +11,7 @@ class Contacto(models.Model):
 
 class AcercaDe(models.Model):
     datos = models.TextField()
+
+class FechaPremios(models.model):
+    fecha_de_inicio: models.DateField()
+    fecha_de_termino: models.DateField()
