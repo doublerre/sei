@@ -12,7 +12,6 @@ class Contacto(models.Model):
 class AcercaDe(models.Model):
     datos = models.TextField()
 
-
 class FechasPremios(models.Model):
-    fecha_de_inicio: models.TextField(verbose_name="Fecha de inicio", max_length=25)
-    fecha_de_fin: models.TextField(verbose_name="Fecha de cierre", max_length=25)
+    f_inicio = models.TextField(),
+    f_fin = models.TextField(),

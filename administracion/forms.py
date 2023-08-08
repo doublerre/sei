@@ -85,7 +85,7 @@ class FormFechaPremios(forms.ModelForm):
         fields = "__all__"
 
         widgets = {
-            'fecha_de_inicio': forms.DateInput(
+            'f_inicio': forms.Textarea(
                 attrs={'class': 'form-control'}
             )
         }

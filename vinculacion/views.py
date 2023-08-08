@@ -34,68 +34,68 @@ def index(request):
 
 @login_required
 def dashboard(request):
-    return redirect("vinculacion:perfil")
-    # tipos_usuario = TipoUsuario.objects.all()
-    # tipos_usuario_snake_case = [
-    #     "_".join(t.tipo.split()).lower() for t in tipos_usuario]
-    # categorias = Categoria.objects.all()
-    # usuarios = []
-    # investigadores = Investigador.objects.all()
-    # empresas = Empresa.objects.all()
-    # instituciones_educativas = InstitucionEducativa.objects.all()
+    #return redirect("vinculacion:perfil")
+    tipos_usuario = TipoUsuario.objects.all()
+    tipos_usuario_snake_case = [
+        "_".join(t.tipo.split()).lower() for t in tipos_usuario]
+    categorias = Categoria.objects.all()
+    usuarios = []
+    investigadores = Investigador.objects.all()
+    empresas = Empresa.objects.all()
+    instituciones_educativas = InstitucionEducativa.objects.all()
 
-    # usuarios.extend([{
-    #     "username": u.user.username,
-    #     "latitud": u.latitud,
-    #     "longitud": u.longitud,
-    #     "tipoUsuario": u.user.tipo_usuario.tipo,
-    #     "categorias": list(set(itertools.chain.from_iterable(
-    #         [list(
-    #             map(
-    #                 str,
-    #                 investigacion.categorias.all())
-    #         ) for investigacion in Investigacion.objects.filter(
-    #             autores=u.pk)]))),
-    #     "municipio": u.municipio,
-    #     "url": reverse_lazy("investigadores:investigador_perfil", args=[u.pk])
-    # } for u in investigadores])
-    # usuarios.extend([{
-    #     "username": u.encargado.username,
-    #     "latitud": u.latitud,
-    #     "longitud": u.longitud,
-    #     "tipoUsuario": u.encargado.tipo_usuario.tipo,
-    #     "categorias": list(map(str, u.especialidades.all())),
-    #     "municipio": u.municipio,
-    #     "url": ""
-    # } for u in empresas])
-    # usuarios.extend([{
-    #     "username": u.encargado.username,
-    #     "latitud": u.latitud,
-    #     "longitud": u.longitud,
-    #     "tipoUsuario": u.encargado.tipo_usuario.tipo,
-    #     "categorias": list(map(str, u.especialidades.all())),
-    #     "municipio": u.municipio,
-    #     "url": ""
-    # } for u in instituciones_educativas])
+    usuarios.extend([{
+        "username": u.user.username,
+        "latitud": u.latitud,
+        "longitud": u.longitud,
+        "tipoUsuario": u.user.tipo_usuario.tipo,
+        "categorias": list(set(itertools.chain.from_iterable(
+            [list(
+                map(
+                    str,
+                    investigacion.categorias.all())
+            ) for investigacion in Investigacion.objects.filter(
+                autores=u.pk)]))),
+        "municipio": u.municipio,
+        "url": reverse_lazy("investigadores:investigador_perfil", args=[u.pk])
+    } for u in investigadores])
+    usuarios.extend([{
+        "username": u.encargado.username,
+        "latitud": u.latitud,
+        "longitud": u.longitud,
+        "tipoUsuario": u.encargado.tipo_usuario.tipo,
+        "categorias": list(map(str, u.especialidades.all())),
+        "municipio": u.municipio,
+        "url": ""
+    } for u in empresas])
+    usuarios.extend([{
+        "username": u.encargado.username,
+        "latitud": u.latitud,
+        "longitud": u.longitud,
+        "tipoUsuario": u.encargado.tipo_usuario.tipo,
+        "categorias": list(map(str, u.especialidades.all())),
+        "municipio": u.municipio,
+        "url": ""
+    } for u in instituciones_educativas])
 
-    # areas_conocimiento = list(
-    #     set(map(lambda categoria: categoria.area_conocimiento, categorias)))
-    # areas_conocimiento = [{
-    #     "area": area,
-    #     "categorias": Categoria.objects.filter(
-    #         area_conocimiento=area)
-    # } for area in areas_conocimiento]
+    areas_conocimiento = list(
+        set(map(lambda categoria: categoria.area_conocimiento, categorias)))
+    areas_conocimiento = [{
+        "area": area,
+        "categorias": Categoria.objects.filter(
+            area_conocimiento=area)
+    } for area in areas_conocimiento]
 
-    # return render(
-    #     request,
-    #     "vinculacion/map.html",
-    #     {
-    #         "tipos_usuario": zip(tipos_usuario, tipos_usuario_snake_case),
-    #         "categorias": categorias,
-    #         "usuarios": usuarios,
-    #         "municipios": MUNICIPIOS,
-    #         "areas_conocimiento": areas_conocimiento
-    #     })
+    return render(
+        request,
+        "vinculacion/map.html",
+        {
+            "tipos_usuario": zip(tipos_usuario, tipos_usuario_snake_case),
+            "categorias": categorias,
+            "usuarios": usuarios,
+            "municipios": MUNICIPIOS,
+            "areas_conocimiento": areas_conocimiento
+        })
 
 
 @login_required

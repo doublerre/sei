@@ -821,7 +821,7 @@ class FechaPremiosEditar(UserPassesTestMixin, UpdateView):
     extra_context = {"accion": "Actualizar",
                      "nombre_modelo": "fechas de premios",
                      "formulario_archivos": False,
-                     "menu_activo": "acerca_de"}
+                     "menu_activo": "premios"}
     
     def test_func(self):
         return user_is_staff_member(self.request.user)
