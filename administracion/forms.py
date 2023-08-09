@@ -1,5 +1,5 @@
 from django import forms
-from administracion.models import Contacto, AcercaDe
+from administracion.models import Contacto, AcercaDe, Premios
 from usuarios.models import User
 from vinculacion.models import Categoria, Noticia
 
@@ -75,6 +75,17 @@ class FormAcercaDe(forms.ModelForm):
 
         widgets = {
             'datos': forms.Textarea(
+                attrs={'class': 'form-control'}
+            )
+        }
+
+class FormPremios(forms.ModelForm):
+    class Meta:
+        model: Premios
+        fields = "__all__"
+
+        widgets = {
+            'fecha_inicio': forms.DateField(
                 attrs={'class': 'form-control'}
             )
         }
