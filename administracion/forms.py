@@ -2,6 +2,7 @@ from django import forms
 from administracion.models import Contacto, AcercaDe, Premios
 from usuarios.models import User
 from vinculacion.models import Categoria, Noticia
+import datetime
 
 
 class FormUser(forms.ModelForm):
@@ -88,7 +89,8 @@ class FormPremios(forms.ModelForm):
             'fecha_inicio': forms.DateInput(
                 format=('%Y-%m-%d'),
                 attrs={'class': 'form-control', 
-                    'type': 'date'
+                    'type': 'date',
+                    'min': datetime.date.today()
                 },
             ),
             'fecha_fin': forms.widgets.DateInput(
