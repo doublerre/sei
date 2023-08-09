@@ -32,6 +32,13 @@ urlpatterns = [
         views.rechazar_solicitud,
         name='rechazar_solicitud'),
 
+    #Premio estatal CyT
+    path(
+        'perfil/premio-estatal',
+        views.premiosCyT,
+        name = 'premios'
+    ),
+
     # Trabajos
     path(
         'perfil/trabajos', views.trabajos_en_curso,
