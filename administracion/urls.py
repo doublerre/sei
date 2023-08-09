@@ -177,4 +177,8 @@ urlpatterns = [
           'convocatoria/editar',
           views.CambiarEstadoConvocatoria.as_view(),
           name='toggle_convocatoria'),
+    path(
+          'premios/editar',
+          views.FechaPremiosEditar.as_view(),
+          name='premios'),
 ]
