@@ -21,11 +21,13 @@ from instituciones_educativas.models import (
 from administracion.models import (
     Convocatoria,
     AcercaDe,
-    Contacto
+    Contacto,
+    Premios
 )
 from usuarios.models import User, MUNICIPIOS
 import itertools
 from . import helpers
+import datetime
 
 
 def index(request):
@@ -115,7 +117,6 @@ def noticia(request, id):
 @login_required
 def perfil(request):
     usuario = request.user
-
     if usuario.is_staff:
         return redirect("administracion:dashboard")
 
@@ -138,6 +139,25 @@ def perfil(request):
         "vinculacion/perfil.html",
         {"usuario_data": usuario_data})
 
+@login_required
+def premiosCyT(request):
+    fechas = Premios.objects.first()
+    today = datetime.date.today()
+    if today >= fechas.fecha_inicio and today <= fechas.fecha_fin: 
+        tipo = request.user.tipo_usuario
+        usuario_data = get_user_specific_data(request.user)
+        if str(tipo) == "Investigador":
+            if usuario_data["es_sei"]:
+                return render(request, "vinculacion/perfil_premio_estatal.html")
+            else:
+                messages.error(request, "Error, no tienes tu constancia de investigador")
+                return redirect("vinculacion:perfil")
+        else:
+            messages.error(request, "Error, no eres un investigador")
+            return redirect("vinculacion:perfil")
+    else:
+        messages.error(request, "Error, la convocatoria esta cerrada")
+        return redirect("vinculacion:perfil")
 
 class UsuarioEliminar(LoginRequiredMixin, DeleteView):
     model = User
