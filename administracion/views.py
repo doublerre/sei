@@ -16,13 +16,15 @@ from administracion.forms import (
     FormNoticia,
     FormUser,
     FormContacto,
-    FormAcercaDe
+    FormAcercaDe,
+    FormPremios
 )
 from administracion.user_tests import user_is_staff_member
 from administracion.models import (
     Convocatoria,
     Contacto,
-    AcercaDe
+    AcercaDe,
+    Premios
 )
 from investigadores.forms import (
     FormInvestigador,
@@ -809,6 +811,28 @@ class AcercaDeEditar(UserPassesTestMixin, UpdateView):
         form.save()
 
         messages.success(self.request, "Información acerca de actualizada")
+        return redirect(self.success_url)
+
+class FechaPremiosEditar(UserPassesTestMixin, UpdateView):
+    model = Premios
+    form_class = FormPremios
+    success_url = reverse_lazy('administracion:dashboard')
+    template_name = "administracion/formulario.html"
+    extra_context = {"accion": "Editar",
+                     "nombre_modelo": "Fecha para obtención de premios",
+                     "formulario_archivos": False,
+                     "menu_activo": "premios"}
+
+    def test_func(self):
+        return user_is_staff_member(self.request.user)
+
+    def get_object(self):
+        return Premios.objects.all()[0]
+
+    def form_valid(self, form):
+        form.save()
+
+        messages.success(self.request, "Fechas actualizadas con exito")
         return redirect(self.success_url)
 
 
