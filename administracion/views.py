@@ -827,7 +827,7 @@ class FechaPremiosEditar(UserPassesTestMixin, UpdateView):
         return user_is_staff_member(self.request.user)
 
     def get_object(self):
-        return Premios.objects.all()[0]
+        return Premios.objects.first()
 
     def form_valid(self, form):
         form.save()
