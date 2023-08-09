@@ -81,11 +81,21 @@ class FormAcercaDe(forms.ModelForm):
 
 class FormPremios(forms.ModelForm):
     class Meta:
-        model: Premios
+        model = Premios
         fields = "__all__"
 
         widgets = {
-            'fecha_inicio': forms.DateField(
-                attrs={'class': 'form-control'}
-            )
+            'fecha_inicio': forms.DateInput(
+                format=('%Y-%m-%d'),
+                attrs={'class': 'form-control', 
+                    'type': 'date'
+                },
+            ),
+            'fecha_fin': forms.widgets.DateInput(
+                format=('%Y-%m-%d'),
+                attrs={'class': 'form-control', 
+                    'placeholder': 'Select a date',
+                    'type': 'date'
+                },
+            ),
         }
