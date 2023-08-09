@@ -60,6 +60,16 @@
 
 {% block scripts %}
 <script src="{% static 'dist/assets/js/extensions/form-element-select.js' %}"></script>
+<script>
+  {% for field in form.visible_fields %}
+    {% if field.label == "Fecha inicio" %}
+      document.getElementById("id_fecha_inicio").onchange = function(){
+        var input = document.getElementById("id_fecha_fin");
+        input.setAttribute("min", this.value);
+      }
+    {% endif %}
+  {% endfor %}
+</script>
 {% endblock %}
 
 {% block marcar_activo %}{% if menu_activo %}{{menu_activo}}{% else %}tablas{% endif %}{% endblock %}
