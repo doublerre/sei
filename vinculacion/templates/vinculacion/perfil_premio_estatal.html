@@ -5,38 +5,24 @@
 
 <div class="d-flex flex-column align-items-center h-100 w-100">
 
-  <h1 class="titulo-seccion">Selecciona el tipo de usuario que deseas crear</h1>
+  <h1 class="titulo-seccion">Selecciona la categoria en la que deseas participar.</h1>
 
-  <div class="row h-100 w-100 p-5">
+  <div class="row">
 
-    <div class="col-md-4">
-      <a href="{% url 'investigadores:investigador_form' %}" id="investigador">
-        <div class="card perfil-opcion" style="height: 300px;">
-          <div class="card-img-overlay d-flex justify-content-center align-items-center">
-            <h2>Investigador</h2>
-          </div>
-        </div>
-      </a>
+    <div class="card col-md-6 text-center">
+      <img src="{% static 'img/MEI.jpeg' %}" width="100px" class="card-img-top" alt="premio arbol y bonilla">
+      <div class="card-body">
+        <h5 class="card-title text-center">Producción Científica y Tecnológica.</h5>
+        <a href="#" class="btn btn-primary">Ver detalles.</a>
+      </div>
     </div>
 
-    <div class="col-md-4">
-      <a href="{% url 'empresas:empresa_form' %}" id="empresa">
-        <div class="card perfil-opcion" style="height: 300px;">
-          <div class="card-img-overlay d-flex justify-content-center align-items-center">
-            <h2>Empresa</h2>
-          </div>
-        </div>
-      </a>
-    </div>
-
-    <div class="col-md-4">
-      <a href="{% url 'instituciones_educativas:institucion_educativa_form' %}" id="institucion-educativa">
-        <div class="card perfil-opcion" style="height: 300px;">
-          <div class="card-img-overlay d-flex justify-content-center align-items-center">
-            <h2>Institución Educativa</h2>
-          </div>
-        </div>
-      </a>
+    <div class="card col-md-6 text-center">
+      <img src="{% static 'img/JAB.png' %}" width="100px" class="card-img-top" alt="premio arbol y bonilla">
+      <div class="card-body center">
+        <h5 class="card-title text-center">Superación Académica, Formación de Recursos Humanos y Otros.</h5>
+        <a href="#" class="btn btn-primary">Ver detalles.</a>
+      </div>
     </div>
   </div>
 
