@@ -214,7 +214,7 @@ class CategoriaA(models.Model):
     estatus = models.CharField(
         choices= ESTADOS_TRABAJO_FINALIZACION,
         verbose_name="Estatus de la solicitud",
-        default="A",
+        default="E",
         max_length=1
     )
     
