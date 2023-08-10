@@ -22,7 +22,8 @@
       <img src="{% static 'img/JAB.png' %}" width="100px" class="card-img-top" alt="premio arbol y bonilla">
       <div class="card-body center">
         <h5 class="card-title text-center">Superación Académica, Formación de Recursos Humanos y Otros.</h5>
-        <a href="#" class="btn btn-primary">Ver detalles.</a>
+        <button data-bs-toggle="modal" data-bs-target="#modalJAB" class="btn btn-primary">Ver detalles.</button>
+        <button class="btn btn-primary">Participa.</button>
       </div>
     </div>
   </div>
@@ -87,6 +88,73 @@
                 <tr>
                   <th scope="row">A10</th>
                   <td>Pertenencia al Sistema Nacional de Investigadores.</td>
+                </tr>
+              </tbody>
+            </table>
+            <br/>
+            <p class="text-right">Para mas información consulta el manual de operación dando click <a target="_blank" href="https://cozcyt.gob.mx/docs/web/CXXXIII_3_AL_16.pdf">aqui.</a> </p>
+          </div>
+      </div>
+  </div>
+</div>
+
+<div class="modal fade" id="modalJAB" tabindex="-1" aria-labelledby="modalJABLabel" aria-hidden="true">
+  <div class="modal-dialog modal-xl">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="text-justify">Categoría B) Superación Académica, Formación de Recursos Humanos y Otros</h5>
+          <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+          <div class="modal-body">
+            <table class="table table-striped text-center">
+              <thead>
+                <tr>
+                  <th scope="col">Clave</th>
+                  <th scope="col">Producto</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <th scope="row">B1</th>
+                  <td>Obtención del grado académico de Doctorado o Maestría o Especialidad de los programas del SNP o en el extranjero con beca CONACYT.</td>
+                </tr>
+                <tr>
+                  <th scope="row">B2</th>
+                  <td>Obtención del grado académico de Doctorado o Maestría o Especialidad de un programa nacional.</td>
+                </tr>
+                <tr>
+                  <th scope="row">B3</th>
+                  <td>Dirección de Tesis o Artículo de Investigación de alumnos graduados en licenciatura, maestría, doctorado o especialidad médica.</td>
+                </tr>
+                <tr>
+                  <th scope="row">B4</th>
+                  <td>Dirección de tesis de licenciatura de alumnos graduados en la modalidad de artículo científico.</td>
+                </tr>
+                <tr>
+                  <th scope="row">B5</th>
+                  <td>Presentación de ponencias o carteles en eventos científicos, en México o el extranjero.</td>
+                </tr>
+                <tr>
+                  <th scope="row">B6</th>
+                  <td>Estancias de investigación en instituciones académicas o de investigación.</td>
+                </tr>
+                <tr>
+                  <th scope="row">B7</th>
+                  <td>Asignaturas con créditos impartidas en Especialidad, Maestría o Doctorado de programas del SNP.</td>
+                </tr>
+                <tr>
+                  <th scope="row">B8</th>
+                  <td>Participación en proyectos de investigación con financiamiento interno o externo.</td>
+                </tr>
+                <tr>
+                  <th scope="row">B9</th>
+                  <td>Publicación de artículos en revistas de divulgación científica o tecnológica no arbitradas.</td>
+                </tr>
+                <tr>
+                  <th scope="row">B10</th>
+                  <td>Evaluación de trabajos de investigación o proyectos.</td>
                 </tr>
               </tbody>
             </table>
