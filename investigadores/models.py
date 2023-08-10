@@ -58,6 +58,12 @@ ESTADOS_TRABAJO_FINALIZACION = [
     ("F", "Finalizada"),
 ]
 
+ESTADOS_PREMIOS = [
+    ("E", "En revisión"),
+    ("G", "Ganador"),
+    ("F", "Finalizada"),
+]
+
 class Investigador(models.Model):
     user = models.OneToOneField(
         User,
@@ -212,7 +218,7 @@ class CategoriaA(models.Model):
         validators=[FileExtensionValidator(['pdf'], limite10MbArchivo)]
     )
     estatus = models.CharField(
-        choices= ESTADOS_TRABAJO_FINALIZACION,
+        choices= ESTADOS_PREMIOS,
         verbose_name="Estatus de la solicitud",
         default="E",
         max_length=1
