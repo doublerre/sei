@@ -150,7 +150,7 @@ def premiosCyT(request):
             if usuario_data["es_sei"]:
                 return render(request, "vinculacion/perfil_premio_estatal.html")
             else:
-                messages.error(request, "Error, no tienes tu constancia de investigador")
+                messages.error(request, "Es necesario contar constancia de investigador para participar, comunicate al siguiente telefono: 492 921 3228 o al correo: lfaraiz@gmail.com")
                 return redirect("vinculacion:perfil")
         else:
             messages.error(request, "Error, no eres un investigador")
