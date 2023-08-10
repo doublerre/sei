@@ -13,7 +13,8 @@
       <img src="{% static 'img/MEI.jpeg' %}" width="100px" class="card-img-top" alt="premio arbol y bonilla">
       <div class="card-body">
         <h5 class="card-title text-center">Producción Científica y Tecnológica.</h5>
-        <a href="#" class="btn btn-primary">Ver detalles.</a>
+        <button data-bs-toggle="modal" data-bs-target="#modalPCT" class="btn btn-primary">Ver detalles.</button>
+        <button class="btn btn-primary">Participa.</button>
       </div>
     </div>
 
@@ -27,6 +28,76 @@
   </div>
 
 </div>
+
+<!-- Modal -->
+<div class="modal fade" id="modalPCT" tabindex="-1" aria-labelledby="modalPCTLabel" aria-hidden="true">
+  <div class="modal-dialog modal-xl">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="text-justify">Categoría A) Producción Científica y Tecnológica, son aquellas actividades científicas y/o tecnológicas realizadas que tienen como resultado la generación o transformación de productos de conocimientos demostrables. Las actividades de la categoría A) se enlistan a continuación:</h5>
+          <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+          <div class="modal-body">
+            <table class="table table-striped text-center">
+              <thead>
+                <tr>
+                  <th scope="col">Clave</th>
+                  <th scope="col">Producto</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <th scope="row">A1</th>
+                  <td>Artículos científicos en revistas indexadas o arbitradas.</td>
+                </tr>
+                <tr>
+                  <th scope="row">A2</th>
+                  <td>Autoría y coautoría de libros y/o capítulos de libros científicos con arbitraje.</td>
+                </tr>
+                <tr>
+                  <th scope="row">A3</th>
+                  <td>Trámite de solicitud u obtención de patentes.</td>
+                </tr>
+                <tr>
+                  <th scope="row">A4</th>
+                  <td>Trámite de solicitud u obtención de derechos de obtentor.</td>
+                </tr>
+                <tr>
+                  <th scope="row">A5</th>
+                  <td>Desarrollo de software/hardware con Derechos de Autor.</td>
+                </tr>
+                <tr>
+                  <th scope="row">A6</th>
+                  <td>Implementaciones Tecnológicas.</td>
+                </tr>
+                <tr>
+                  <th scope="row">A7</th>
+                  <td>Artículos o notas científicas publicadas en revistas arbitradas de divulgación científica o tecnológica.</td>
+                </tr>
+                <tr>
+                  <th scope="row">A8</th>
+                  <td>Participación en proyectos de investigación, desarrollo tecnológico e innovación con financiamiento externo obtenido mediante convocatoria.</td>
+                </tr>
+                <tr>
+                  <th scope="row">A9</th>
+                  <td>Editor, compilador o coordinador de libros colectivos.</td>
+                </tr>
+                <tr>
+                  <th scope="row">A10</th>
+                  <td>Pertenencia al Sistema Nacional de Investigadores.</td>
+                </tr>
+              </tbody>
+            </table>
+            <br/>
+            <p class="text-right">Para mas información consulta el manual de operación dando click <a target="_blank" href="https://cozcyt.gob.mx/docs/web/CXXXIII_3_AL_16.pdf">aqui.</a> </p>
+          </div>
+      </div>
+  </div>
+</div>
+
+<script src="{% static 'dist/assets/js/app.js' %}"></script>
 
 {% endblock %}
 
