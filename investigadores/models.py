@@ -50,6 +50,14 @@ def rutaConstanciaInvestigador(instance, filename):
         extension
     )
 
+ESTADOS_TRABAJO_FINALIZACION = [
+    ("E", "En revisión"),
+    ("P", "En proceso"),
+    ("A", "Aceptada"),
+    ("R", "Rechazada"),
+    ("F", "Finalizada"),
+]
+
 class Investigador(models.Model):
     user = models.OneToOneField(
         User,
@@ -119,8 +127,8 @@ class Investigador(models.Model):
 
 class CategoriaA(models.Model):
     user = models.OneToOneField(
-        User,
-        verbose_name="Usuario",
+        Investigador,
+        verbose_name="Investigador",
         on_delete=models.CASCADE,
         primary_key=True)
     a1 = models.FileField(
@@ -163,11 +171,56 @@ class CategoriaA(models.Model):
         default=None,
         validators=[FileExtensionValidator(['pdf'], limite10MbArchivo)]
     )
-
-
+    a6 = models.FileField(
+        upload_to=rutaCategoriaA,
+        verbose_name="Implementaciones tecnológicas",
+        blank=True,
+        null=True,
+        default=None,
+        validators=[FileExtensionValidator(['pdf'], limite10MbArchivo)]
+    )
+    a7 = models.FileField(
+        upload_to=rutaCategoriaA,
+        verbose_name="Artículos o notas científicas publicadas en revistas arbitradas de divulgación científica o tecnológica.",
+        blank=True,
+        null=True,
+        default=None,
+        validators=[FileExtensionValidator(['pdf'], limite10MbArchivo)]
+    )
+    a8 = models.FileField(
+        upload_to=rutaCategoriaA,
+        verbose_name="Participación en proyectos de investigación, desarrollo tecnológico e innovación con financiamiento externo obtenido mediante convocatoria.",
+        blank=True,
+        null=True,
+        default=None,
+        validators=[FileExtensionValidator(['pdf'], limite10MbArchivo)]
+    )
+    a9 = models.FileField(
+        upload_to=rutaCategoriaA,
+        verbose_name="Editor, compilador o coordinador de libros colectivos.",
+        blank=True,
+        null=True,
+        default=None,
+        validators=[FileExtensionValidator(['pdf'], limite10MbArchivo)]
+    )
+    a10 = models.FileField(
+        upload_to=rutaCategoriaA,
+        verbose_name="Pertenencia al Sistema Nacional de Investigadores.",
+        blank=True,
+        null=True,
+        default=None,
+        validators=[FileExtensionValidator(['pdf'], limite10MbArchivo)]
+    )
+    estatus = models.CharField(
+        choices= ESTADOS_TRABAJO_FINALIZACION,
+        verbose_name="Estatus de la solicitud",
+        default="A",
+        max_length=1
+    )
+    
 
     def __str__(self):
-        return self.user.username
+        return self.user.nombre_completo
 
 class Investigacion(models.Model):
     titulo = models.CharField(max_length=500)
@@ -194,14 +247,6 @@ ESTADOS = [
     ("P", "En proceso"),
     ("R", "Rechazada"),
     ("C", "Cancelada"),
-]
-
-ESTADOS_TRABAJO_FINALIZACION = [
-    ("E", "En revisión"),
-    ("P", "En proceso"),
-    ("A", "Aceptada"),
-    ("R", "Rechazada"),
-    ("F", "Finalizada"),
 ]
 
 
