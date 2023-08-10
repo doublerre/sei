@@ -2,9 +2,10 @@ from pathlib import Path
 from django.db import models
 from vinculacion.models import Categoria
 from usuarios.models import User, MUNICIPIOS
-from investigadores.validators import curp_validador, google_scholar_link_valdador, limiteTamanioArchivo
+from investigadores.validators import curp_validador, google_scholar_link_valdador, limiteTamanioArchivo, limite10MbArchivo
 from administracion.validators import cp_validator
 from django.core.validators import FileExtensionValidator
+import uuid
 
 
 class NivelInvestigador(models.Model):
@@ -32,6 +33,13 @@ def rutaCGInvestigador(instance, filename):
     extension = Path(filename).suffix
     return 'usuarios/investigadores/CGs/{0}{1}'.format(
         instance.curp,
+        extension
+    )
+
+def rutaCategoriaA(instance, filename):
+    extension = Path(filename).suffix
+    return 'usuarios/investigadores/CategoriaA/{0}{1}'.format(
+        uuid.uuid4(),
         extension
     )
 
@@ -109,6 +117,57 @@ class Investigador(models.Model):
     def __str__(self):
         return self.user.username
 
+class CategoriaA(models.Model):
+    user = models.OneToOneField(
+        User,
+        verbose_name="Usuario",
+        on_delete=models.CASCADE,
+        primary_key=True)
+    a1 = models.FileField(
+        upload_to=rutaCategoriaA,
+        verbose_name="Artículos científicos en revistas indexadas o arbitradas.",
+        blank=True,
+        null=True,
+        default=None,
+        validators=[FileExtensionValidator(['pdf'], limite10MbArchivo)]
+    )
+    a2 = models.FileField(
+        upload_to=rutaCategoriaA,
+        verbose_name="Autoría y coautoría de libros y/o capítulos de libros científicos con arbitraje.",
+        blank=True,
+        null=True,
+        default=None,
+        validators=[FileExtensionValidator(['pdf'], limite10MbArchivo)]
+    )
+    a3 = models.FileField(
+        upload_to=rutaCategoriaA,
+        verbose_name="Trámite de solicitud u obtención de patentes.",
+        blank=True,
+        null=True,
+        default=None,
+        validators=[FileExtensionValidator(['pdf'], limite10MbArchivo)]
+    )
+    a4 = models.FileField(
+        upload_to=rutaCategoriaA,
+        verbose_name="Trámite de solicitud u obtención de derechos de obtentor.",
+        blank=True,
+        null=True,
+        default=None,
+        validators=[FileExtensionValidator(['pdf'], limite10MbArchivo)]
+    )
+    a5 = models.FileField(
+        upload_to=rutaCategoriaA,
+        verbose_name="Desarrollo de software/hardware con Derechos de Autor.",
+        blank=True,
+        null=True,
+        default=None,
+        validators=[FileExtensionValidator(['pdf'], limite10MbArchivo)]
+    )
+
+
+
+    def __str__(self):
+        return self.user.username
 
 class Investigacion(models.Model):
     titulo = models.CharField(max_length=500)
