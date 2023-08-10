@@ -21,3 +21,8 @@ def limiteTamanioArchivo(archivo):
     limite = 4e6
     if archivo.size > limite:
         raise ValidationError('Archivo demasiado grande. El tamaño del archivo no debería exceder de 2 MB.')
+    
+def limite10MbArchivo(archivo):
+    limit = 10.0
+    if archivo.size > limit*1024*1024:
+        raise ValidationError('Archivo demasiado grande. El tamaño del archivo no deberia exceder de %sMB' %str(limit))
