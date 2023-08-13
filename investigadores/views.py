@@ -267,3 +267,8 @@ def constancia_sei(request, investigador_id):
     
     messages.success(request, "Constancia creada correctamente.")
     return redirect("administracion:investigadores_lista")
+
+@login_required
+def solicitud_realizada(request):
+    messages.error(request, "Error, no puedes participar en 2 categorias al mismo tiempo.")
+    return render(request, "solicitud_realizada.html")
