@@ -54,6 +54,11 @@ urlpatterns = [
         'investigadores/premios/categoria-a',
         views.SolicitudCategoriaA.as_view(),
         name = 'premios-categoria-a'
+    ),
+    path(
+        'investigadores/premios/solicitud-realizada',
+        views.solicitud_realizada,
+        name="solicitud-realizada"
     )
     
 ]
