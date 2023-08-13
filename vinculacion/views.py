@@ -142,6 +142,9 @@ def perfil(request):
 @login_required
 def premiosCyT(request):
     fechas = Premios.objects.first()
+    if not fechas:
+        messages.error(request, "Error, la convocatoria esta cerrada")
+        return redirect("vinculacion:perfil")
     today = datetime.date.today()
     if today >= fechas.fecha_inicio and today <= fechas.fecha_fin: 
         tipo = request.user.tipo_usuario
