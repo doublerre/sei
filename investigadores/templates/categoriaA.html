@@ -7,7 +7,7 @@
   const c1 = {{c1}}
   console.log(c1)
   if(c1 != 0){
-    console.log("True")
+    window.location.replace("{% url 'investigadores:solicitud-realizada' %}");
   }
 </script>
 {% endblock %}
