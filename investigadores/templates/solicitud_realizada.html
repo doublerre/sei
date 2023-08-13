@@ -1,0 +1,14 @@
+{% extends 'vinculacion/perfil_base.html' %}
+{% load static %}
+
+{% block contenido_perfil %}
+<div class="d-flex justify-content-center align-items-center">
+  <h1 class="titulo-seccion">Tu solicitud se encuentra en proceso.</h1>
+</div>
+{% endblock %}
+
+{% block elemento_activo %}premios{% endblock %}
+
+{% block scripts %}
+<script src="{% static 'dist/assets/js/extensions/form-element-select.js' %}"></script>
+{% endblock %}
