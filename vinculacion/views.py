@@ -13,7 +13,8 @@ from django.views.generic import CreateView, DeleteView
 from investigadores.models import (
     Investigador,
     Investigacion,
-    SolicitudTrabajo)
+    SolicitudTrabajo,
+    CategoriaA)
 from empresas.models import Empresa
 from instituciones_educativas.models import (
     InstitucionEducativa,
@@ -142,6 +143,13 @@ def perfil(request):
 @login_required
 def premiosCyT(request):
     fechas = Premios.objects.first()
+    try:
+        cA = CategoriaA.objects.get(user_id = request.user.id)
+        if cA:
+            messages.error(request, "Ya estas participando en el premio de CyT")
+            return redirect("vinculacion:perfil")
+    except:
+        print("Registro inexistente")
     if not fechas:
         messages.error(request, "Error, la convocatoria esta cerrada")
         return redirect("vinculacion:perfil")
