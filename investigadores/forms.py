@@ -1,6 +1,6 @@
 from django import forms
 from .models import SolicitudTrabajo
-from investigadores.models import Investigador, Investigacion
+from investigadores.models import Investigador, Investigacion, CategoriaA
 from usuarios.models import User
 
 
@@ -154,6 +154,24 @@ class FormInvestigacion(forms.ModelForm):
             'contenido': forms.Textarea(
                 attrs={'class': 'form-control'}),
         }
+
+class FormCategoriaA(forms.ModelForm):
+    class Meta:
+        model = CategoriaA
+        exclude = ["estatus", "user"]
+    def __init__(self, *args, **kwargs):
+        super(FormCategoriaA, self).__init__(*args, **kwargs)
+        self.fields["a1"].widget.attrs['class'] = 'form-control'
+        self.fields["a2"].widget.attrs['class'] = 'form-control'
+        self.fields["a3"].widget.attrs['class'] = 'form-control'
+        self.fields["a4"].widget.attrs['class'] = 'form-control'
+        self.fields["a5"].widget.attrs['class'] = 'form-control'
+        self.fields["a6"].widget.attrs['class'] = 'form-control'
+        self.fields["a7"].widget.attrs['class'] = 'form-control'
+        self.fields["a8"].widget.attrs['class'] = 'form-control'
+        self.fields["a9"].widget.attrs['class'] = 'form-control'
+        self.fields["a10"].widget.attrs['class'] = 'form-control'
+
 
 
 class SolicitudTrabajoForm(forms.ModelForm):

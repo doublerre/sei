@@ -14,11 +14,13 @@ from investigadores.models import (
     Investigacion,
     NivelInvestigador,
     SolicitudTrabajo,
-    InvestigacionGoogleScholar
+    InvestigacionGoogleScholar,
+    CategoriaA
 )
 from investigadores.forms import (
     FormInvestigadorBase,
     FormInvestigacion,
+    FormCategoriaA
 )
 from vinculacion.helpers import (
     get_author,
@@ -28,6 +30,7 @@ from usuarios.models import TipoUsuario
 from urllib.parse import urlparse, parse_qs
 from django.http import FileResponse
 from django.contrib import messages
+from django.http import HttpResponseForbidden
 from docxtpl import DocxTemplate
 from docx import Document
 import datetime
@@ -69,6 +72,30 @@ class InvestigadorSolicitud(UserPassesTestMixin, CreateView):
         messages.success(self.request, "Solicitud registrada correctamente")
         return redirect('vinculacion:perfil')
 
+class SolicitudCategoriaA(LoginRequiredMixin, CreateView):
+    model = CategoriaA
+    form_class = FormCategoriaA
+    template_name = "categoriaA.html"
+    extra_context = {
+        "formulario_archivos": True,
+        "titulo": "Categoria A"
+    }
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        userid = self.request.user.id
+        
+        context["c1"] = CategoriaA.objects.filter(user_id = userid).count()
+        return context
+
+    def form_valid(self, form):
+        categoria = form.save(commit=False)
+        categoria.user = Investigador.objects.get(pk = self.request.user.id)
+        
+        categoria.save()
+        categoria.user.save()
+        messages.success(self.request, "Solicitud enviada con exito.")
+        return redirect("vinculacion:perfil")
 
 class InvestigadorActualizar(LoginRequiredMixin, UpdateView):
     model = Investigador

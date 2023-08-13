@@ -1,8 +1,15 @@
+
 {% extends 'vinculacion/perfil_base.html' %}
 {% load static %}
-
 {% block extraresources %}
 <link rel="stylesheet" href="{% static 'dist/assets/css/pages/form-element-select.css' %}">
+<script>
+  const c1 = {{c1}}
+  console.log(c1)
+  if(c1 != 0){
+    console.log("True")
+  }
+</script>
 {% endblock %}
 
 {% block contenido_perfil %}
@@ -11,7 +18,7 @@
   <div class="w-75">
     <div class="card">
       <div class="card-header">
-        <h5>Categoria A</h5>
+        <h5>{{titulo}}</h5>
       </div>
       <div class="card-body">
         <form method="POST" {% if formulario_archivos %}enctype="multipart/form-data"{% endif %}>

@@ -49,5 +49,11 @@ urlpatterns = [
     ),
     path('investigadores/<int:investigador_id>/constancia',
          views.constancia_sei,
-         name="constancia_sei")
+         name="constancia_sei"),
+    path(
+        'investigadores/premios/categoria-a',
+        views.SolicitudCategoriaA.as_view(),
+        name = 'premios-categoria-a'
+    )
+    
 ]
