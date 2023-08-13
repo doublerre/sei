@@ -59,6 +59,7 @@ ESTADOS_TRABAJO_FINALIZACION = [
 ]
 
 ESTADOS_PREMIOS = [
+    ("I", "En proceso"),
     ("E", "En revisión"),
     ("G", "Ganador"),
     ("F", "Finalizada"),
@@ -220,9 +221,10 @@ class CategoriaA(models.Model):
     estatus = models.CharField(
         choices= ESTADOS_PREMIOS,
         verbose_name="Estatus de la solicitud",
-        default="E",
+        default="I",
         max_length=1
     )
+    anio = models.CharField(max_length = 5, null=True, blank=True)
     
 
     def __str__(self):
