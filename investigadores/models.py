@@ -43,6 +43,13 @@ def rutaCategoriaA(instance, filename):
         extension
     )
 
+def rutaCategoriaB(instance, filename):
+    extension = Path(filename).suffix
+    return 'usuarios/investigadores/CategoriaB/{0}{1}'.format(
+        uuid.uuid4(),
+        extension
+    )
+
 def rutaConstanciaInvestigador(instance, filename):
     extension = Path(filename).suffix
     return 'usuarios/investigadores/Constancias/{0}{1}.'.format(
@@ -230,6 +237,105 @@ class CategoriaA(models.Model):
     def __str__(self):
         return self.user.nombre_completo
 
+
+class CategoriaB(models.Model):
+    user = models.OneToOneField(
+        Investigador,
+        verbose_name="Investigador",
+        on_delete=models.CASCADE,
+        primary_key=True)
+    b1 = models.FileField(
+        upload_to=rutaCategoriaB,
+        verbose_name="Artículos científicos en revistas indexadas o arbitradas.",
+        blank=True,
+        null=True,
+        default=None,
+        validators=[FileExtensionValidator(['pdf'], limite10MbArchivo)]
+    )
+    b2 = models.FileField(
+        upload_to=rutaCategoriaB,
+        verbose_name="Autoría y coautoría de libros y/o capítulos de libros científicos con arbitraje.",
+        blank=True,
+        null=True,
+        default=None,
+        validators=[FileExtensionValidator(['pdf'], limite10MbArchivo)]
+    )
+    b3 = models.FileField(
+        upload_to=rutaCategoriaB,
+        verbose_name="Trámite de solicitud u obtención de patentes.",
+        blank=True,
+        null=True,
+        default=None,
+        validators=[FileExtensionValidator(['pdf'], limite10MbArchivo)]
+    )
+    b4 = models.FileField(
+        upload_to=rutaCategoriaB,
+        verbose_name="Trámite de solicitud u obtención de derechos de obtentor.",
+        blank=True,
+        null=True,
+        default=None,
+        validators=[FileExtensionValidator(['pdf'], limite10MbArchivo)]
+    )
+    b5 = models.FileField(
+        upload_to=rutaCategoriaB,
+        verbose_name="Desarrollo de software/hardware con Derechos de Autor.",
+        blank=True,
+        null=True,
+        default=None,
+        validators=[FileExtensionValidator(['pdf'], limite10MbArchivo)]
+    )
+    b6 = models.FileField(
+        upload_to=rutaCategoriaB,
+        verbose_name="Implementaciones tecnológicas",
+        blank=True,
+        null=True,
+        default=None,
+        validators=[FileExtensionValidator(['pdf'], limite10MbArchivo)]
+    )
+    b7 = models.FileField(
+        upload_to=rutaCategoriaB,
+        verbose_name="Artículos o notas científicas publicadas en revistas arbitradas de divulgación científica o tecnológica.",
+        blank=True,
+        null=True,
+        default=None,
+        validators=[FileExtensionValidator(['pdf'], limite10MbArchivo)]
+    )
+    b8 = models.FileField(
+        upload_to=rutaCategoriaB,
+        verbose_name="Participación en proyectos de investigación, desarrollo tecnológico e innovación con financiamiento externo obtenido mediante convocatoria.",
+        blank=True,
+        null=True,
+        default=None,
+        validators=[FileExtensionValidator(['pdf'], limite10MbArchivo)]
+    )
+    b9 = models.FileField(
+        upload_to=rutaCategoriaB,
+        verbose_name="Editor, compilador o coordinador de libros colectivos.",
+        blank=True,
+        null=True,
+        default=None,
+        validators=[FileExtensionValidator(['pdf'], limite10MbArchivo)]
+    )
+    b10 = models.FileField(
+        upload_to=rutaCategoriaB,
+        verbose_name="Pertenencia al Sistema Nacional de Investigadores.",
+        blank=True,
+        null=True,
+        default=None,
+        validators=[FileExtensionValidator(['pdf'], limite10MbArchivo)]
+    )
+    estatus = models.CharField(
+        choices= ESTADOS_PREMIOS,
+        verbose_name="Estatus de la solicitud",
+        default="I",
+        max_length=1
+    )
+    anio = models.CharField(max_length = 5, null=True, blank=True)
+    
+
+    def __str__(self):
+        return self.user.nombre_completo
+    
 class Investigacion(models.Model):
     titulo = models.CharField(max_length=500)
     categorias = models.ManyToManyField(Categoria, blank=True)
