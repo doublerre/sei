@@ -14,7 +14,8 @@ from investigadores.models import (
     Investigador,
     Investigacion,
     SolicitudTrabajo,
-    CategoriaA)
+    CategoriaA,
+    CategoriaB)
 from empresas.models import Empresa
 from instituciones_educativas.models import (
     InstitucionEducativa,
@@ -144,12 +145,21 @@ def perfil(request):
 def premiosCyT(request):
     fechas = Premios.objects.first()
     try:
-        cA = CategoriaA.objects.get(user_id = request.user.id)
+        cA = CategoriaA.objects.get(user_id = request.user.id, anio=datetime.datetime.today().year)
         if cA:
             messages.error(request, "Ya estas participando en el premio de CyT")
             return redirect("vinculacion:perfil")
     except:
         print("Registro inexistente")
+
+    try:
+        cB = CategoriaB.objects.get(user_id = request.user.id, anio=datetime.datetime.today().year)
+        if cB:
+            messages.error(request, "Ya estas participando en el premio de CyT")
+            return redirect("vinculacion:perfil")
+    except:
+        print("Registro inexistente")
+
     if not fechas:
         messages.error(request, "Error, la convocatoria esta cerrada")
         return redirect("vinculacion:perfil")
