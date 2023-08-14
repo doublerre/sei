@@ -80,7 +80,7 @@ class SolicitudCategoriaA(LoginRequiredMixin, CreateView):
     template_name = "categoriaA.html"
     extra_context = {
         "formulario_archivos": True,
-        "titulo": "Categoria A"
+        "titulo": "Categoria A: Producción Científica y Tecnológica."
     }
 
     def get_context_data(self, **kwargs):
@@ -107,7 +107,7 @@ class SolicitudCategoriaB(LoginRequiredMixin, CreateView):
     template_name = "categoriaA.html"
     extra_context = {
         "formulario_archivos": True,
-        "titulo": "Categoria B"
+        "titulo": "Categoria B: Superación Académica, Formación de Recursos Humanos y Otros."
     }
 
     def get_context_data(self, **kwargs):
