@@ -91,6 +91,7 @@ class SolicitudCategoriaA(LoginRequiredMixin, CreateView):
     def form_valid(self, form):
         categoria = form.save(commit=False)
         categoria.user = Investigador.objects.get(pk = self.request.user.id)
+        categoria.anio = datetime.datetime.today().year
         
         categoria.save()
         categoria.user.save()
