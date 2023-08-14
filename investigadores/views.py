@@ -88,6 +88,7 @@ class SolicitudCategoriaA(LoginRequiredMixin, CreateView):
         userid = self.request.user.id
         
         context["c1"] = CategoriaA.objects.filter(user_id = userid).count()
+        context["c2"] = CategoriaB.objects.filter(user_id = userid).count()
         return context
 
     def form_valid(self, form):
