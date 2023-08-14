@@ -15,12 +15,14 @@ from investigadores.models import (
     NivelInvestigador,
     SolicitudTrabajo,
     InvestigacionGoogleScholar,
-    CategoriaA
+    CategoriaA,
+    CategoriaB
 )
 from investigadores.forms import (
     FormInvestigadorBase,
     FormInvestigacion,
-    FormCategoriaA
+    FormCategoriaA,
+    FormCategoriaB
 )
 from vinculacion.helpers import (
     get_author,
@@ -86,6 +88,33 @@ class SolicitudCategoriaA(LoginRequiredMixin, CreateView):
         userid = self.request.user.id
         
         context["c1"] = CategoriaA.objects.filter(user_id = userid).count()
+        return context
+
+    def form_valid(self, form):
+        categoria = form.save(commit=False)
+        categoria.user = Investigador.objects.get(pk = self.request.user.id)
+        categoria.anio = datetime.datetime.today().year
+        
+        categoria.save()
+        categoria.user.save()
+        messages.success(self.request, "Solicitud enviada con exito.")
+        return redirect("vinculacion:perfil")
+    
+class SolicitudCategoriaB(LoginRequiredMixin, CreateView):
+    model = CategoriaB
+    form_class = FormCategoriaB
+    template_name = "categoriaA.html"
+    extra_context = {
+        "formulario_archivos": True,
+        "titulo": "Categoria B"
+    }
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        userid = self.request.user.id
+        
+        context["c1"] = CategoriaA.objects.filter(user_id = userid).count()
+        context["c2"] = CategoriaB.objects.filter(user_id = userid).count()
         return context
 
     def form_valid(self, form):
