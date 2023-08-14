@@ -64,6 +64,11 @@ urlpatterns = [
         'investigadores/premios/solicitud-realizada',
         views.solicitud_realizada,
         name="solicitud-realizada"
+    ),
+    path(
+        'investigadores/premios/error/edad',
+        views.errorEdad,
+        name='error-edad'
     )
     
 ]
