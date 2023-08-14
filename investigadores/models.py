@@ -246,7 +246,7 @@ class CategoriaB(models.Model):
         primary_key=True)
     b1 = models.FileField(
         upload_to=rutaCategoriaB,
-        verbose_name="Artículos científicos en revistas indexadas o arbitradas.",
+        verbose_name="Obtención del grado académico de Doctorado o Maestría o Especialidad de los programas del SNP o en el extranjero con beca CONACYT.",
         blank=True,
         null=True,
         default=None,
@@ -254,7 +254,7 @@ class CategoriaB(models.Model):
     )
     b2 = models.FileField(
         upload_to=rutaCategoriaB,
-        verbose_name="Autoría y coautoría de libros y/o capítulos de libros científicos con arbitraje.",
+        verbose_name="Obtención del grado académico de Doctorado o Maestría o Especialidad de un programa nacional.",
         blank=True,
         null=True,
         default=None,
@@ -262,7 +262,7 @@ class CategoriaB(models.Model):
     )
     b3 = models.FileField(
         upload_to=rutaCategoriaB,
-        verbose_name="Trámite de solicitud u obtención de patentes.",
+        verbose_name="Dirección de Tesis o Artículo de Investigación de alumnos graduados en licenciatura, maestría, doctorado o especialidad médica.",
         blank=True,
         null=True,
         default=None,
@@ -270,7 +270,7 @@ class CategoriaB(models.Model):
     )
     b4 = models.FileField(
         upload_to=rutaCategoriaB,
-        verbose_name="Trámite de solicitud u obtención de derechos de obtentor.",
+        verbose_name="Dirección de tesis de licenciatura de alumnos graduados en la modalidad de artículo científico.",
         blank=True,
         null=True,
         default=None,
@@ -278,7 +278,7 @@ class CategoriaB(models.Model):
     )
     b5 = models.FileField(
         upload_to=rutaCategoriaB,
-        verbose_name="Desarrollo de software/hardware con Derechos de Autor.",
+        verbose_name="Presentación de ponencias o carteles en eventos científicos, en México o el extranjero.",
         blank=True,
         null=True,
         default=None,
@@ -286,7 +286,7 @@ class CategoriaB(models.Model):
     )
     b6 = models.FileField(
         upload_to=rutaCategoriaB,
-        verbose_name="Implementaciones tecnológicas",
+        verbose_name="Estancias de investigación en instituciones académicas o de investigación.",
         blank=True,
         null=True,
         default=None,
@@ -294,7 +294,7 @@ class CategoriaB(models.Model):
     )
     b7 = models.FileField(
         upload_to=rutaCategoriaB,
-        verbose_name="Artículos o notas científicas publicadas en revistas arbitradas de divulgación científica o tecnológica.",
+        verbose_name="Asignaturas con créditos impartidas en Especialidad, Maestría o Doctorado de programas del SNP.",
         blank=True,
         null=True,
         default=None,
@@ -302,7 +302,7 @@ class CategoriaB(models.Model):
     )
     b8 = models.FileField(
         upload_to=rutaCategoriaB,
-        verbose_name="Participación en proyectos de investigación, desarrollo tecnológico e innovación con financiamiento externo obtenido mediante convocatoria.",
+        verbose_name="Participación en proyectos de investigación con financiamiento interno o externo.",
         blank=True,
         null=True,
         default=None,
@@ -310,7 +310,7 @@ class CategoriaB(models.Model):
     )
     b9 = models.FileField(
         upload_to=rutaCategoriaB,
-        verbose_name="Editor, compilador o coordinador de libros colectivos.",
+        verbose_name="Publicación de artículos en revistas de divulgación científica o tecnológica no arbitradas.",
         blank=True,
         null=True,
         default=None,
@@ -318,7 +318,7 @@ class CategoriaB(models.Model):
     )
     b10 = models.FileField(
         upload_to=rutaCategoriaB,
-        verbose_name="Pertenencia al Sistema Nacional de Investigadores.",
+        verbose_name="Evaluación de trabajos de investigación o proyectos.",
         blank=True,
         null=True,
         default=None,
