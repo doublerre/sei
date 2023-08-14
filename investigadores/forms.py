@@ -158,7 +158,7 @@ class FormInvestigacion(forms.ModelForm):
 class FormCategoriaA(forms.ModelForm):
     class Meta:
         model = CategoriaA
-        exclude = ["estatus", "user"]
+        exclude = ["estatus", "user", "anio"]
     def __init__(self, *args, **kwargs):
         super(FormCategoriaA, self).__init__(*args, **kwargs)
         self.fields["a1"].widget.attrs['class'] = 'form-control'
