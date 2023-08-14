@@ -87,8 +87,8 @@ class SolicitudCategoriaA(LoginRequiredMixin, CreateView):
         context = super().get_context_data(**kwargs)
         userid = self.request.user.id
         
-        context["c1"] = CategoriaA.objects.filter(user_id = userid).count()
-        context["c2"] = CategoriaB.objects.filter(user_id = userid).count()
+        context["c1"] = CategoriaA.objects.filter(user_id = userid, anio=datetime.datetime.today().year).count()
+        context["c2"] = CategoriaB.objects.filter(user_id = userid, anio=datetime.datetime.today().year).count()
         return context
 
     def form_valid(self, form):
@@ -113,9 +113,10 @@ class SolicitudCategoriaB(LoginRequiredMixin, CreateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         userid = self.request.user.id
-        
-        context["c1"] = CategoriaA.objects.filter(user_id = userid).count()
-        context["c2"] = CategoriaB.objects.filter(user_id = userid).count()
+        investigador = Investigador.objects.get(user_id = self.request.user.id)
+        context["c1"] = CategoriaA.objects.filter(user_id = userid, anio=datetime.datetime.today().year).count()
+        context["c2"] = CategoriaB.objects.filter(user_id = userid, anio=datetime.datetime.today().year).count()
+        context["curp"] = investigador.curp
         return context
 
     def form_valid(self, form):
@@ -303,3 +304,7 @@ def constancia_sei(request, investigador_id):
 def solicitud_realizada(request):
     messages.error(request, "Error, no puedes participar en 2 categorias al mismo tiempo.")
     return render(request, "solicitud_realizada.html")
+
+@login_required
+def errorEdad(request):
+    return render(request, "edad-mayor.html")
