@@ -177,7 +177,7 @@ class FormCategoriaB(forms.ModelForm):
         model = CategoriaB
         exclude = ["estatus", "user", "anio"]
     def __init__(self, *args, **kwargs):
-        super(FormCategoriaA, self).__init__(*args, **kwargs)
+        super(FormCategoriaB, self).__init__(*args, **kwargs)
         self.fields["b1"].widget.attrs['class'] = 'form-control'
         self.fields["b2"].widget.attrs['class'] = 'form-control'
         self.fields["b3"].widget.attrs['class'] = 'form-control'
