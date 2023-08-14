@@ -1,6 +1,6 @@
 from django import forms
 from .models import SolicitudTrabajo
-from investigadores.models import Investigador, Investigacion, CategoriaA
+from investigadores.models import Investigador, Investigacion, CategoriaA, CategoriaB
 from usuarios.models import User
 
 
@@ -172,7 +172,22 @@ class FormCategoriaA(forms.ModelForm):
         self.fields["a9"].widget.attrs['class'] = 'form-control'
         self.fields["a10"].widget.attrs['class'] = 'form-control'
 
-
+class FormCategoriaB(forms.ModelForm):
+    class Meta:
+        model = CategoriaB
+        exclude = ["estatus", "user", "anio"]
+    def __init__(self, *args, **kwargs):
+        super(FormCategoriaA, self).__init__(*args, **kwargs)
+        self.fields["b1"].widget.attrs['class'] = 'form-control'
+        self.fields["b2"].widget.attrs['class'] = 'form-control'
+        self.fields["b3"].widget.attrs['class'] = 'form-control'
+        self.fields["b4"].widget.attrs['class'] = 'form-control'
+        self.fields["b5"].widget.attrs['class'] = 'form-control'
+        self.fields["b6"].widget.attrs['class'] = 'form-control'
+        self.fields["b7"].widget.attrs['class'] = 'form-control'
+        self.fields["b8"].widget.attrs['class'] = 'form-control'
+        self.fields["b9"].widget.attrs['class'] = 'form-control'
+        self.fields["b10"].widget.attrs['class'] = 'form-control'
 
 class SolicitudTrabajoForm(forms.ModelForm):
     class Meta:
