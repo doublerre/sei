@@ -5,9 +5,38 @@
 <link rel="stylesheet" href="{% static 'dist/assets/css/pages/form-element-select.css' %}">
 <script>
   const c1 = {{c1}}
-  console.log(c1)
-  if(c1 != 0){
-    window.location.replace("{% url 'investigadores:solicitud-realizada' %}");
+  const c2 = {{c2}}
+  const curp = "{{curp}}"
+  if(curp){
+    const edad = curpToDate(curp)
+    if(edad >= 36) window.location.replace("{% url 'investigadores:error-edad' %}");
+  }
+  if(c1 != 0 || c2 !=0) window.location.replace("{% url 'investigadores:solicitud-realizada' %}");
+
+  function curpToDate(curp){
+    var miCurp = curp.toUpperCase();
+    resultado = document.getElementById("resultado");
+
+    var m = miCurp.match(/^\w{4}(\w{2})(\w{2})(\w{2})/);  
+    var anyo = parseInt(m[1], 10) + 1900;
+    if (anyo < 1950) anyo += 100;
+    var mes = parseInt(m[2], 10) - 1;
+    var dia = parseInt(m[3], 10);  
+    var fechaNacimiento = new Date(anyo, mes, dia);
+    var edad = calcularEdad(fechaNacimiento);
+    return edad;
+  }
+
+  function calcularEdad(fecha) {
+    var hoy = new Date();
+    var cumpleanos = new Date(fecha);
+    var edad = hoy.getFullYear() - cumpleanos.getFullYear();
+    var m = hoy.getMonth() - cumpleanos.getMonth();
+  
+    if (m < 0 || (m === 0 && hoy.getDate() < cumpleanos.getDate())) {
+      edad--;
+    }
+    return edad;
   }
 </script>
 {% endblock %}
