@@ -21,6 +21,7 @@ class User(AbstractUser):
         validators=[MinLengthValidator(8)]
     )
     aprobado = models.BooleanField(default=False)
+    es_revisor = models.BooleanField(default = False)
 
     def __str__(self):
         return self.username
