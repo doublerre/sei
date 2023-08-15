@@ -8,7 +8,7 @@ import datetime
 class FormUser(forms.ModelForm):
     class Meta:
         model = User
-        fields = ['username', 'password', 'email']
+        fields = ['username', 'password', 'email', 'es_revisor']
 
         widgets = {
             'username': forms.TextInput(
