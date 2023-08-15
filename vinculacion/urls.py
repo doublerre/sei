@@ -60,4 +60,16 @@ urlpatterns = [
         'acerca_de',
         views.acerca_de,
         name='acerca_de'),
+
+    #Usuarios Revisores
+    path(
+        'revisor',
+        views.UsuarioRevisor,
+        name='revisor'
+    ),
+    path(
+        'revisor/categoria-b',
+        views.RevisorCategoriaB,
+        name='revisor-categoria-b'
+    ),
 ]

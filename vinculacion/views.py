@@ -121,6 +121,9 @@ def perfil(request):
     usuario = request.user
     if usuario.is_staff:
         return redirect("administracion:dashboard")
+    
+    if usuario.es_revisor:
+        return redirect("vinculacion:revisor")
 
     if not usuario.tipo_usuario:
         if Convocatoria.objects.all()[0].activa:
@@ -179,6 +182,12 @@ def premiosCyT(request):
     else:
         messages.error(request, "Error, la convocatoria esta cerrada")
         return redirect("vinculacion:perfil")
+
+def UsuarioRevisor(request):
+    return render(request, "revisores/dashboard.html")
+
+def RevisorCategoriaB(request):
+    return render(request, "revisores/categoria-b.html")
 
 class UsuarioEliminar(LoginRequiredMixin, DeleteView):
     model = User

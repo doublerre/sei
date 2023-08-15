@@ -1,0 +1,44 @@
+{% extends 'revisores/base.html' %}
+{% load static %}
+
+{% block contenido %}
+
+{% for message in messages %}
+{% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR %}
+<div class="alert alert-danger">{{message}}</div>
+{% else %}
+<div class="alert alert-success">{{message}}</div>
+{% endif %}
+{% endfor %}
+
+<section class="section">
+  <section class="section">
+    <div class="card">
+      <div class="card-header">
+        <h4 class="card-title">Listado de solicitudes de: Producción Científica y Tecnológica</h4>
+      </div>
+      <div class="card-body">
+        <table class="table" id="table1">
+          <thead>
+            <tr>
+              <th>Registro</th>
+              <th>Nombre del investigador</th>
+              <th>Acciones</th>
+            </tr>
+          </thead>
+          <tbody>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  
+  </section>
+</section>
+{% endblock %}
+
+{% block scripts %}
+<script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+<script src="{% static 'js/graficas.js' %}"></script>
+{% endblock %}
+
+{% block marcar_activo %}categoria-a{% endblock %}
