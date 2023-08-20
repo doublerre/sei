@@ -3,7 +3,7 @@ from django.contrib.auth.decorators import user_passes_test
 from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
 from vinculacion.models import Noticia
-from investigadores.models import Investigador, Investigacion
+from investigadores.models import Investigador, Investigacion, CategoriaA, CategoriaB, RevisoresCatA
 from usuarios.models import User, TipoUsuario
 from empresas.models import Empresa
 from vinculacion.models import Categoria
@@ -50,6 +50,7 @@ from docxtpl import DocxTemplate
 from docx import Document
 import os
 import subprocess
+import datetime
 
 @user_passes_test(user_is_staff_member)
 def dashboard(request):
@@ -172,6 +173,39 @@ def aprobar_empresa(request, pk):
 def perfil(request, id):
     investigador = Investigador.objects.get(user_id=id)
     return render(request, "administracion/perfil_en_revision.html", {"investigador": investigador})
+
+@user_passes_test(user_is_staff_member)
+def AsignarInvestigadores(request):
+    #fPremios = Premios.objects.first()
+    #if fPremios.fecha_fin >= datetime.date.today():
+    #    messages.error(request, "La convocatoria sigue activa.")
+    #    return redirect('administracion:dashboard')
+    
+    revisores = User.objects.filter(es_revisor= True)
+    cRevisores = revisores.count()
+    categoriaA = CategoriaA.objects.filter(anio = datetime.date.today().year)
+    cCategoriaA = categoriaA.count()
+    cont = 0
+    indexRevisores = 0
+
+    CantCatAPorR = cCategoriaA/cRevisores
+
+    for elemento in categoriaA:
+        cont = cont + 1
+        print(revisores[indexRevisores].id)
+        #Add code from new model 
+        asignacion = RevisoresCatA()
+        asignacion.revisor = int(revisores[indexRevisores].id)
+        asignacion.solicitud = elemento.id
+        asignacion.save
+        if(indexRevisores == cRevisores - 1):
+            cont = 0
+        if cont == int(CantCatAPorR):
+            cont = 0
+            indexRevisores = indexRevisores + 1
+
+    messages.success(request, "Investigadores asignados exitosamente.")
+    return redirect('administracion:dashboard')
 
 # Usuarios
 

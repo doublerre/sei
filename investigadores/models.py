@@ -140,11 +140,11 @@ class Investigador(models.Model):
         return self.user.username
 
 class CategoriaA(models.Model):
-    user = models.OneToOneField(
+    user = models.ForeignKey(
         Investigador,
         verbose_name="Investigador",
         on_delete=models.CASCADE,
-        primary_key=True)
+        unique=False)
     a1 = models.FileField(
         upload_to=rutaCategoriaA,
         verbose_name="Artículos científicos en revistas indexadas o arbitradas.",
@@ -239,11 +239,11 @@ class CategoriaA(models.Model):
 
 
 class CategoriaB(models.Model):
-    user = models.OneToOneField(
+    user = models.ForeignKey(
         Investigador,
         verbose_name="Investigador",
         on_delete=models.CASCADE,
-        primary_key=True)
+        unique=False)
     b1 = models.FileField(
         upload_to=rutaCategoriaB,
         verbose_name="Obtención del grado académico de Doctorado o Maestría o Especialidad de los programas del SNP o en el extranjero con beca CONACYT.",
@@ -335,7 +335,32 @@ class CategoriaB(models.Model):
 
     def __str__(self):
         return self.user.nombre_completo
-    
+
+class RevisoresCatA(models.Model):
+    revisor = models.ForeignKey(
+        User,
+        verbose_name="Usuario Revisor",
+        on_delete=models.CASCADE,
+        unique=False
+    )
+    solicitud = models.ForeignKey(
+        CategoriaA, 
+        verbose_name="Solicitud Categoria",
+        on_delete=models.CASCADE,
+        unique=False
+    )
+    a1 = models.PositiveIntegerField(default=0, null=True, blank=True)
+    a2 = models.PositiveIntegerField(default=0, null=True, blank=True)
+    a3 = models.PositiveIntegerField(default=0, null=True, blank=True)
+    a4 = models.PositiveIntegerField(default=0, null=True, blank=True)
+    a5 = models.PositiveIntegerField(default=0, null=True, blank=True)
+    a6 = models.PositiveIntegerField(default=0, null=True, blank=True)
+    a7 = models.PositiveIntegerField(default=0, null=True, blank=True)
+    a8 = models.PositiveIntegerField(default=0, null=True, blank=True)
+    a9 = models.PositiveIntegerField(default=0, null=True, blank=True)
+    a10 = models.PositiveIntegerField(default=0, null=True, blank=True)
+
+
 class Investigacion(models.Model):
     titulo = models.CharField(max_length=500)
     categorias = models.ManyToManyField(Categoria, blank=True)

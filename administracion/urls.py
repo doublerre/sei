@@ -181,4 +181,9 @@ urlpatterns = [
           'premios/editar',
           views.FechaPremiosEditar.as_view(),
           name='premios'),
+    path(
+        'premios/asignar',
+        views.AsignarInvestigadores,
+        name='investigadores-asignar'
+    )
 ]
