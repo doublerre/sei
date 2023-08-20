@@ -192,11 +192,9 @@ def AsignarInvestigadores(request):
 
     for elemento in categoriaA:
         cont = cont + 1
-        print(revisores[indexRevisores].id)
+        print(elemento)
         #Add code from new model 
-        asignacion = RevisoresCatA()
-        asignacion.revisor = int(revisores[indexRevisores].id)
-        asignacion.solicitud = elemento.id
+        asignacion = RevisoresCatA.objects.create(revisor_id = revisores[indexRevisores].id, solicitud_id= elemento.id)
         asignacion.save
         if(indexRevisores == cRevisores - 1):
             cont = 0
