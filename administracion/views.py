@@ -181,18 +181,18 @@ def AsignarInvestigadores(request):
     #    messages.error(request, "La convocatoria sigue activa.")
     #    return redirect('administracion:dashboard')
     
+    ReCatA = RevisoresCatA.objects.filter(estatus = "E")
+    ReCatB = RevisoresCatB.objects.filter(estatus = "E")
+    if ReCatA.count() >= 1 or ReCatB.count() >=1:
+        messages.error(request, "Existen revisiones actualmente")
+        return redirect('administracion:dashboard')
+    
     revisores = User.objects.filter(es_revisor= True)
     cRevisores = revisores.count()
     categoriaA = CategoriaA.objects.filter(anio = datetime.date.today().year)
     cCategoriaA = categoriaA.count()
     cont = 0
     indexRevisores = 0
-
-    ReCatA = RevisoresCatA.objects.filter(estatus = "E")
-    ReCatB = RevisoresCatB.objects.filter(estatus = "E")
-    if ReCatA.count() >= 1 or ReCatB.count() >=1:
-        messages.error(request, "Existen revisiones actualmente")
-        return redirect('administracion:dashboard')
 
     CantCatAPorR = cCategoriaA/cRevisores
 
