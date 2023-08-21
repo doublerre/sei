@@ -176,10 +176,10 @@ def perfil(request, id):
 
 @user_passes_test(user_is_staff_member)
 def AsignarInvestigadores(request):
-    #fPremios = Premios.objects.first()
-    #if fPremios.fecha_fin >= datetime.date.today():
-    #    messages.error(request, "La convocatoria sigue activa.")
-    #    return redirect('administracion:dashboard')
+    fPremios = Premios.objects.first()
+    if fPremios.fecha_fin >= datetime.date.today():
+        messages.error(request, "La convocatoria sigue activa.")
+        return redirect('administracion:dashboard')
     
     ReCatA = RevisoresCatA.objects.filter(estatus = "E")
     ReCatB = RevisoresCatB.objects.filter(estatus = "E")
