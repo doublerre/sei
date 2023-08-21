@@ -189,7 +189,7 @@ def AsignarInvestigadores(request):
     
     revisores = User.objects.filter(es_revisor= True)
     cRevisores = revisores.count()
-    categoriaA = CategoriaA.objects.filter(anio = datetime.date.today().year)
+    categoriaA = CategoriaA.objects.filter(anio = datetime.date.today().year, estatus = "I")
     cCategoriaA = categoriaA.count()
     cont = 0
     indexRevisores = 0
@@ -211,7 +211,7 @@ def AsignarInvestigadores(request):
             indexRevisores = indexRevisores + 1
 
 
-    categoriaB = CategoriaB.objects.filter(anio = datetime.date.today().year)
+    categoriaB = CategoriaB.objects.filter(anio = datetime.date.today().year, estatus = "I")
     cCategoriaB = categoriaB.count()
     cont = 0
     indexRevisores = 0
