@@ -3,7 +3,7 @@ from django.contrib.auth.decorators import user_passes_test
 from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
 from vinculacion.models import Noticia
-from investigadores.models import Investigador, Investigacion, CategoriaA, CategoriaB, RevisoresCatA
+from investigadores.models import Investigador, Investigacion, CategoriaA, CategoriaB, RevisoresCatA, RevisoresCatB
 from usuarios.models import User, TipoUsuario
 from empresas.models import Empresa
 from vinculacion.models import Categoria
@@ -202,6 +202,24 @@ def AsignarInvestigadores(request):
             cont = 0
             indexRevisores = indexRevisores + 1
 
+
+    categoriaB = CategoriaB.objects.filter(anio = datetime.date.today().year)
+    cCategoriaB = categoriaB.count()
+    cont = 0
+    indexRevisores = 0
+
+    CantCatBPorR = cCategoriaB/cRevisores
+
+    for elemento in categoriaB:
+        cont = cont + 1
+        asignacion = RevisoresCatB.objects.create(revisor_id = revisores[indexRevisores].id, solicitud_id= elemento.id)
+        asignacion.save
+        if(indexRevisores == cRevisores - 1):
+            cont = 0
+        if cont == int(CantCatBPorR):
+            cont = 0
+            indexRevisores = indexRevisores + 1
+        
     messages.success(request, "Investigadores asignados exitosamente.")
     return redirect('administracion:dashboard')
 
