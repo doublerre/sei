@@ -191,6 +191,8 @@ def AsignarInvestigadores(request):
     CantCatAPorR = cCategoriaA/cRevisores
 
     for elemento in categoriaA:
+        elemento.estatus = "E"
+        elemento.save()
         cont = cont + 1
         print(elemento)
         #Add code from new model 
@@ -211,6 +213,8 @@ def AsignarInvestigadores(request):
     CantCatBPorR = cCategoriaB/cRevisores
 
     for elemento in categoriaB:
+        elemento.estatus = "E"
+        elemento.save()
         cont = cont + 1
         asignacion = RevisoresCatB.objects.create(revisor_id = revisores[indexRevisores].id, solicitud_id= elemento.id)
         asignacion.save
