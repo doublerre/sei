@@ -359,7 +359,42 @@ class RevisoresCatA(models.Model):
     a8 = models.PositiveIntegerField(default=0, null=True, blank=True)
     a9 = models.PositiveIntegerField(default=0, null=True, blank=True)
     a10 = models.PositiveIntegerField(default=0, null=True, blank=True)
+    estatus = models.CharField(
+        choices= ESTADOS_PREMIOS,
+        verbose_name="Estatus de la revisión",
+        default="E",
+        max_length=1
+    )
 
+class RevisoresCatB(models.Model):
+    revisor = models.ForeignKey(
+        User,
+        verbose_name="Usuario Revisor",
+        on_delete=models.CASCADE,
+        unique=False
+    )
+    solicitud = models.ForeignKey(
+        CategoriaA, 
+        verbose_name="Solicitud Categoria",
+        on_delete=models.CASCADE,
+        unique=False
+    )
+    b1 = models.PositiveIntegerField(default=0, null=True, blank=True)
+    b2 = models.PositiveIntegerField(default=0, null=True, blank=True)
+    b3 = models.PositiveIntegerField(default=0, null=True, blank=True)
+    b4 = models.PositiveIntegerField(default=0, null=True, blank=True)
+    b5 = models.PositiveIntegerField(default=0, null=True, blank=True)
+    b6 = models.PositiveIntegerField(default=0, null=True, blank=True)
+    b7 = models.PositiveIntegerField(default=0, null=True, blank=True)
+    b8 = models.PositiveIntegerField(default=0, null=True, blank=True)
+    b9 = models.PositiveIntegerField(default=0, null=True, blank=True)
+    b10 = models.PositiveIntegerField(default=0, null=True, blank=True)
+    estatus = models.CharField(
+        choices= ESTADOS_PREMIOS,
+        verbose_name="Estatus de la revisión",
+        default="E",
+        max_length=1
+    )
 
 class Investigacion(models.Model):
     titulo = models.CharField(max_length=500)
