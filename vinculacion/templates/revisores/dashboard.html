@@ -1,6 +1,11 @@
 {% extends 'revisores/base.html' %}
 {% load static %}
 
+{% block extracss %}
+<link rel="stylesheet" href="{% static 'dist/assets/css/pages/datatables.css' %}">
+<link rel="stylesheet" href="{% static 'dist/assets/css/pages/fontawesome.css' %}">
+{% endblock %}
+
 {% block contenido %}
 
 {% for message in messages %}
@@ -26,9 +31,11 @@
             </tr>
           </thead>
           <tbody>
-            {% for revisor in revisores %}
+            {% for revisor in revisiones %}
             <tr>
-              <td>{{revisor.id}}</td>
+              <td>{{revisor.solicitud_id}}</td>
+              <td>{{revisor.solicitud.user.nombre_completo}}</td>
+              <td></td>
             </tr>
             {% endfor %}
           </tbody>
@@ -41,8 +48,7 @@
 {% endblock %}
 
 {% block scripts %}
-<script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
-<script src="{% static 'js/graficas.js' %}"></script>
+<script src="{% static 'dist/assets/js/extensions/datatables.js' %}"></script>
 {% endblock %}
 
 {% block marcar_activo %}categoria-a{% endblock %}

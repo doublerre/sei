@@ -16,7 +16,8 @@ from investigadores.models import (
     SolicitudTrabajo,
     CategoriaA,
     CategoriaB,
-    RevisoresCatA)
+    RevisoresCatA,
+    RevisoresCatB)
 from empresas.models import Empresa
 from instituciones_educativas.models import (
     InstitucionEducativa,
@@ -184,14 +185,17 @@ def premiosCyT(request):
         messages.error(request, "Error, la convocatoria esta cerrada")
         return redirect("vinculacion:perfil")
 
-class RevisorListaCategoriaA(LoginRequiredMixin, ListView):
-    paginate_by = 10
-    model = RevisoresCatA
-    template_name = "revisores/dashboard.html",
-    context_object_name = "revisores"
+def RevisorListaCategoriaA(request):
+    revisiones = RevisoresCatA.objects.filter(revisor_id = request.user.id, estatus = "E").select_related("solicitud")
+    return render(request, "revisores/dashboard.html", {
+        "revisiones": revisiones,
+    })
 
 def RevisorCategoriaB(request):
-    return render(request, "revisores/categoria-b.html")
+    revisiones = RevisoresCatB.objects.filter(revisor_id = request.user.id, estatus = "E").select_related("solicitud")
+    return render(request, "revisores/dashboard.html", {
+        "revisiones": revisiones,
+    })
 
 class UsuarioEliminar(LoginRequiredMixin, DeleteView):
     model = User
