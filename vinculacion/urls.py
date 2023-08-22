@@ -64,7 +64,7 @@ urlpatterns = [
     #Usuarios Revisores
     path(
         'revisor',
-        views.UsuarioRevisor,
+        views.RevisorListaCategoriaA.as_view(),
         name='revisor'
     ),
     path(

@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.urls import reverse_lazy
 from django.contrib import messages
 from django.db.models import Q
@@ -9,13 +9,14 @@ from investigadores.forms import SolicitudTrabajoForm
 from usuarios.models import TipoUsuario
 from vinculacion.models import Categoria, Noticia
 from vinculacion.helpers import get_user_specific_data
-from django.views.generic import CreateView, DeleteView
+from django.views.generic import CreateView, DeleteView, ListView
 from investigadores.models import (
     Investigador,
     Investigacion,
     SolicitudTrabajo,
     CategoriaA,
-    CategoriaB)
+    CategoriaB,
+    RevisoresCatA)
 from empresas.models import Empresa
 from instituciones_educativas.models import (
     InstitucionEducativa,
@@ -183,8 +184,11 @@ def premiosCyT(request):
         messages.error(request, "Error, la convocatoria esta cerrada")
         return redirect("vinculacion:perfil")
 
-def UsuarioRevisor(request):
-    return render(request, "revisores/dashboard.html")
+class RevisorListaCategoriaA(LoginRequiredMixin, ListView):
+    paginate_by = 10
+    model = RevisoresCatA
+    template_name = "revisores/dashboard.html",
+    context_object_name = "revisores"
 
 def RevisorCategoriaB(request):
     return render(request, "revisores/categoria-b.html")

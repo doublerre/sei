@@ -12,7 +12,6 @@
 {% endfor %}
 
 <section class="section">
-  <section class="section">
     <div class="card">
       <div class="card-header">
         <h4 class="card-title">Listado de solicitudes de: Producción Científica y Tecnológica</h4>
@@ -27,13 +26,18 @@
             </tr>
           </thead>
           <tbody>
+            {% for revisor in revisores %}
+            <tr>
+              <td>{{revisor.id}}</td>
+            </tr>
+            {% endfor %}
           </tbody>
         </table>
       </div>
     </div>
   
-  </section>
 </section>
+
 {% endblock %}
 
 {% block scripts %}
