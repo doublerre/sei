@@ -186,13 +186,13 @@ def premiosCyT(request):
         return redirect("vinculacion:perfil")
 
 def RevisorListaCategoriaA(request):
-    revisiones = RevisoresCatA.objects.filter(revisor_id = request.user.id, estatus = "E").select_related("solicitud")
+    revisiones = RevisoresCatA.objects.filter(revisor_id = request.user.id, estatus = "E")
     return render(request, "revisores/dashboard.html", {
         "revisiones": revisiones,
     })
 
 def RevisorCategoriaB(request):
-    revisiones = RevisoresCatB.objects.filter(revisor_id = request.user.id, estatus = "E").select_related("solicitud")
+    revisiones = RevisoresCatB.objects.filter(revisor_id = request.user.id, estatus = "E")
     return render(request, "revisores/dashboard.html", {
         "revisiones": revisiones,
     })
