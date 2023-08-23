@@ -193,7 +193,7 @@ def RevisorListaCategoriaA(request):
 
 def RevisorCategoriaB(request):
     revisiones = RevisoresCatB.objects.filter(revisor_id = request.user.id, estatus = "E")
-    return render(request, "revisores/dashboard.html", {
+    return render(request, "revisores/categoria-b.html", {
         "revisiones": revisiones,
     })
 
