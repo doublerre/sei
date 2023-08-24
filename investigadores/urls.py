@@ -69,6 +69,11 @@ urlpatterns = [
         'investigadores/premios/error/edad',
         views.errorEdad,
         name='error-edad'
+    ),
+    path(
+        "investigadores/premios/solicitud/<int:rev_id>",
+        views.exportZip,
+        name="export-zip-file"
     )
     
 ]

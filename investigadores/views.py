@@ -38,6 +38,8 @@ from docx import Document
 import datetime
 import subprocess
 import os
+import zipfile
+import zlib
 
 
 class InvestigadorSolicitud(UserPassesTestMixin, CreateView):
@@ -263,6 +265,19 @@ def mostrar_cv(request, investigador_id):
     investigador = get_object_or_404(Investigador, user=investigador_id)
     filepath = os.path.join('media', '{0}'.format(investigador.curriculum_vitae.name))
     return FileResponse(open(filepath, 'rb'), content_type='application/pdf')
+
+def exportZip(request, rev_id):
+    try:
+        compression = zipfile.ZIP_DEFLATED
+    except:
+        compression = zipfile.ZIP_STORED
+
+    zf = zipfile.ZipFile("example.zip", mode="w")
+
+    try:
+        zf.write("media/usuarios/investigadores/CategoriaA/A1-rafaelrangel.pdf", compress_type=compression)
+    finally:
+        zf.close()
 
 def mostrar_cg(request, investigador_id):
     investigador = get_object_or_404(Investigador, user=investigador_id)
