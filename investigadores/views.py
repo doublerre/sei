@@ -266,18 +266,44 @@ def mostrar_cv(request, investigador_id):
     filepath = os.path.join('media', '{0}'.format(investigador.curriculum_vitae.name))
     return FileResponse(open(filepath, 'rb'), content_type='application/pdf')
 
-def exportZip(request, rev_id):
+def exportZipCatA(request, rev_id):
+    try:
+        cA = CategoriaA.objects.get(pk = rev_id)
+    except:
+        messages.error(request, "No se encontro la solicitud con este ID.")
+        return redirect("vinculacion:revisor")
+    
     try:
         compression = zipfile.ZIP_DEFLATED
     except:
         compression = zipfile.ZIP_STORED
 
-    zf = zipfile.ZipFile("example.zip", mode="w")
-
+    zf = zipfile.ZipFile(f"media/ZIPs/{str(cA.user.curp)}.zip", mode="w")
+    
     try:
-        zf.write("media/usuarios/investigadores/CategoriaA/A1-rafaelrangel.pdf", compress_type=compression)
+        if cA.a1:
+            zf.write(f"media/{str(cA.a1)}", f"A1-{str(cA.user.curp)}.pdf", compress_type=compression)
+        if cA.a2:
+            zf.write(f"media/{str(cA.a2)}", f"A2-{str(cA.user.curp)}.pdf", compress_type=compression)
+        if cA.a3:
+            zf.write(f"media/{str(cA.a3)}", f"A3-{str(cA.user.curp)}.pdf", compress_type=compression)
+        if cA.a4:
+            zf.write(f"media/{str(cA.a4)}", f"A4-{str(cA.user.curp)}.pdf", compress_type=compression)
+        if cA.a5:
+            zf.write(f"media/{str(cA.a5)}", f"A5-{str(cA.user.curp)}.pdf", compress_type=compression)
+        if cA.a6:
+            zf.write(f"media/{str(cA.a6)}", f"A6-{str(cA.user.curp)}.pdf", compress_type=compression)
+        if cA.a7:
+            zf.write(f"media/{str(cA.a7)}", f"A7-{str(cA.user.curp)}.pdf", compress_type=compression)
+        if cA.a8:
+            zf.write(f"media/{str(cA.a8)}", f"A8-{str(cA.user.curp)}.pdf", compress_type=compression)
+        if cA.a9:
+            zf.write(f"media/{str(cA.a9)}", f"A9-{str(cA.user.curp)}.pdf", compress_type=compression)
+        if cA.a10:
+            zf.write(f"media/{str(cA.a10)}", f"A10-{str(cA.user.curp)}.pdf", compress_type=compression)
     finally:
         zf.close()
+    return FileResponse(open(f"media/ZIPs/{str(cA.user.curp)}.zip", 'rb'), content_type='application/zip')
 
 def mostrar_cg(request, investigador_id):
     investigador = get_object_or_404(Investigador, user=investigador_id)

@@ -72,7 +72,7 @@ urlpatterns = [
     ),
     path(
         "investigadores/premios/solicitud/<int:rev_id>",
-        views.exportZip,
+        views.exportZipCatA,
         name="export-zip-file"
     )
     
