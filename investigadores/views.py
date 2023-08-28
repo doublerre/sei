@@ -305,6 +305,45 @@ def exportZipCatA(request, rev_id):
         zf.close()
     return FileResponse(open(f"media/ZIPs/{str(cA.user.curp)}.zip", 'rb'), content_type='application/zip')
 
+def exportZipCatB(request, rev_id):
+    try:
+        cB = CategoriaB.objects.get(pk = rev_id)
+    except:
+        messages.error(request, "No se encontro la solicitud con este ID.")
+        return redirect("vinculacion:revisor")
+    
+    try:
+        compression = zipfile.ZIP_DEFLATED
+    except:
+        compression = zipfile.ZIP_STORED
+
+    zf = zipfile.ZipFile(f"media/ZIPs/{str(cB.user.curp)}.zip", mode="w")
+    
+    try:
+        if cB.b1:
+            zf.write(f"media/{str(cB.b1)}", f"A1-{str(cB.user.curp)}.pdf", compress_type=compression)
+        if cB.b2:
+            zf.write(f"media/{str(cB.b2)}", f"A2-{str(cB.user.curp)}.pdf", compress_type=compression)
+        if cB.b3:
+            zf.write(f"media/{str(cB.b3)}", f"A3-{str(cB.user.curp)}.pdf", compress_type=compression)
+        if cB.b4:
+            zf.write(f"media/{str(cB.b4)}", f"A4-{str(cB.user.curp)}.pdf", compress_type=compression)
+        if cB.b5:
+            zf.write(f"media/{str(cB.b5)}", f"A5-{str(cB.user.curp)}.pdf", compress_type=compression)
+        if cB.b6:
+            zf.write(f"media/{str(cB.b6)}", f"A6-{str(cB.user.curp)}.pdf", compress_type=compression)
+        if cB.b7:
+            zf.write(f"media/{str(cB.b7)}", f"A7-{str(cB.user.curp)}.pdf", compress_type=compression)
+        if cB.b8:
+            zf.write(f"media/{str(cB.b8)}", f"A8-{str(cB.user.curp)}.pdf", compress_type=compression)
+        if cB.b9:
+            zf.write(f"media/{str(cB.b9)}", f"A9-{str(cB.user.curp)}.pdf", compress_type=compression)
+        if cB.b10:
+            zf.write(f"media/{str(cB.b10)}", f"A10-{str(cB.user.curp)}.pdf", compress_type=compression)
+    finally:
+        zf.close()
+    return FileResponse(open(f"media/ZIPs/{str(cB.user.curp)}.zip", 'rb'), content_type='application/zip')
+
 def mostrar_cg(request, investigador_id):
     investigador = get_object_or_404(Investigador, user=investigador_id)
     filepath = os.path.join('media', '{0}'.format(investigador.grado.name))
