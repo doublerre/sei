@@ -16,6 +16,7 @@
 						<img src="{% static 'dist/assets/images/faces/1.jpg' %}" alt="Avatar">
 						{% endif %}
 					</div>
+					
 					<div class="ms-3 name">
 						<h5 class="font-bold">{{user.username|capfirst}}</h5>
 						<h6 class="text-muted mb-0">{{user.email}}</h6>
@@ -39,11 +40,10 @@
 						{% endif %}
 					</div>
 				</div>
-
 			</div>
 		</div>
 	</div>
-
+	
 
 	<div class="col-md-8">
 		<div class="card">
@@ -57,6 +57,78 @@
 			</div>
 		</div>
 	</div>
+
+	{%if categoriaA %}
+		<div class="col-md-4">
+			<div class="card">
+				<div class="card-body">
+					<h5 class="font-bold">Categoria A - Producción Científica y Tecnológica</h5>
+					<div class="d-flex align-items-center overflow-auto">
+						<table class="table" id="table1">
+							<thead>
+							<tr>
+								<th>Periodo</th>
+								<th>Estatus</th>
+							</tr>
+							</thead>
+							<tbody>
+								{% for categoria in categoriaA %}
+									<tr>
+										<td>{{categoria.anio}}</td>
+										{% if categoria.estatus == "E"%}
+											<td>En revisión</td>
+										{% elif categoria.estatus == "I" %}
+											<td>En proceso</td>
+										{% elif categoria.estatus == "G" %}
+											<td>Ganador</td>
+											{% elif categoria.estatus == "F" %}
+											<td>Finalizada</td>
+										{% endif %}
+									</tr>
+								{% endfor %}
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
+	{%endif%}
+
+	{%if categoriaB %}
+		<div class="col-md-4">
+			<div class="card">
+				<div class="card-body">
+					<h5 class="font-bold">Categoria B - Superación Académica, Formación de Recursos Humanos y Otros</h5>
+					<div class="d-flex align-items-center overflow-auto">
+						<table class="table" id="table2">
+							<thead>
+							<tr>
+								<th>Periodo</th>
+								<th>Estatus</th>
+							</tr>
+							</thead>
+							<tbody>
+								{% for categoria in categoriaB %}
+									<tr>
+										<td>{{categoria.anio}}</td>
+										{% if categoria.estatus == "E"%}
+											<td>En revisión</td>
+										{% elif categoria.estatus == "I" %}
+											<td>En proceso</td>
+										{% elif categoria.estatus == "G" %}
+											<td>Ganador</td>
+											{% elif categoria.estatus == "F" %}
+											<td>Finalizada</td>
+										{% endif %}
+									</tr>
+								{% endfor %}
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
+	{%endif%}
 </div>
 
 {% endblock %}

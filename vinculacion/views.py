@@ -140,11 +140,12 @@ def perfil(request):
         return render(request, "vinculacion/perfil_pendiente.html")
 
     usuario_data = get_user_specific_data(usuario)
-
+    catA = CategoriaA.objects.filter(user_id = request.user.id)[:5]
+    catB = CategoriaB.objects.filter(user_id = request.user.id)[:5]
     return render(
         request,
         "vinculacion/perfil.html",
-        {"usuario_data": usuario_data})
+        {"usuario_data": usuario_data, "categoriaA": catA, "categoriaB": catB})
 
 @login_required
 def premiosCyT(request):

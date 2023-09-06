@@ -16,13 +16,17 @@ from investigadores.models import (
     SolicitudTrabajo,
     InvestigacionGoogleScholar,
     CategoriaA,
-    CategoriaB
+    CategoriaB,
+    RevisoresCatA,
+    RevisoresCatB
 )
 from investigadores.forms import (
     FormInvestigadorBase,
     FormInvestigacion,
     FormCategoriaA,
-    FormCategoriaB
+    FormCategoriaB,
+    FormRevisorCatA,
+    FormRevisorCatB
 )
 from vinculacion.helpers import (
     get_author,
@@ -203,6 +207,69 @@ class InvestigacionNuevo(LoginRequiredMixin, CreateView):
             investigacion.autores.add(investigador)
         return redirect(self.success_url)
 
+class EditarRevisionCatA(LoginRequiredMixin, UpdateView):
+    model = RevisoresCatA
+    form_class =FormRevisorCatA
+    success_url = reverse_lazy('vinculacion:revisor')
+    template_name = "revisores/formulario.html"
+    extra_context = {
+        "accion": "Agregar calificación",
+        "nombre_modelo": "para la solicitud del investigador:",
+        "formulario_archivos": False,
+        "menu_activo": "categoria-a"
+    }
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        revisionid = self.kwargs['pk']
+        revision = RevisoresCatA.objects.get(id = revisionid)
+        investigador = Investigador.objects.get(user_id = revision.solicitud.user.user_id)
+        context["investigador"] = investigador
+        context["revision"] = revision
+        context["revisor_id"] = self.request.user.id
+        return context
+
+    def form_valid(self, form):
+        revision = form.save(commit=False)
+        if revision.estatus == "F":
+            messages.error(self.request, "Este investigador ya ha sido evaluado.")
+            return redirect(self.success_url)
+        revision.estatus = "F"
+        revision.save()
+        messages.success(self.request, "Evaluación guardada con exito.")
+        return redirect(self.success_url)
+
+class EditarRevisionCatB(LoginRequiredMixin, UpdateView):
+    model = RevisoresCatB
+    form_class =FormRevisorCatB
+    success_url = reverse_lazy('vinculacion:revisor-categoria-b')
+    template_name = "revisores/formulario.html"
+    extra_context = {
+        "accion": "Agregar calificación",
+        "nombre_modelo": "para la solicitud del investigador:",
+        "formulario_archivos": False,
+        "menu_activo": "categoria-b"
+    }
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        revisionid = self.kwargs['pk']
+        revision = RevisoresCatB.objects.get(id = revisionid)
+        investigador = Investigador.objects.get(user_id = revision.solicitud.user.user_id)
+        context["investigador"] = investigador
+        context["revision_b"] = revision
+        context["revisor_id_b"] = self.request.user.id
+        return context
+
+    def form_valid(self, form):
+        revision = form.save(commit=False)
+        if revision.estatus == "F":
+            messages.error(self.request, "Este investigador ya ha sido evaluado.")
+            return redirect(self.success_url)
+        revision.estatus = "F"
+        revision.save()
+        messages.success(self.request, "Evaluación guardada con exito.")
+        return redirect(self.success_url)
 
 @login_required
 def investigaciones_google(request):
@@ -266,9 +333,21 @@ def mostrar_cv(request, investigador_id):
     filepath = os.path.join('media', '{0}'.format(investigador.curriculum_vitae.name))
     return FileResponse(open(filepath, 'rb'), content_type='application/pdf')
 
+def erroresHttp(request, error):
+    messages.error(request, f"{str(error)}")
+    success_url = reverse_lazy('vinculacion:revisor')
+    return redirect(success_url)
+
+def erroresHttpCatB(request, error):
+    messages.error(request, f"{str(error)}")
+    success_url = reverse_lazy('vinculacion:revisor-categoria-b')
+    return redirect(success_url)
+
+@login_required
 def exportZipCatA(request, rev_id):
     try:
         cA = CategoriaA.objects.get(pk = rev_id)
+        revisores = RevisoresCatA.objects.get(solicitud_id = rev_id)
     except:
         messages.error(request, "No se encontro la solicitud con este ID.")
         return redirect("vinculacion:revisor")
@@ -303,11 +382,15 @@ def exportZipCatA(request, rev_id):
             zf.write(f"media/{str(cA.a10)}", f"A10-{str(cA.user.curp)}.pdf", compress_type=compression)
     finally:
         zf.close()
+    revisores.downloadZipFile = True
+    revisores.save()
     return FileResponse(open(f"media/ZIPs/{str(cA.user.curp)}.zip", 'rb'), content_type='application/zip')
 
+@login_required
 def exportZipCatB(request, rev_id):
     try:
         cB = CategoriaB.objects.get(pk = rev_id)
+        revisores = RevisoresCatB.objects.get(solicitud_id = rev_id)
     except:
         messages.error(request, "No se encontro la solicitud con este ID.")
         return redirect("vinculacion:revisor")
@@ -321,27 +404,29 @@ def exportZipCatB(request, rev_id):
     
     try:
         if cB.b1:
-            zf.write(f"media/{str(cB.b1)}", f"A1-{str(cB.user.curp)}.pdf", compress_type=compression)
+            zf.write(f"media/{str(cB.b1)}", f"B1-{str(cB.user.curp)}.pdf", compress_type=compression)
         if cB.b2:
-            zf.write(f"media/{str(cB.b2)}", f"A2-{str(cB.user.curp)}.pdf", compress_type=compression)
+            zf.write(f"media/{str(cB.b2)}", f"B2-{str(cB.user.curp)}.pdf", compress_type=compression)
         if cB.b3:
-            zf.write(f"media/{str(cB.b3)}", f"A3-{str(cB.user.curp)}.pdf", compress_type=compression)
+            zf.write(f"media/{str(cB.b3)}", f"B3-{str(cB.user.curp)}.pdf", compress_type=compression)
         if cB.b4:
-            zf.write(f"media/{str(cB.b4)}", f"A4-{str(cB.user.curp)}.pdf", compress_type=compression)
+            zf.write(f"media/{str(cB.b4)}", f"B4-{str(cB.user.curp)}.pdf", compress_type=compression)
         if cB.b5:
-            zf.write(f"media/{str(cB.b5)}", f"A5-{str(cB.user.curp)}.pdf", compress_type=compression)
+            zf.write(f"media/{str(cB.b5)}", f"B5-{str(cB.user.curp)}.pdf", compress_type=compression)
         if cB.b6:
-            zf.write(f"media/{str(cB.b6)}", f"A6-{str(cB.user.curp)}.pdf", compress_type=compression)
+            zf.write(f"media/{str(cB.b6)}", f"B6-{str(cB.user.curp)}.pdf", compress_type=compression)
         if cB.b7:
-            zf.write(f"media/{str(cB.b7)}", f"A7-{str(cB.user.curp)}.pdf", compress_type=compression)
+            zf.write(f"media/{str(cB.b7)}", f"B7-{str(cB.user.curp)}.pdf", compress_type=compression)
         if cB.b8:
-            zf.write(f"media/{str(cB.b8)}", f"A8-{str(cB.user.curp)}.pdf", compress_type=compression)
+            zf.write(f"media/{str(cB.b8)}", f"B8-{str(cB.user.curp)}.pdf", compress_type=compression)
         if cB.b9:
-            zf.write(f"media/{str(cB.b9)}", f"A9-{str(cB.user.curp)}.pdf", compress_type=compression)
+            zf.write(f"media/{str(cB.b9)}", f"B9-{str(cB.user.curp)}.pdf", compress_type=compression)
         if cB.b10:
-            zf.write(f"media/{str(cB.b10)}", f"A10-{str(cB.user.curp)}.pdf", compress_type=compression)
+            zf.write(f"media/{str(cB.b10)}", f"B10-{str(cB.user.curp)}.pdf", compress_type=compression)
     finally:
         zf.close()
+    revisores.downloadZipFile = True
+    revisores.save()
     return FileResponse(open(f"media/ZIPs/{str(cB.user.curp)}.zip", 'rb'), content_type='application/zip')
 
 def mostrar_cg(request, investigador_id):

@@ -74,6 +74,31 @@ urlpatterns = [
         "investigadores/premios/solicitud/<int:rev_id>",
         views.exportZipCatA,
         name="export-zip-file"
+    ),
+    path(
+        "investigadores/premios/solicitud-b/<int:rev_id>",
+        views.exportZipCatB,
+        name="export-zip-file-b"
+    ),
+    path(
+        "investigadores/premios/categoria-a/editar/<int:pk>",
+        views.EditarRevisionCatA.as_view(),
+        name="asignar-calificacion-cat-a"
+    ),
+    path(
+        "investigadores/premios/categoria-b/editar/<int:pk>",
+        views.EditarRevisionCatB.as_view(),
+        name="asignar-calificacion-cat-b"
+    ),
+    path(
+        "investigadores/error/<str:error>",
+        views.erroresHttp,
+        name="investigador-error"
+    ),
+    path(
+        "investigadores/error-cat-b/<str:error>",
+        views.erroresHttpCatB,
+        name="investigador-error"
     )
     
 ]

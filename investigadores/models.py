@@ -4,7 +4,7 @@ from vinculacion.models import Categoria
 from usuarios.models import User, MUNICIPIOS
 from investigadores.validators import curp_validador, google_scholar_link_valdador, limiteTamanioArchivo, limite10MbArchivo
 from administracion.validators import cp_validator
-from django.core.validators import FileExtensionValidator
+from django.core.validators import FileExtensionValidator, MaxValueValidator, MinValueValidator 
 import uuid
 
 
@@ -349,22 +349,23 @@ class RevisoresCatA(models.Model):
         on_delete=models.CASCADE,
         unique=False
     )
-    a1 = models.PositiveIntegerField(default=0, null=True, blank=True)
-    a2 = models.PositiveIntegerField(default=0, null=True, blank=True)
-    a3 = models.PositiveIntegerField(default=0, null=True, blank=True)
-    a4 = models.PositiveIntegerField(default=0, null=True, blank=True)
-    a5 = models.PositiveIntegerField(default=0, null=True, blank=True)
-    a6 = models.PositiveIntegerField(default=0, null=True, blank=True)
-    a7 = models.PositiveIntegerField(default=0, null=True, blank=True)
-    a8 = models.PositiveIntegerField(default=0, null=True, blank=True)
-    a9 = models.PositiveIntegerField(default=0, null=True, blank=True)
-    a10 = models.PositiveIntegerField(default=0, null=True, blank=True)
+    a1 = models.PositiveIntegerField(default=0, null=True, blank=True, verbose_name="A1 - Artículos científicos en revistas indexadas o arbitradas.", validators=[MinValueValidator(0), MaxValueValidator(10)])
+    a2 = models.PositiveIntegerField(default=0, null=True, blank=True, verbose_name="A2 - Autoría y coautoría de libros y/o capítulos de libros científicos con arbitraje.", validators=[MinValueValidator(0), MaxValueValidator(10)])
+    a3 = models.PositiveIntegerField(default=0, null=True, blank=True, verbose_name="A3 - Trámite de solicitud u obtención de patentes.", validators=[MinValueValidator(0), MaxValueValidator(10)])
+    a4 = models.PositiveIntegerField(default=0, null=True, blank=True, verbose_name="A4 - Trámite de solicitud u obtención de derechos de obtentor.", validators=[MinValueValidator(0), MaxValueValidator(10)])
+    a5 = models.PositiveIntegerField(default=0, null=True, blank=True, verbose_name="A5 - Desarrollo de software/hardware con Derechos de Autor.", validators=[MinValueValidator(0), MaxValueValidator(10)])
+    a6 = models.PositiveIntegerField(default=0, null=True, blank=True, verbose_name="A6 - Implementaciones tecnológicas", validators=[MinValueValidator(0), MaxValueValidator(10)])
+    a7 = models.PositiveIntegerField(default=0, null=True, blank=True, verbose_name="A7 - Artículos o notas científicas publicadas en revistas arbitradas de divulgación científica o tecnológica.", validators=[MinValueValidator(0), MaxValueValidator(10)])
+    a8 = models.PositiveIntegerField(default=0, null=True, blank=True, verbose_name="A8 - Participación en proyectos de investigación, desarrollo tecnológico e innovación con financiamiento externo obtenido mediante convocatoria.", validators=[MinValueValidator(0), MaxValueValidator(10)])
+    a9 = models.PositiveIntegerField(default=0, null=True, blank=True, verbose_name="A9 - Editor, compilador o coordinador de libros colectivos.", validators=[MinValueValidator(0), MaxValueValidator(10)])
+    a10 = models.PositiveIntegerField(default=0, null=True, blank=True, verbose_name="A10 - Pertenencia al Sistema Nacional de Investigadores.", validators=[MinValueValidator(0), MaxValueValidator(10)])
     estatus = models.CharField(
         choices= ESTADOS_PREMIOS,
         verbose_name="Estatus de la revisión",
         default="E",
         max_length=1
     )
+    downloadZipFile = models.BooleanField(default=False)
 
 class RevisoresCatB(models.Model):
     revisor = models.ForeignKey(
@@ -374,27 +375,28 @@ class RevisoresCatB(models.Model):
         unique=False
     )
     solicitud = models.ForeignKey(
-        CategoriaA, 
+        CategoriaB, 
         verbose_name="Solicitud Categoria",
         on_delete=models.CASCADE,
         unique=False
     )
-    b1 = models.PositiveIntegerField(default=0, null=True, blank=True)
-    b2 = models.PositiveIntegerField(default=0, null=True, blank=True)
-    b3 = models.PositiveIntegerField(default=0, null=True, blank=True)
-    b4 = models.PositiveIntegerField(default=0, null=True, blank=True)
-    b5 = models.PositiveIntegerField(default=0, null=True, blank=True)
-    b6 = models.PositiveIntegerField(default=0, null=True, blank=True)
-    b7 = models.PositiveIntegerField(default=0, null=True, blank=True)
-    b8 = models.PositiveIntegerField(default=0, null=True, blank=True)
-    b9 = models.PositiveIntegerField(default=0, null=True, blank=True)
-    b10 = models.PositiveIntegerField(default=0, null=True, blank=True)
+    b1 = models.PositiveIntegerField(default=0, null=True, blank=True, verbose_name="B1 - Obtención del grado académico de Doctorado o Maestría o Especialidad de los programas del SNP o en el extranjero con beca CONACYT.", validators=[MinValueValidator(0), MaxValueValidator(15)])
+    b2 = models.PositiveIntegerField(default=0, null=True, blank=True, verbose_name="B2 - Obtención del grado académico de Doctorado o Maestría o Especialidad de un programa nacional.", validators=[MinValueValidator(0), MaxValueValidator(5)])
+    b3 = models.PositiveIntegerField(default=0, null=True, blank=True, verbose_name="B3 - Dirección de Tesis o Artículo de Investigación de alumnos graduados en licenciatura, maestría, doctorado o especialidad médica.", validators=[MinValueValidator(0), MaxValueValidator(10)])
+    b4 = models.PositiveIntegerField(default=0, null=True, blank=True, verbose_name="B4 - Dirección de tesis de licenciatura de alumnos graduados en la modalidad de artículo científico.", validators=[MinValueValidator(0), MaxValueValidator(10)])
+    b5 = models.PositiveIntegerField(default=0, null=True, blank=True, verbose_name="B5 - Presentación de ponencias o carteles en eventos científicos, en México o el extranjero.", validators=[MinValueValidator(0), MaxValueValidator(10)])
+    b6 = models.PositiveIntegerField(default=0, null=True, blank=True, verbose_name="B6 - Estancias de investigación en instituciones académicas o de investigación.", validators=[MinValueValidator(0), MaxValueValidator(15)])
+    b7 = models.PositiveIntegerField(default=0, null=True, blank=True, verbose_name="B7 - Asignaturas con créditos impartidas en Especialidad, Maestría o Doctorado de programas del SNP.", validators=[MinValueValidator(0), MaxValueValidator(10)])
+    b8 = models.PositiveIntegerField(default=0, null=True, blank=True, verbose_name="B8 - Participación en proyectos de investigación con financiamiento interno o externo.", validators=[MinValueValidator(0), MaxValueValidator(10)])
+    b9 = models.PositiveIntegerField(default=0, null=True, blank=True, verbose_name="B9 - Publicación de artículos en revistas de divulgación científica o tecnológica no arbitradas.", validators=[MinValueValidator(0), MaxValueValidator(5)])
+    b10 = models.PositiveIntegerField(default=0, null=True, blank=True, verbose_name="B10 - Evaluación de trabajos de investigación o proyectos.", validators=[MinValueValidator(0), MaxValueValidator(10)])
     estatus = models.CharField(
         choices= ESTADOS_PREMIOS,
         verbose_name="Estatus de la revisión",
         default="E",
         max_length=1
     )
+    downloadZipFile = models.BooleanField(default=False)
 
 class Investigacion(models.Model):
     titulo = models.CharField(max_length=500)

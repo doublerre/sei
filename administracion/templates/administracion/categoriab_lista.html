@@ -1,0 +1,62 @@
+{% extends 'administracion/base.html' %}
+{% load static %}
+
+{% block extracss %}
+<link rel="stylesheet" href="{% static 'dist/assets/css/pages/datatables.css' %}">
+<link rel="stylesheet" href="{% static 'dist/assets/css/pages/fontawesome.css' %}">
+{% endblock %}
+
+{% block contenido %}
+{% for message in messages %}
+{% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR %}
+<div class="alert alert-danger">{{message}}</div>
+{% else %}
+<div class="alert alert-success">{{message}}</div>
+{% endif %}
+{% endfor %}
+
+
+<section class="section">
+</section>
+
+<!-- Basic Tables start -->
+<section class="section">
+  <div class="card">
+    <div class="card-header">
+      <h4 class="card-title">Superación Académica, Formación de Recursos Humanos y Otros</h4>
+    </div>
+    <div class="card-body">
+      <table class="table" id="table1">
+        <thead>
+          <tr>
+            <th>Nombre</th>
+            <th>Curp</th>
+            <th>Calificación</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for categoria in CategoriaB %}
+          <tr>
+            <td>{{categoria.solicitud.user.nombre_completo}}</td>
+            <td>{{categoria.solicitud.user.curp}}</td>
+            <td>{{categoria.total}}/100</td>
+            <td>
+              <a href="{% url 'administracion:premio-catb-ganador' categoria.solicitud.id%}"><span
+                class="badge bg-info">Dar premio</span></a>
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+</section>
+{% endblock %}
+
+{% block scripts %}
+<script src="{% static 'dist/assets/js/extensions/datatables.js' %}"></script>
+{% endblock %}
+
+{% block marcar_activo %}tablas{% endblock %}

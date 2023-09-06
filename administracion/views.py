@@ -233,6 +233,32 @@ def AsignarInvestigadores(request):
     messages.success(request, "Investigadores asignados exitosamente.")
     return redirect('administracion:dashboard')
 
+@user_passes_test(user_is_staff_member)
+def ListaCategoriaB(request):
+    catB = RevisoresCatB.objects.filter(estatus="F").extra(select={'total': 'b1 + b2 + b3 + b4 + b5 + b6 + b7 + b8 + b9 + b10'}, order_by=('total',))
+    return render(request, 'administracion/categoriab_lista.html', {"CategoriaB": catB})
+
+@user_passes_test(user_is_staff_member)
+def ListaCategoriaA(request):
+    catA = RevisoresCatA.objects.filter(estatus="F").extra(select={'total': 'a1 + a2 + a3 + a4 + a5 + a6 + a7 + a8 + a9 + a10'}, order_by=('total',))
+    return render(request, 'administracion/categoriaa_lista.html', {"CategoriaA": catA})
+
+@user_passes_test(user_is_staff_member)
+def GanadorCatA(request, id):
+    CategoriaA.objects.filter(anio = datetime.date.today().year).update(estatus = "F")
+    RevisoresCatA.objects.all().update(estatus = "I")
+    CategoriaA.objects.filter(id = id).update(estatus = "G")
+    messages.success(request, "El ganador ha sido publicado correctamente.")
+    return redirect('administracion:premios-a-lista')
+
+@user_passes_test(user_is_staff_member)
+def GanadorCatB(request, id):
+    CategoriaB.objects.filter(anio = datetime.date.today().year).update(estatus = "F")
+    RevisoresCatB.objects.all().update(estatus = "I")
+    CategoriaB.objects.filter(id = id).update(estatus = "G")
+    messages.success(request, "El ganador ha sido publicado correctamente.")
+    return redirect('administracion:premios-b-lista')
+
 # Usuarios
 
 

@@ -1,6 +1,6 @@
 from django import forms
 from .models import SolicitudTrabajo
-from investigadores.models import Investigador, Investigacion, CategoriaA, CategoriaB
+from investigadores.models import Investigador, Investigacion, CategoriaA, CategoriaB, RevisoresCatA, RevisoresCatB
 from usuarios.models import User
 
 
@@ -204,4 +204,40 @@ class SolicitudTrabajoForm(forms.ModelForm):
                     'class': 'form-control form-control-xl',
                     'placeholder': 'Decripción del trabajo'
                 }),
+        }
+
+class FormRevisorCatA(forms.ModelForm):
+    class Meta:
+        model = RevisoresCatA
+        exclude = ["downloadZipFile", 'revisor', 'solicitud', 'estatus']
+
+        widgets = {
+            'a1': forms.NumberInput(attrs={'class': 'form-control'}),
+            'a2': forms.NumberInput(attrs={'class': 'form-control'}),
+            'a3': forms.NumberInput(attrs={'class': 'form-control'}),
+            'a4': forms.NumberInput(attrs={'class': 'form-control'}),
+            'a5': forms.NumberInput(attrs={'class': 'form-control'}),
+            'a6': forms.NumberInput(attrs={'class': 'form-control'}),
+            'a7': forms.NumberInput(attrs={'class': 'form-control'}),
+            'a8': forms.NumberInput(attrs={'class': 'form-control'}),
+            'a9': forms.NumberInput(attrs={'class': 'form-control'}),
+            'a10': forms.NumberInput(attrs={'class': 'form-control'})
+        }
+
+class FormRevisorCatB(forms.ModelForm):
+    class Meta:
+        model = RevisoresCatB
+        exclude = ["downloadZipFile", 'revisor', 'solicitud', 'estatus']
+
+        widgets = {
+            'b1': forms.NumberInput(attrs={'class': 'form-control'}),
+            'b2': forms.NumberInput(attrs={'class': 'form-control'}),
+            'b3': forms.NumberInput(attrs={'class': 'form-control'}),
+            'b4': forms.NumberInput(attrs={'class': 'form-control'}),
+            'b5': forms.NumberInput(attrs={'class': 'form-control'}),
+            'b6': forms.NumberInput(attrs={'class': 'form-control'}),
+            'b7': forms.NumberInput(attrs={'class': 'form-control'}),
+            'b8': forms.NumberInput(attrs={'class': 'form-control'}),
+            'b9': forms.NumberInput(attrs={'class': 'form-control'}),
+            'b10': forms.NumberInput(attrs={'class': 'form-control'})
         }

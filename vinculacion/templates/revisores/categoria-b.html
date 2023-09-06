@@ -27,6 +27,7 @@
             <tr>
               <th>Registro</th>
               <th>Nombre del investigador</th>
+              <th>CURP del investigador</th>
               <th>Acciones</th>
             </tr>
           </thead>
@@ -35,7 +36,13 @@
             <tr>
               <td>{{revisor.solicitud_id}}</td>
               <td>{{revisor.solicitud.user.nombre_completo}}</td>
-              <td></td>
+              <td>{{revisor.solicitud.user.curp}}</td>
+              <td>
+                <a href="{% url 'investigadores:export-zip-file-b' revisor.solicitud_id %}"><span
+                class="badge bg-info">Descargar Zip</span></a>
+                <a href="{% url 'investigadores:asignar-calificacion-cat-b' revisor.id %}"><span
+                  class="badge bg-primary">Calificar</span></a>
+              </td>
             </tr>
             {% endfor %}
           </tbody>

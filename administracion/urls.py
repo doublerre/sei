@@ -184,6 +184,25 @@ urlpatterns = [
     path(
         'premios/asignar',
         views.AsignarInvestigadores,
-        name='investigadores-asignar'
-    )
+        name='investigadores-asignar'),
+	path(
+		'premios-b/lista',
+        views.ListaCategoriaB,
+        name='premios-b-lista'
+	),
+    path(
+        'premios-a/lista',
+        views.ListaCategoriaA,
+        name='premios-a-lista'
+	),
+    path(
+		'premios/ganador-a/<int:id>',
+        views.GanadorCatA,
+        name='premio-cata-ganador'
+	),
+    path(
+		'premios/ganador-b/<int:id>',
+        views.GanadorCatB,
+        name='premio-catb-ganador'
+	),
 ]
