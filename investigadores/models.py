@@ -151,7 +151,7 @@ class CategoriaA(models.Model):
         blank=True,
         null=True,
         default=None,
-        validators=[FileExtensionValidator(['pdf'], limite10MbArchivo)]
+        validators=[FileExtensionValidator( ['pdf']), limite10MbArchivo]
     )
     a2 = models.FileField(
         upload_to=rutaCategoriaA,
@@ -159,7 +159,7 @@ class CategoriaA(models.Model):
         blank=True,
         null=True,
         default=None,
-        validators=[FileExtensionValidator(['pdf'], limite10MbArchivo)]
+        validators=[FileExtensionValidator( ['pdf']), limite10MbArchivo]
     )
     a3 = models.FileField(
         upload_to=rutaCategoriaA,
@@ -167,7 +167,7 @@ class CategoriaA(models.Model):
         blank=True,
         null=True,
         default=None,
-        validators=[FileExtensionValidator(['pdf'], limite10MbArchivo)]
+        validators=[FileExtensionValidator( ['pdf']), limite10MbArchivo]
     )
     a4 = models.FileField(
         upload_to=rutaCategoriaA,
@@ -175,7 +175,7 @@ class CategoriaA(models.Model):
         blank=True,
         null=True,
         default=None,
-        validators=[FileExtensionValidator(['pdf'], limite10MbArchivo)]
+        validators=[FileExtensionValidator( ['pdf']), limite10MbArchivo]
     )
     a5 = models.FileField(
         upload_to=rutaCategoriaA,
@@ -183,7 +183,7 @@ class CategoriaA(models.Model):
         blank=True,
         null=True,
         default=None,
-        validators=[FileExtensionValidator(['pdf'], limite10MbArchivo)]
+        validators=[FileExtensionValidator( ['pdf']), limite10MbArchivo]
     )
     a6 = models.FileField(
         upload_to=rutaCategoriaA,
@@ -191,7 +191,7 @@ class CategoriaA(models.Model):
         blank=True,
         null=True,
         default=None,
-        validators=[FileExtensionValidator(['pdf'], limite10MbArchivo)]
+        validators=[FileExtensionValidator( ['pdf']), limite10MbArchivo]
     )
     a7 = models.FileField(
         upload_to=rutaCategoriaA,
@@ -199,7 +199,7 @@ class CategoriaA(models.Model):
         blank=True,
         null=True,
         default=None,
-        validators=[FileExtensionValidator(['pdf'], limite10MbArchivo)]
+        validators=[FileExtensionValidator( ['pdf']), limite10MbArchivo]
     )
     a8 = models.FileField(
         upload_to=rutaCategoriaA,
@@ -207,7 +207,7 @@ class CategoriaA(models.Model):
         blank=True,
         null=True,
         default=None,
-        validators=[FileExtensionValidator(['pdf'], limite10MbArchivo)]
+        validators=[FileExtensionValidator( ['pdf']), limite10MbArchivo]
     )
     a9 = models.FileField(
         upload_to=rutaCategoriaA,
@@ -215,7 +215,7 @@ class CategoriaA(models.Model):
         blank=True,
         null=True,
         default=None,
-        validators=[FileExtensionValidator(['pdf'], limite10MbArchivo)]
+        validators=[FileExtensionValidator( ['pdf']), limite10MbArchivo]
     )
     a10 = models.FileField(
         upload_to=rutaCategoriaA,
@@ -223,7 +223,7 @@ class CategoriaA(models.Model):
         blank=True,
         null=True,
         default=None,
-        validators=[FileExtensionValidator(['pdf'], limite10MbArchivo)]
+        validators=[FileExtensionValidator( ['pdf']), limite10MbArchivo]
     )
     estatus = models.CharField(
         choices= ESTADOS_PREMIOS,
@@ -250,7 +250,7 @@ class CategoriaB(models.Model):
         blank=True,
         null=True,
         default=None,
-        validators=[FileExtensionValidator(['pdf'], limite10MbArchivo)]
+        validators=[FileExtensionValidator( ['pdf']), limite10MbArchivo]
     )
     b2 = models.FileField(
         upload_to=rutaCategoriaB,
@@ -258,7 +258,7 @@ class CategoriaB(models.Model):
         blank=True,
         null=True,
         default=None,
-        validators=[FileExtensionValidator(['pdf'], limite10MbArchivo)]
+        validators=[FileExtensionValidator( ['pdf']), limite10MbArchivo]
     )
     b3 = models.FileField(
         upload_to=rutaCategoriaB,
@@ -266,7 +266,7 @@ class CategoriaB(models.Model):
         blank=True,
         null=True,
         default=None,
-        validators=[FileExtensionValidator(['pdf'], limite10MbArchivo)]
+        validators=[FileExtensionValidator( ['pdf']), limite10MbArchivo]
     )
     b4 = models.FileField(
         upload_to=rutaCategoriaB,
@@ -274,7 +274,7 @@ class CategoriaB(models.Model):
         blank=True,
         null=True,
         default=None,
-        validators=[FileExtensionValidator(['pdf'], limite10MbArchivo)]
+        validators=[FileExtensionValidator( ['pdf']), limite10MbArchivo]
     )
     b5 = models.FileField(
         upload_to=rutaCategoriaB,
@@ -282,7 +282,7 @@ class CategoriaB(models.Model):
         blank=True,
         null=True,
         default=None,
-        validators=[FileExtensionValidator(['pdf'], limite10MbArchivo)]
+        validators=[FileExtensionValidator( ['pdf']), limite10MbArchivo]
     )
     b6 = models.FileField(
         upload_to=rutaCategoriaB,
@@ -290,7 +290,7 @@ class CategoriaB(models.Model):
         blank=True,
         null=True,
         default=None,
-        validators=[FileExtensionValidator(['pdf'], limite10MbArchivo)]
+        validators=[FileExtensionValidator( ['pdf']), limite10MbArchivo]
     )
     b7 = models.FileField(
         upload_to=rutaCategoriaB,
@@ -298,7 +298,7 @@ class CategoriaB(models.Model):
         blank=True,
         null=True,
         default=None,
-        validators=[FileExtensionValidator(['pdf'], limite10MbArchivo)]
+        validators=[FileExtensionValidator( ['pdf']), limite10MbArchivo]
     )
     b8 = models.FileField(
         upload_to=rutaCategoriaB,
@@ -306,7 +306,7 @@ class CategoriaB(models.Model):
         blank=True,
         null=True,
         default=None,
-        validators=[FileExtensionValidator(['pdf'], limite10MbArchivo)]
+        validators=[FileExtensionValidator( ['pdf']), limite10MbArchivo]
     )
     b9 = models.FileField(
         upload_to=rutaCategoriaB,
@@ -314,7 +314,7 @@ class CategoriaB(models.Model):
         blank=True,
         null=True,
         default=None,
-        validators=[FileExtensionValidator(['pdf'], limite10MbArchivo)]
+        validators=[FileExtensionValidator( ['pdf']), limite10MbArchivo]
     )
     b10 = models.FileField(
         upload_to=rutaCategoriaB,
@@ -322,7 +322,7 @@ class CategoriaB(models.Model):
         blank=True,
         null=True,
         default=None,
-        validators=[FileExtensionValidator(['pdf'], limite10MbArchivo)]
+        validators=[FileExtensionValidator( ['pdf']), limite10MbArchivo]
     )
     estatus = models.CharField(
         choices= ESTADOS_PREMIOS,
