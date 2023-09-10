@@ -211,17 +211,40 @@ class FormRevisorCatA(forms.ModelForm):
         model = RevisoresCatA
         exclude = ["downloadZipFile", 'revisor', 'solicitud', 'estatus']
 
+        CHOICES = [
+            (['1', '1']),
+            (['2', '2']),
+            (['3', '3']),
+            (['4', '4']),
+            (['5', '5']),
+            (['6', '6']),
+            (['7', '7']),
+            (['8', '8']),
+            (['9', '9']),
+            (['10', '10']),
+        ]
+
         widgets = {
-            'a1': forms.NumberInput(attrs={'class': 'form-control'}),
-            'a2': forms.NumberInput(attrs={'class': 'form-control'}),
-            'a3': forms.NumberInput(attrs={'class': 'form-control'}),
-            'a4': forms.NumberInput(attrs={'class': 'form-control'}),
-            'a5': forms.NumberInput(attrs={'class': 'form-control'}),
-            'a6': forms.NumberInput(attrs={'class': 'form-control'}),
-            'a7': forms.NumberInput(attrs={'class': 'form-control'}),
-            'a8': forms.NumberInput(attrs={'class': 'form-control'}),
-            'a9': forms.NumberInput(attrs={'class': 'form-control'}),
-            'a10': forms.NumberInput(attrs={'class': 'form-control'})
+            'a1': forms.RadioSelect(choices=CHOICES, attrs={'style': 'display: inline;'}),
+            'a1_comentario': forms.Textarea(attrs={ 'class': 'form-control'}),
+            'a2': forms.RadioSelect(choices=CHOICES, attrs={'style': 'display: inline;'}),
+            'a2_comentario': forms.Textarea(attrs={ 'class': 'form-control'}),
+            'a3': forms.RadioSelect(choices=CHOICES, attrs={'style': 'display: inline;'}),
+            'a3_comentario': forms.Textarea(attrs={ 'class': 'form-control'}),
+            'a4': forms.RadioSelect(choices=CHOICES, attrs={'style': 'display: inline;'}),
+            'a4_comentario': forms.Textarea(attrs={ 'class': 'form-control'}),
+            'a5': forms.RadioSelect(choices=CHOICES, attrs={'style': 'display: inline;'}),
+            'a5_comentario': forms.Textarea(attrs={ 'class': 'form-control'}),
+            'a6': forms.RadioSelect(choices=CHOICES, attrs={'style': 'display: inline;'}),
+            'a6_comentario': forms.Textarea(attrs={ 'class': 'form-control'}),
+            'a7': forms.RadioSelect(choices=CHOICES, attrs={'style': 'display: inline;'}),
+            'a7_comentario': forms.Textarea(attrs={ 'class': 'form-control'}),
+            'a8': forms.RadioSelect(choices=CHOICES, attrs={'style': 'display: inline;'}),
+            'a8_comentario': forms.Textarea(attrs={ 'class': 'form-control'}),
+            'a9': forms.RadioSelect(choices=CHOICES, attrs={'style': 'display: inline;'}),
+            'a9_comentario': forms.Textarea(attrs={ 'class': 'form-control'}),
+            'a10': forms.RadioSelect(choices=CHOICES, attrs={'style': 'display: inline;'}),
+            'a10_comentario': forms.Textarea(attrs={ 'class': 'form-control'}),
         }
 
 class FormRevisorCatB(forms.ModelForm):
@@ -229,15 +252,62 @@ class FormRevisorCatB(forms.ModelForm):
         model = RevisoresCatB
         exclude = ["downloadZipFile", 'revisor', 'solicitud', 'estatus']
 
+        CHOICES1 = [
+            (['1', '1']),
+            (['2', '2']),
+            (['3', '3']),
+            (['4', '4']),
+            (['5', '5']),
+            (['6', '6']),
+            (['7', '7']),
+            (['8', '8']),
+            (['9', '9']),
+            (['10', '10']),
+        ]
+        CHOICES2 = [
+            (['1', '1']),
+            (['2', '2']),
+            (['3', '3']),
+            (['4', '4']),
+            (['5', '5']),
+            (['6', '6']),
+            (['7', '7']),
+            (['8', '8']),
+            (['9', '9']),
+            (['10', '10']),
+            (['11', '11']),
+            (['12', '12']),
+            (['13', '13']),
+            (['14', '14']),
+            (['15', '15']),
+        ]
+        CHOICES3 = [
+            (['1', '1']),
+            (['2', '2']),
+            (['3', '3']),
+            (['4', '4']),
+            (['5', '5']),
+        ]
+
         widgets = {
-            'b1': forms.NumberInput(attrs={'class': 'form-control'}),
-            'b2': forms.NumberInput(attrs={'class': 'form-control'}),
-            'b3': forms.NumberInput(attrs={'class': 'form-control'}),
-            'b4': forms.NumberInput(attrs={'class': 'form-control'}),
-            'b5': forms.NumberInput(attrs={'class': 'form-control'}),
-            'b6': forms.NumberInput(attrs={'class': 'form-control'}),
-            'b7': forms.NumberInput(attrs={'class': 'form-control'}),
-            'b8': forms.NumberInput(attrs={'class': 'form-control'}),
-            'b9': forms.NumberInput(attrs={'class': 'form-control'}),
-            'b10': forms.NumberInput(attrs={'class': 'form-control'})
+            'b1': forms.RadioSelect(choices=CHOICES2, attrs={'style': 'display: inline;'}),
+            'b1_comentario': forms.Textarea(attrs={ 'class': 'form-control'}),
+            'b2': forms.RadioSelect(choices=CHOICES3, attrs={'style': 'display: inline;'}),
+            'b2_comentario': forms.Textarea(attrs={ 'class': 'form-control'}),
+            'b3': forms.RadioSelect(choices=CHOICES1, attrs={'style': 'display: inline;'}),
+            'b3_comentario': forms.Textarea(attrs={ 'class': 'form-control'}),
+            'b4': forms.RadioSelect(choices=CHOICES1, attrs={'style': 'display: inline;'}),
+            'b4_comentario': forms.Textarea(attrs={ 'class': 'form-control'}),
+            'b5': forms.RadioSelect(choices=CHOICES1, attrs={'style': 'display: inline;'}),
+            'b5_comentario': forms.Textarea(attrs={ 'class': 'form-control'}),
+            'b6': forms.RadioSelect(choices=CHOICES2, attrs={'style': 'display: inline;'}),
+            'b6_comentario': forms.Textarea(attrs={ 'class': 'form-control'}),
+            'b7': forms.RadioSelect(choices=CHOICES1, attrs={'style': 'display: inline;'}),
+            'b7_comentario': forms.Textarea(attrs={ 'class': 'form-control'}),
+            'b8': forms.RadioSelect(choices=CHOICES1, attrs={'style': 'display: inline;'}),
+            'b8_comentario': forms.Textarea(attrs={ 'class': 'form-control'}),
+            'b9': forms.RadioSelect(choices=CHOICES3, attrs={'style': 'display: inline;'}),
+            'b9_comentario': forms.Textarea(attrs={ 'class': 'form-control'}),
+            'b10': forms.RadioSelect(choices=CHOICES1, attrs={'style': 'display: inline;'}),
+            'b10_comentario': forms.Textarea(attrs={ 'class': 'form-control'}),
         }
