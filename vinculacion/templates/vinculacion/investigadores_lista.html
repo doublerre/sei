@@ -3,6 +3,8 @@
 
 {% block extraresources %}
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="{% static 'dist/assets/css/pages/datatables.css' %}">
+<link rel="stylesheet" href="{% static 'dist/assets/css/pages/fontawesome.css' %}">
 {% endblock %}
 
 {% block contenido %}
@@ -27,56 +29,38 @@
 
   <div class="row w-75">
 
-    {% for investigador in object_list %}
-    <div class="col-md-6">
-      <div class="card">
-        <div class="row no-gutters">
-          <div class="col-4 d-flex justify-content-center align-items-center">
-            <div>
-              {% if investigador.imagen %}
-              <img src="{{MEDIA_URL}}/{{investigador.imagen}}" class="rounded-3" style="width: 100px; height: 100px;" alt="...">
-              {% else %}
-              <img src="{% static 'dist/assets/images/faces/1.jpg' %}" class="rounded-3" style="width: 100px; height: 100px;" alt="...">
-              {% endif %}
-            </div>
-          </div>
-          <div class="col-8">
-            <div class="card-body">
-              <h5 class="card-title">{{investigador.user.username|capfirst}}</h5>
-              <p class="card-text">
-              </p>
-            </div>
-            <ul class="list-group list-group-flush">
-              <li class="list-group-item"><a href="{% url 'investigadores:investigador_perfil' investigador.pk%}" class="btn btn-primary">Ver perfil</a></li>
-            </ul>
-          </div>
-        </div>
-      </div>
-    </div>
-    {% endfor %}
-
-    <div class="d-flex justify-content-center mt-3">
-    <ul class="pagination pagination-primary">
-        {% if page_obj.has_previous %}
-        <li class="page-item"><a class="page-link" href="?page={{ page_obj.previous_page_number }}">
-                <span aria-hidden="true"><i class="bi bi-chevron-left"></i></span>
-            </a></li>
-        <li class="page-item"><a class="page-link" href="?page={{ page_obj.previous_page_number }}">{{page_obj.previous_page_number}}</a></li>
-        {% endif %}
-
-        <li class="page-item active"><a class="page-link" href="#">{{page_obj.number}}</a></li>
-
-        {% if page_obj.has_next %}
-        <li class="page-item"><a class="page-link" href="?page={{ page_obj.next_page_number }}">{{page_obj.next_page_number}}</a></li>
-        <li class="page-item"><a class="page-link" href="?page={{ page_obj.next_page_number }}">
-                <span aria-hidden="true"><i class="bi bi-chevron-right"></i></span>
-            </a></li>
-        {% endif %}
-    </ul>
-    </div>
-
+    <table class="table" id="table1">
+      <thead>
+        <tr>
+          <th>Foto de perfil</th>
+          <th>Nombre del investigador</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for investigador in object_list %}
+        <tr>
+          <td>
+            {% if investigador.imagen %}
+            <img src="{{MEDIA_URL}}/{{investigador.imagen}}" class="rounded-3" style="width: 100px; height: 100px;" alt="...">
+            {% else %}
+            <img src="{% static 'dist/assets/images/faces/1.jpg' %}" class="rounded-3" style="width: 100px; height: 100px;" alt="...">
+            {% endif %}
+          </td>
+          <td>{{investigador.nombre_completo|capfirst}}</td>
+          <td>
+            <a href="{% url 'investigadores:investigador_perfil' investigador.pk%}" class="btn btn-primary">Ver perfil</a>
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
   </div>
 
 </div>
 
+{% endblock %}
+
+{% block scripts %}
+<script src="{% static 'dist/assets/js/extensions/datatables.js' %}"></script>
 {% endblock %}

@@ -167,7 +167,6 @@ class InvestigadorActualizar(LoginRequiredMixin, UpdateView):
 
 
 class InvestigadorLista(LoginRequiredMixin, ListView):
-    paginate_by = 10
     model = Investigador
     template_name = "vinculacion/investigadores_lista.html"
 
