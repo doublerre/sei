@@ -22,6 +22,7 @@ from investigadores.models import (
 )
 from investigadores.forms import (
     FormInvestigadorBase,
+    FormInvestigadorBaseUpdate,
     FormInvestigacion,
     FormCategoriaA,
     FormCategoriaB,
@@ -137,7 +138,7 @@ class SolicitudCategoriaB(LoginRequiredMixin, CreateView):
 
 class InvestigadorActualizar(LoginRequiredMixin, UpdateView):
     model = Investigador
-    form_class = FormInvestigadorBase
+    form_class = FormInvestigadorBaseUpdate
     template_name = "vinculacion/formulario_perfil.html"
     extra_context = {"formulario_archivos": True}
 

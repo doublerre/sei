@@ -138,6 +138,48 @@ class FormInvestigadorBase(forms.ModelForm):
         self.fields["grado"].widget.attrs['class'] = (
             'form-control')
 
+class FormInvestigadorBaseUpdate(forms.ModelForm):
+
+    class Meta:
+        model = Investigador
+        exclude = ['latitud', 'longitud', 'user', 'aprobado', 'nivel', 'es_sei', 'es_sni', 'constancia', 'curp']
+
+    def __init__(self, *args, **kwargs):
+        super(FormInvestigadorBaseUpdate, self).__init__(*args, **kwargs)
+        self.fields["nombre_completo"].widget.attrs['class'] = 'form-control'
+        self.fields["nombre_completo"].widget.attrs['placeholder'] = ('Escribe tu nombre')
+        self.fields["codigo_postal"].widget.attrs['class'] = (
+            'form-control')
+        self.fields["codigo_postal"].widget.attrs['placeholder'] = (
+            'Ingresa tu código postal de contacto')
+        self.fields["municipio"].widget.attrs['class'] = (
+            'form-select')
+        self.fields["municipio"].widget.attrs['placeholder'] = (
+            'Ingresa tu municipio de contacto')
+        self.fields["colonia"].widget.attrs['class'] = (
+            'form-control')
+        self.fields["colonia"].widget.attrs['placeholder'] = (
+            'Ingresa tu colonia de contacto')
+        self.fields["calle"].widget.attrs['class'] = (
+            'form-control')
+        self.fields["calle"].widget.attrs['placeholder'] = (
+            'Ingresa tu calle de contacto')
+        self.fields["numero_exterior"].widget.attrs['class'] = (
+            'form-control')
+        self.fields["numero_exterior"].widget.attrs['placeholder'] = (
+            'Ingresa tu número exterior de contacto')
+        self.fields["acerca_de"].widget.attrs['class'] = (
+            'form-control')
+        self.fields["acerca_de"].widget.attrs['placeholder'] = (
+            'Ingresa una breve descripción tuya')
+        self.fields["imagen"].widget.attrs['class'] = (
+            'form-control')
+        self.fields["link_google_scholar"].widget.attrs['class'] = (
+            'form-control')
+        self.fields["curriculum_vitae"].widget.attrs['class'] = (
+            'form-control')
+        self.fields["grado"].widget.attrs['class'] = (
+            'form-control')
 
 class FormInvestigacion(forms.ModelForm):
     class Meta:
