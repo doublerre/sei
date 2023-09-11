@@ -56,9 +56,19 @@ urlpatterns = [
         name = 'premios-categoria-a'
     ),
     path(
+        'investigadores/premios/categoria-a/<int:pk>',
+        views.UpdateSolicitudCategoriaA.as_view(),
+        name = 'update-premios-categoria-a'
+    ),
+    path(
         'investigadores/premios/categoria-b',
         views.SolicitudCategoriaB.as_view(),
         name='premios-categoria-b'
+    ),
+    path(
+        'investigadores/premios/categoria-b/<int:pk>',
+        views.UpdateSolicitudCategoriaB.as_view(),
+        name='update-premios-categoria-b'
     ),
     path(
         'investigadores/premios/solicitud-realizada',

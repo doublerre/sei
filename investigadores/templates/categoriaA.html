@@ -4,9 +4,14 @@
 {% block extraresources %}
 <link rel="stylesheet" href="{% static 'dist/assets/css/pages/form-element-select.css' %}">
 <script>
-  const c1 = {{c1}}
-  const c2 = {{c2}}
   const curp = "{{curp}}"
+  const user_id = "{{user_id}}"
+  const investigador = "{{investigador.user.id}}"
+  if(user_id != investigador) window.location.replace("{% url 'vinculacion:premios' %}");
+
+  const c1 = "{{c1}}"
+  const c2 = "{{c2}}"
+
   if(curp){
     const edad = curpToDate(curp)
     if(edad >= 36) window.location.replace("{% url 'investigadores:error-edad' %}");
@@ -48,6 +53,7 @@
     <div class="card">
       <div class="card-header">
         <h5>{{titulo}}</h5>
+        <p><b>Nota: </b>Solo se permiten archivos en formato .PDF con un tamaño máximo de 10Mb</p>
       </div>
       <div class="card-body">
         <form method="POST" {% if formulario_archivos %}enctype="multipart/form-data"{% endif %}>

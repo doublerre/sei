@@ -150,21 +150,6 @@ def perfil(request):
 @login_required
 def premiosCyT(request):
     fechas = Premios.objects.first()
-    try:
-        cA = CategoriaA.objects.get(user_id = request.user.id, anio=datetime.datetime.today().year)
-        if cA:
-            messages.error(request, "Ya estas participando en el premio de CyT")
-            return redirect("vinculacion:perfil")
-    except:
-        print("Registro inexistente")
-
-    try:
-        cB = CategoriaB.objects.get(user_id = request.user.id, anio=datetime.datetime.today().year)
-        if cB:
-            messages.error(request, "Ya estas participando en el premio de CyT")
-            return redirect("vinculacion:perfil")
-    except:
-        print("Registro inexistente")
 
     if not fechas:
         messages.error(request, "Error, la convocatoria esta cerrada")
@@ -175,7 +160,20 @@ def premiosCyT(request):
         usuario_data = get_user_specific_data(request.user)
         if str(tipo) == "Investigador":
             if usuario_data["es_sei"]:
-                return render(request, "vinculacion/perfil_premio_estatal.html")
+                try:
+                    cA = CategoriaA.objects.get(user_id = request.user.id, anio=datetime.datetime.today().year)
+                except:
+                    cA = False
+
+                try:
+                    cB = CategoriaB.objects.get(user_id = request.user.id, anio=datetime.datetime.today().year)
+                except:
+                    cB = False
+                return render(request, "vinculacion/perfil_premio_estatal.html", {
+                    "CategoriaA": cA,
+                    "CategoriaB": cB,
+                    "Convocatoria": fechas.fecha_fin - today
+                })
             else:
                 messages.error(request, "Es necesario contar constancia de investigador para participar, comunicate al siguiente telefono: 492 921 3228 o al correo: lfaraiz@gmail.com")
                 return redirect("vinculacion:perfil")

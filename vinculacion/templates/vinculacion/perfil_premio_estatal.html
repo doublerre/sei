@@ -6,32 +6,60 @@
 <div class="d-flex flex-column align-items-center h-100 w-100">
 
   <h1 class="titulo-seccion">Selecciona la categoria en la que deseas participar.</h1>
+  <h5>Quedan {{Convocatoria.days}} diás para el cierre de la convocatoria.</h5>
 
   <div class="row">
 
-    <div class="col-md-6">
-      <div class="card border-primary text-center">
-        <img src="{% static 'img/MEI.jpeg' %}" width="100px" class="card-img-top" alt="premio arbol y bonilla">
-        <div class="card-body">
-          <h5 class="card-title text-center">Producción Científica y Tecnológica.</h5>
-          <button data-bs-toggle="modal" data-bs-target="#modalPCT" class="btn btn-primary">Ver detalles.</button>
-          <a href = "{% url 'investigadores:premios-categoria-a' %}" class="btn btn-primary">Participa.</a>
+    {% if CategoriaA == False and CategoriaB == False%}
+      <div class="col-md-6">
+        <div class="card border-primary text-center">
+          <img src="{% static 'img/MEI.jpeg' %}" width="100px" class="card-img-top" alt="premio arbol y bonilla">
+          <div class="card-body">
+            <h5 class="card-title text-center">Producción Científica y Tecnológica.</h5>
+            <button data-bs-toggle="modal" data-bs-target="#modalPCT" class="btn btn-primary">Ver detalles.</button>
+            <a href = "{% url 'investigadores:premios-categoria-a' %}" class="btn btn-primary">Participa.</a>
+          </div>
         </div>
       </div>
-    </div>
 
+      <div class="col-md-6">
+        <div class="card border-primary text-center">
+          <img src="{% static 'img/JAB.png' %}" width="100px" class="card-img-top" alt="premio arbol y bonilla">
+          <div class="card-body center">
+            <h5 class="card-title text-center">Superación Académica, Formación de Recursos Humanos y Otros.</h5>
+            <button data-bs-toggle="modal" data-bs-target="#modalJAB" class="btn btn-primary">Ver detalles.</button>
+            <a href = "{% url 'investigadores:premios-categoria-b' %}" class="btn btn-primary">Participa.</a>
+          </div>
+        </div>
+      </div>
+    {% endif %}
+  </div>
+
+  {% if CategoriaA == False %}
     <div class="col-md-6">
       <div class="card border-primary text-center">
         <img src="{% static 'img/JAB.png' %}" width="100px" class="card-img-top" alt="premio arbol y bonilla">
         <div class="card-body center">
           <h5 class="card-title text-center">Superación Académica, Formación de Recursos Humanos y Otros.</h5>
           <button data-bs-toggle="modal" data-bs-target="#modalJAB" class="btn btn-primary">Ver detalles.</button>
-          <a href = "{% url 'investigadores:premios-categoria-b' %}" class="btn btn-primary">Participa.</a>
+          <a href = "{% url 'investigadores:update-premios-categoria-b' CategoriaB.id%}" class="btn btn-primary">Actualiza tus datos.</a>
         </div>
       </div>
     </div>
-  </div>
+  {% endif %}
 
+  {% if CategoriaB == False %}
+  <div class="col-md-6">
+    <div class="card border-primary text-center">
+      <img src="{% static 'img/MEI.jpeg' %}" width="100px" class="card-img-top" alt="premio arbol y bonilla">
+      <div class="card-body">
+        <h5 class="card-title text-center">Producción Científica y Tecnológica.</h5>
+        <button data-bs-toggle="modal" data-bs-target="#modalPCT" class="btn btn-primary">Ver detalles.</button>
+        <a href = "{% url 'investigadores:update-premios-categoria-a' CategoriaA.id%}" class="btn btn-primary">Actualiza tus datos.</a>
+      </div>
+    </div>
+  </div>
+  {% endif %}
 </div>
 
 <!-- Modal -->

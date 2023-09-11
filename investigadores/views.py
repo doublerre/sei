@@ -87,7 +87,7 @@ class SolicitudCategoriaA(LoginRequiredMixin, CreateView):
     template_name = "categoriaA.html"
     extra_context = {
         "formulario_archivos": True,
-        "titulo": "Categoria A: Producción Científica y Tecnológica."
+        "titulo": "Categoria A: Producción Científica y Tecnológica.",
     }
 
     def get_context_data(self, **kwargs):
@@ -107,7 +107,32 @@ class SolicitudCategoriaA(LoginRequiredMixin, CreateView):
         categoria.user.save()
         messages.success(self.request, "Solicitud enviada con exito.")
         return redirect("vinculacion:perfil")
-    
+
+class UpdateSolicitudCategoriaA(LoginRequiredMixin, UpdateView):
+    model = CategoriaA
+    form_class = FormCategoriaA
+    template_name = "categoriaA.html"
+    extra_context = {
+        "formulario_archivos": True,
+        "titulo": "Categoria A: Producción Científica y Tecnológica.",
+    }
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        investigador = Investigador.objects.get(user_id = self.request.user.id)
+        context["curp"] = investigador.curp
+        context["investigador"] = investigador
+        context["user_id"] = self.request.user.id
+        return context
+
+    def form_valid(self, form):
+        categoria = form.save(commit=False)
+        
+        categoria.save()
+        categoria.user.save()
+        messages.success(self.request, "Solicitud enviada con exito.")
+        return redirect("vinculacion:perfil")
+
 class SolicitudCategoriaB(LoginRequiredMixin, CreateView):
     model = CategoriaB
     form_class = FormCategoriaB
@@ -130,6 +155,31 @@ class SolicitudCategoriaB(LoginRequiredMixin, CreateView):
         categoria = form.save(commit=False)
         categoria.user = Investigador.objects.get(pk = self.request.user.id)
         categoria.anio = datetime.datetime.today().year
+        
+        categoria.save()
+        categoria.user.save()
+        messages.success(self.request, "Solicitud enviada con exito.")
+        return redirect("vinculacion:perfil")
+
+class UpdateSolicitudCategoriaB(LoginRequiredMixin, UpdateView):
+    model = CategoriaB
+    form_class = FormCategoriaB
+    template_name = "categoriaA.html"
+    extra_context = {
+        "formulario_archivos": True,
+        "titulo": "Categoria B: Superación Académica, Formación de Recursos Humanos y Otros."
+    }
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        investigador = Investigador.objects.get(user_id = self.request.user.id)
+        context["curp"] = investigador.curp
+        context["investigador"] = investigador
+        context["user_id"] = self.request.user.id
+        return context
+
+    def form_valid(self, form):
+        categoria = form.save(commit=False)
         
         categoria.save()
         categoria.user.save()
