@@ -1,0 +1,218 @@
+{% extends 'administracion/base.html' %}
+{% load static %}
+
+{% block extracss %}
+<link rel="stylesheet" href="{% static 'dist/assets/css/pages/form-element-select.css' %}">
+{% endblock %}
+
+{% block contenido %}
+<!-- Basic Vertical form layout section start -->
+<section id="basic-vertical-layouts">
+  <div class="row match-height">
+    <div class="col-md-4 col-sm-12">
+
+			<div class="card">
+				<div class="card-body">
+					<div class="d-flex align-items-center overflow-auto">
+						<div class="avatar avatar-xl">
+							{% if Categoria.solicitud.user.imagen %}
+							<img src="{{MEDIA_URL}}/{{Categoria.solicitud.user.imagen}}" alt="Face 1">
+							{% else %}
+							<img src="{% static 'dist/assets/images/faces/1.jpg' %}" alt="Avatar">
+							{% endif %}
+						</div>
+						<div class="ms-3 name">
+							<h5 class="font-bold">{{Categoria.solicitud.user.nombre_completo|capfirst}}</h5>
+							<h6 class="text-muted mb-0">{{Categoria.solicitud.user.curp}}</h6>
+                            </br>
+                            <p class="card-text">
+                                {% if Categoria.solicitud.user.link_google_scholar %}
+                                    <a target="_blank" href="{{Categoria.solicitud.user.link_google_scholar}}"><span
+                                        class="badge bg-info">Google Scholar</span></a>
+                                {% endif %}
+                                {% if Categoria.solicitud.user.curriculum_vitae %}
+                                    <a target="_blank" href="{% url 'investigadores:mostrar_cv' Categoria.solicitud.user.pk%}"
+                                        class="badge bg-secondary">Curriculum Vitae</a>
+                                {% endif %}
+                                {% if Categoria.solicitud.user.es_sei %}
+                                <span class="badge bg-primary">SEI</span>
+                                {% endif %}
+                                </br>
+                                {% if Categoria.solicitud.user.es_sni %}
+                                <span class="badge bg-primary">SNI</span>
+                                {% endif %}
+                                {% if Categoria.solicitud.user.constancia %}
+                                <a target="_blank" href="{{MEDIA_URL}}/{{Categoria.solicitud.user.constancia}}"><span
+                                class="badge bg-primary">Constancia</span></a>
+                                {% endif %}
+							</p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+    <div class="col-md-8 col-sm-12">
+      <div class="card">
+				<div class="card-content">
+					<div class="card-body">
+						<h3 class="card-title">Más información</h4>
+							<p class="card-text" style="text-align:justify; text-justify:inter-word">
+								{{Categoria.solicitud.user.acerca_de}}
+							</p>
+					</div>
+				</div>
+			</div>
+    </div>
+    <h4> Categoría A) Producción Científica y Tecnológica </h4>
+    {%if Categoria.a1_comentario != ""%}
+        <div class="col-md-4 col-sm-12">
+            <div class="card">
+                <div class="card-header">
+                <h6>A1 - Artículos científicos en revistas indexadas o arbitradas.</h6>
+                </div>
+                <div class="card-content">
+                <div class="card-body">
+                    <p style="text-align:justify; text-justify:inter-word">{{Categoria.a1_comentario}}</p>
+                </div>
+                </div>
+            </div>
+        </div>
+    {% endif %}
+    {%if Categoria.a2_comentario != ""%}
+        <div class="col-md-4 col-sm-12">
+            <div class="card">
+                <div class="card-header">
+                <h6>A2 - Autoría y coautoría de libros y/o capítulos de libros científicos con arbitraje.</h6>
+                </div>
+                <div class="card-content">
+                <div class="card-body">
+                    <p style="text-align:justify; text-justify:inter-word">{{Categoria.a1_comentario}}</p>
+                </div>
+                </div>
+            </div>
+        </div>
+    {% endif %}
+    {%if Categoria.a3_comentario != ""%}
+        <div class="col-md-4 col-sm-12">
+            <div class="card">
+                <div class="card-header">
+                <h6>A3 - Trámite de solicitud u obtención de patentes.</h6>
+                </div>
+                <div class="card-content">
+                <div class="card-body">
+                    <p style="text-align:justify; text-justify:inter-word">{{Categoria.a3_comentario}}</p>
+                </div>
+                </div>
+            </div>
+        </div>
+    {% endif %}
+    {%if Categoria.a4_comentario != ""%}
+        <div class="col-md-4 col-sm-12">
+            <div class="card">
+                <div class="card-header">
+                <h6>A4 - Trámite de solicitud u obtención de derechos de obtentor.</h6>
+                </div>
+                <div class="card-content">
+                <div class="card-body">
+                    <p style="text-align:justify; text-justify:inter-word">{{Categoria.a4_comentario}}</p>
+                </div>
+                </div>
+            </div>
+        </div>
+    {% endif %}
+    {%if Categoria.a5_comentario != ""%}
+        <div class="col-md-4 col-sm-12">
+            <div class="card">
+                <div class="card-header">
+                <h6>A5 - Desarrollo de software/hardware con Derechos de Autor.</h6>
+                </div>
+                <div class="card-content">
+                <div class="card-body">
+                    <p style="text-align:justify; text-justify:inter-word">{{Categoria.a5_comentario}}</p>
+                </div>
+                </div>
+            </div>
+        </div>
+    {% endif %}
+    {%if Categoria.a6_comentario != ""%}
+        <div class="col-md-4 col-sm-12">
+            <div class="card">
+                <div class="card-header">
+                <h6>A6 - Implementaciones Tecnológicas.</h6>
+                </div>
+                <div class="card-content">
+                <div class="card-body">
+                    <p style="text-align:justify; text-justify:inter-word">{{Categoria.a6_comentario}}</p>
+                </div>
+                </div>
+            </div>
+        </div>
+    {% endif %}
+    {%if Categoria.a7_comentario != ""%}
+        <div class="col-md-4 col-sm-12">
+            <div class="card">
+                <div class="card-header">
+                <h6>A7 - Artículos o notas científicas publicadas en revistas arbitradas de divulgación científica o tecnológica.</h6>
+                </div>
+                <div class="card-content">
+                <div class="card-body">
+                    <p style="text-align:justify; text-justify:inter-word">{{Categoria.a7_comentario}}</p>
+                </div>
+                </div>
+            </div>
+        </div>
+    {% endif %}
+    {%if Categoria.a8_comentario != ""%}
+        <div class="col-md-4 col-sm-12">
+            <div class="card">
+                <div class="card-header">
+                <h6>A8 - Participación en proyectos de investigación, desarrollo tecnológico e innovación con financiamiento externo obtenido mediante convocatoria.</h6>
+                </div>
+                <div class="card-content">
+                <div class="card-body">
+                    <p style="text-align:justify; text-justify:inter-word">{{Categoria.a8_comentario}}</p>
+                </div>
+                </div>
+            </div>
+        </div>
+    {% endif %}
+    {%if Categoria.a9_comentario != ""%}
+        <div class="col-md-4 col-sm-12">
+            <div class="card">
+                <div class="card-header">
+                <h6>A9 - Editor, compilador o coordinador de libros colectivos.</h6>
+                </div>
+                <div class="card-content">
+                <div class="card-body">
+                    <p style="text-align:justify; text-justify:inter-word">{{Categoria.a9_comentario}}</p>
+                </div>
+                </div>
+            </div>
+        </div>
+    {% endif %}
+    {%if Categoria.a10_comentario != ""%}
+        <div class="col-md-4 col-sm-12">
+            <div class="card">
+                <div class="card-header">
+                <h6>A10 - Pertenencia al Sistema Nacional de Investigadores.</h6>
+                </div>
+                <div class="card-content">
+                <div class="card-body">
+                    <p style="text-align:justify; text-justify:inter-word">{{Categoria.a10_comentario}}</p>
+                </div>
+                </div>
+            </div>
+        </div>
+    {% endif %}
+  </div>
+</section>
+
+<!-- // Basic Vertical form layout section end -->
+{% endblock %}
+
+{% block scripts %}
+<script src="{% static 'dist/assets/js/extensions/form-element-select.js' %}"></script>
+{% endblock %}
+
+{% block marcar_activo %}{% if menu_activo %}{{menu_activo}}{% else %}premios{% endif %}{% endblock %}

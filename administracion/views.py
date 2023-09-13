@@ -259,6 +259,13 @@ def GanadorCatB(request, id):
     messages.success(request, "El ganador ha sido publicado correctamente.")
     return redirect('administracion:premios-b-lista')
 
+@user_passes_test(user_is_staff_member)
+def ComentariosCatA(request, id):
+    CatA = RevisoresCatA.objects.filter(pk = id).first()
+    return render(request, "administracion/comentarios.html",{
+        "Categoria": CatA,
+        })
+
 # Usuarios
 
 
