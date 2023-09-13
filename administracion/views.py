@@ -266,6 +266,13 @@ def ComentariosCatA(request, id):
         "Categoria": CatA,
         })
 
+@user_passes_test(user_is_staff_member)
+def ComentariosCatB(request, id):
+    CatB = RevisoresCatB.objects.filter(pk = id).first()
+    return render(request, "administracion/comentarios.html",{
+        "Categoria": CatB,
+        })
+
 # Usuarios
 
 

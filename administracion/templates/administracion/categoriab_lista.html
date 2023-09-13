@@ -44,6 +44,8 @@
             <td>
               <a href="{% url 'administracion:premio-catb-ganador' categoria.solicitud.id%}"><span
                 class="badge bg-info">Dar premio</span></a>
+              <a href="{% url 'administracion:comentarios-cat-b' categoria.id %}"><span
+                class="badge bg-secondary">Comentarios</span></a>
             </td>
           </tr>
           {% endfor %}
