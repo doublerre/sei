@@ -20,6 +20,10 @@ class FormInvestigador(forms.ModelForm):
         self.fields["nivel"].widget.attrs['class'] = 'form-select'
         self.fields["curp"].widget.attrs['class'] = 'form-control'
         self.fields["curp"].widget.attrs['placeholder'] = 'Ingresa tu CURP'
+        self.fields["es_sni"].widget.attrs['class'] = (
+            'form-control')
+        self.fields["es_prodep"].widget.attrs['class'] = (
+            'form-control')
         self.fields["codigo_postal"].widget.attrs['class'] = 'form-control'
         self.fields["codigo_postal"].widget.attrs['placeholder'] = (
             'Ingresa tu código postal de contacto')
@@ -61,6 +65,10 @@ class FormInvestigadorUpdate(forms.ModelForm):
             'Ingresa tu CURP')
         self.fields["codigo_postal"].widget.attrs['class'] = (
             'form-control')
+        self.fields["es_sni"].widget.attrs['class'] = (
+            'form-control')
+        self.fields["es_prodep"].widget.attrs['class'] = (
+            'form-control')
         self.fields["codigo_postal"].widget.attrs['placeholder'] = (
             'Ingresa tu código postal de contacto')
         self.fields["municipio"].widget.attrs['class'] = (
@@ -95,7 +103,7 @@ class FormInvestigadorBase(forms.ModelForm):
 
     class Meta:
         model = Investigador
-        exclude = ['latitud', 'longitud', 'user', 'aprobado', 'nivel', 'es_sei', 'es_sni', 'constancia']
+        exclude = ['latitud', 'longitud', 'user', 'aprobado', 'nivel', 'es_sei', 'constancia']
 
     def __init__(self, *args, **kwargs):
         super(FormInvestigadorBase, self).__init__(*args, **kwargs)
@@ -106,6 +114,10 @@ class FormInvestigadorBase(forms.ModelForm):
         self.fields["curp"].widget.attrs['placeholder'] = (
             'Ingresa tu CURP')
         self.fields["codigo_postal"].widget.attrs['class'] = (
+            'form-control')
+        self.fields["es_sni"].widget.attrs['class'] = (
+            'form-control')
+        self.fields["es_prodep"].widget.attrs['class'] = (
             'form-control')
         self.fields["codigo_postal"].widget.attrs['placeholder'] = (
             'Ingresa tu código postal de contacto')
@@ -142,13 +154,17 @@ class FormInvestigadorBaseUpdate(forms.ModelForm):
 
     class Meta:
         model = Investigador
-        exclude = ['latitud', 'longitud', 'user', 'aprobado', 'nivel', 'es_sei', 'es_sni', 'constancia', 'curp']
+        exclude = ['latitud', 'longitud', 'user', 'aprobado', 'nivel', 'es_sei', 'constancia', 'curp']
 
     def __init__(self, *args, **kwargs):
         super(FormInvestigadorBaseUpdate, self).__init__(*args, **kwargs)
         self.fields["nombre_completo"].widget.attrs['class'] = 'form-control'
         self.fields["nombre_completo"].widget.attrs['placeholder'] = ('Escribe tu nombre')
         self.fields["codigo_postal"].widget.attrs['class'] = (
+            'form-control')
+        self.fields["es_sni"].widget.attrs['class'] = (
+            'form-control')
+        self.fields["es_prodep"].widget.attrs['class'] = (
             'form-control')
         self.fields["codigo_postal"].widget.attrs['placeholder'] = (
             'Ingresa tu código postal de contacto')

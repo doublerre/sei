@@ -72,6 +72,11 @@ ESTADOS_PREMIOS = [
     ("F", "Finalizada"),
 ]
 
+BOOLEAN_STATE = [
+    ("True", "Si"),
+    ("False", "No"),
+]
+
 class Investigador(models.Model):
     user = models.OneToOneField(
         User,
@@ -93,7 +98,8 @@ class Investigador(models.Model):
     colonia = models.CharField(max_length=100)
     calle = models.CharField(max_length=100)
     numero_exterior = models.PositiveIntegerField()
-    es_sni = models.BooleanField(default = False)
+    es_sni = models.CharField(default = False, max_length=6, choices=BOOLEAN_STATE, verbose_name="¿Esta adscrito al Sistema Nacional de Investigadores (SNI)?")
+    es_prodep = models.CharField(default = False, max_length=6, choices=BOOLEAN_STATE, verbose_name="¿Esta adscrito al Programa para el Desarrollo Profecional Docente (PRODEP)?")
     es_sei = models.BooleanField(default = False)
     acerca_de = models.TextField(
         verbose_name="Semblanza",
