@@ -262,6 +262,7 @@ def GanadorCatB(request, id):
 @user_passes_test(user_is_staff_member)
 def ComentariosCatA(request, id):
     CatA = RevisoresCatA.objects.filter(pk = id).first()
+    print(CatA)
     return render(request, "administracion/comentarios.html",{
         "Categoria": CatA,
         })
@@ -269,7 +270,7 @@ def ComentariosCatA(request, id):
 @user_passes_test(user_is_staff_member)
 def ComentariosCatB(request, id):
     CatB = RevisoresCatB.objects.filter(pk = id).first()
-    return render(request, "administracion/comentarios.html",{
+    return render(request, "administracion/comentariosB.html",{
         "Categoria": CatB,
         })
 

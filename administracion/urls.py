@@ -213,6 +213,6 @@ urlpatterns = [
     path(
         'premios/comentarios-b/<int:id>',
         views.ComentariosCatB,
-        name='comentarios-cat-a'
+        name='comentarios-cat-b'
 	)
 ]
