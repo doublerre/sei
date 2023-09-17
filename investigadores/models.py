@@ -77,6 +77,48 @@ BOOLEAN_STATE = [
     ("False", "No"),
 ]
 
+CHOICES = [
+    ([0, '0']),
+    ([1, '1']),
+    ([2, '2']),
+    ([3, '3']),
+    ([4, '4']),
+    ([5, '5']),
+    ([6, '6']),
+    ([7, '7']),
+    ([8, '8']),
+    ([9, '9']),
+    ([10, '10']),
+]
+
+CHOICES2 = [
+    ([0, '0']),
+    ([1, '1']),
+    ([2, '2']),
+    ([3, '3']),
+    ([4, '4']),
+    ([5, '5']),
+]
+
+CHOICES3 = [
+    ([0, '0']),
+    ([1, '1']),
+    ([2, '2']),
+    ([3, '3']),
+    ([4, '4']),
+    ([5, '5']),
+    ([6, '6']),
+    ([7, '7']),
+    ([8, '8']),
+    ([9, '9']),
+    ([10, '10']),
+    ([11, '11']),
+    ([12, '12']),
+    ([13, '13']),
+    ([14, '14']),
+    ([15, '15']),
+]
+
 class Investigador(models.Model):
     user = models.OneToOneField(
         User,
@@ -355,70 +397,70 @@ class RevisoresCatA(models.Model):
         on_delete=models.CASCADE,
         unique=False
     )
-    a1 = models.PositiveIntegerField(default=0, null=True, blank=True, verbose_name="A1 - Artículos científicos en revistas indexadas o arbitradas.", validators=[MinValueValidator(0), MaxValueValidator(10)])
+    a1 = models.PositiveIntegerField(default=0, choices=CHOICES, verbose_name="A1 - Artículos científicos en revistas indexadas o arbitradas.", validators=[MinValueValidator(0), MaxValueValidator(10)])
     a1_comentario = models.TextField(
         verbose_name="Retroalimentación de la documentación enviada correspondiente al campo A1 (Minimo 250 caracteres)",
         max_length=2000,
         null=False, blank=False,
         default="",
         validators=[MinLengthValidator(250)])
-    a2 = models.PositiveIntegerField(default=0, null=True, blank=True, verbose_name="A2 - Autoría y coautoría de libros y/o capítulos de libros científicos con arbitraje.", validators=[MinValueValidator(0), MaxValueValidator(10)])
+    a2 = models.PositiveIntegerField(default=0, choices=CHOICES, verbose_name="A2 - Autoría y coautoría de libros y/o capítulos de libros científicos con arbitraje.", validators=[MinValueValidator(0), MaxValueValidator(10)])
     a2_comentario = models.TextField(
         verbose_name="Retroalimentación de la documentación enviada correspondiente al campo A2 (Minimo 250 caracteres)",
         max_length=2000,
         null=False, blank=False,
         default="",
         validators=[MinLengthValidator(250)])
-    a3 = models.PositiveIntegerField(default=0, null=True, blank=True, verbose_name="A3 - Trámite de solicitud u obtención de patentes.", validators=[MinValueValidator(0), MaxValueValidator(10)])
+    a3 = models.PositiveIntegerField(default=0, choices=CHOICES, verbose_name="A3 - Trámite de solicitud u obtención de patentes.", validators=[MinValueValidator(0), MaxValueValidator(10)])
     a3_comentario = models.TextField(
         verbose_name="Retroalimentación de la documentación enviada correspondiente al campo A3 (Minimo 250 caracteres)",
         max_length=2000,
         null=False, blank=False,
         default="",
         validators=[MinLengthValidator(250)])
-    a4 = models.PositiveIntegerField(default=0, null=True, blank=True, verbose_name="A4 - Trámite de solicitud u obtención de derechos de obtentor.", validators=[MinValueValidator(0), MaxValueValidator(10)])
+    a4 = models.PositiveIntegerField(default=0, choices=CHOICES, verbose_name="A4 - Trámite de solicitud u obtención de derechos de obtentor.", validators=[MinValueValidator(0), MaxValueValidator(10)])
     a4_comentario = models.TextField(
         verbose_name="Retroalimentación de la documentación enviada correspondiente al campo A4 (Minimo 250 caracteres)",
         max_length=2000,
         null=False, blank=False,
         default="",
         validators=[MinLengthValidator(250)])
-    a5 = models.PositiveIntegerField(default=0, null=True, blank=True, verbose_name="A5 - Desarrollo de software/hardware con Derechos de Autor.", validators=[MinValueValidator(0), MaxValueValidator(10)])
+    a5 = models.PositiveIntegerField(default=0, choices=CHOICES, verbose_name="A5 - Desarrollo de software/hardware con Derechos de Autor.", validators=[MinValueValidator(0), MaxValueValidator(10)])
     a5_comentario = models.TextField(
         verbose_name="Retroalimentación de la documentación enviada correspondiente al campo A5 (Minimo 250 caracteres)",
         max_length=2000,
         null=False, blank=False,
         default="",
         validators=[MinLengthValidator(250)])
-    a6 = models.PositiveIntegerField(default=0, null=True, blank=True, verbose_name="A6 - Implementaciones tecnológicas", validators=[MinValueValidator(0), MaxValueValidator(10)])
+    a6 = models.PositiveIntegerField(default=0, choices=CHOICES, verbose_name="A6 - Implementaciones tecnológicas", validators=[MinValueValidator(0), MaxValueValidator(10)])
     a6_comentario = models.TextField(
         verbose_name="Retroalimentación de la documentación enviada correspondiente al campo A6 (Minimo 250 caracteres)",
         max_length=2000,
         null=False, blank=False,
         default="",
         validators=[MinLengthValidator(250)])
-    a7 = models.PositiveIntegerField(default=0, null=True, blank=True, verbose_name="A7 - Artículos o notas científicas publicadas en revistas arbitradas de divulgación científica o tecnológica.", validators=[MinValueValidator(0), MaxValueValidator(10)])
+    a7 = models.PositiveIntegerField(default=0, choices=CHOICES, verbose_name="A7 - Artículos o notas científicas publicadas en revistas arbitradas de divulgación científica o tecnológica.", validators=[MinValueValidator(0), MaxValueValidator(10)])
     a7_comentario = models.TextField(
         verbose_name="Retroalimentación de la documentación enviada correspondiente al campo A7 (Minimo 250 caracteres)",
         max_length=2000,
         null=False, blank=False,
         default="",
         validators=[MinLengthValidator(250)])
-    a8 = models.PositiveIntegerField(default=0, null=True, blank=True, verbose_name="A8 - Participación en proyectos de investigación, desarrollo tecnológico e innovación con financiamiento externo obtenido mediante convocatoria.", validators=[MinValueValidator(0), MaxValueValidator(10)])
+    a8 = models.PositiveIntegerField(default=0, choices=CHOICES, verbose_name="A8 - Participación en proyectos de investigación, desarrollo tecnológico e innovación con financiamiento externo obtenido mediante convocatoria.", validators=[MinValueValidator(0), MaxValueValidator(10)])
     a8_comentario = models.TextField(
         verbose_name="Retroalimentación de la documentación enviada correspondiente al campo A8 (Minimo 250 caracteres)",
         max_length=2000,
         null=False, blank=False,
         default="",
         validators=[MinLengthValidator(250)])
-    a9 = models.PositiveIntegerField(default=0, null=True, blank=True, verbose_name="A9 - Editor, compilador o coordinador de libros colectivos.", validators=[MinValueValidator(0), MaxValueValidator(10)])
+    a9 = models.PositiveIntegerField(default=0, choices=CHOICES, verbose_name="A9 - Editor, compilador o coordinador de libros colectivos.", validators=[MinValueValidator(0), MaxValueValidator(10)])
     a9_comentario = models.TextField(
         verbose_name="Retroalimentación de la documentación enviada correspondiente al campo A9 (Minimo 250 caracteres)",
         max_length=2000,
         null=False, blank=False,
         default="",
         validators=[MinLengthValidator(250)])
-    a10 = models.PositiveIntegerField(default=0, null=True, blank=True, verbose_name="A10 - Pertenencia al Sistema Nacional de Investigadores.", validators=[MinValueValidator(0), MaxValueValidator(10)])
+    a10 = models.PositiveIntegerField(default=0, choices=CHOICES, verbose_name="A10 - Pertenencia al Sistema Nacional de Investigadores.", validators=[MinValueValidator(0), MaxValueValidator(10)])
     a10_comentario = models.TextField(
         verbose_name="Retroalimentación de la documentación enviada correspondiente al campo A10 (Minimo 250 caracteres)",
         max_length=2000,
@@ -446,70 +488,70 @@ class RevisoresCatB(models.Model):
         on_delete=models.CASCADE,
         unique=False
     )
-    b1 = models.PositiveIntegerField(default=0, null=True, blank=True, verbose_name="B1 - Obtención del grado académico de Doctorado o Maestría o Especialidad de los programas del SNP o en el extranjero con beca CONACYT.", validators=[MinValueValidator(0), MaxValueValidator(15)])
+    b1 = models.PositiveIntegerField(default=0, choices=CHOICES3, verbose_name="B1 - Obtención del grado académico de Doctorado o Maestría o Especialidad de los programas del SNP o en el extranjero con beca CONACYT.")
     b1_comentario = models.TextField(
         verbose_name="Retroalimentación de la documentación enviada correspondiente al campo B1 (Minimo 250 caracteres)",
         max_length=2000,
         null=False, blank=False,
         default="",
         validators=[MinLengthValidator(250)])
-    b2 = models.PositiveIntegerField(default=0, null=True, blank=True, verbose_name="B2 - Obtención del grado académico de Doctorado o Maestría o Especialidad de un programa nacional.", validators=[MinValueValidator(0), MaxValueValidator(5)])
+    b2 = models.PositiveIntegerField(default=0, choices=CHOICES2, verbose_name="B2 - Obtención del grado académico de Doctorado o Maestría o Especialidad de un programa nacional.")
     b2_comentario = models.TextField(
         verbose_name="Retroalimentación de la documentación enviada correspondiente al campo B2 (Minimo 250 caracteres)",
         max_length=2000,
         null=False, blank=False,
         default="",
         validators=[MinLengthValidator(250)])
-    b3 = models.PositiveIntegerField(default=0, null=True, blank=True, verbose_name="B3 - Dirección de Tesis o Artículo de Investigación de alumnos graduados en licenciatura, maestría, doctorado o especialidad médica.", validators=[MinValueValidator(0), MaxValueValidator(10)])
+    b3 = models.PositiveIntegerField(default=0, choices=CHOICES, verbose_name="B3 - Dirección de Tesis o Artículo de Investigación de alumnos graduados en licenciatura, maestría, doctorado o especialidad médica.")
     b3_comentario = models.TextField(
         verbose_name="Retroalimentación de la documentación enviada correspondiente al campo B3 (Minimo 250 caracteres)",
         max_length=2000,
         null=False, blank=False,
         default="",
         validators=[MinLengthValidator(250)])
-    b4 = models.PositiveIntegerField(default=0, null=True, blank=True, verbose_name="B4 - Dirección de tesis de licenciatura de alumnos graduados en la modalidad de artículo científico.", validators=[MinValueValidator(0), MaxValueValidator(10)])
+    b4 = models.PositiveIntegerField(default=0, choices=CHOICES, verbose_name="B4 - Dirección de tesis de licenciatura de alumnos graduados en la modalidad de artículo científico.")
     b4_comentario = models.TextField(
         verbose_name="Retroalimentación de la documentación enviada correspondiente al campo B4 (Minimo 250 caracteres)",
         max_length=2000,
         null=False, blank=False,
         default="",
         validators=[MinLengthValidator(250)])
-    b5 = models.PositiveIntegerField(default=0, null=True, blank=True, verbose_name="B5 - Presentación de ponencias o carteles en eventos científicos, en México o el extranjero.", validators=[MinValueValidator(0), MaxValueValidator(10)])
+    b5 = models.PositiveIntegerField(default=0, choices=CHOICES, verbose_name="B5 - Presentación de ponencias o carteles en eventos científicos, en México o el extranjero.")
     b5_comentario = models.TextField(
         verbose_name="Retroalimentación de la documentación enviada correspondiente al campo B5 (Minimo 250 caracteres)",
         max_length=2000,
         null=False, blank=False,
         default="",
         validators=[MinLengthValidator(250)])
-    b6 = models.PositiveIntegerField(default=0, null=True, blank=True, verbose_name="B6 - Estancias de investigación en instituciones académicas o de investigación.", validators=[MinValueValidator(0), MaxValueValidator(15)])
+    b6 = models.PositiveIntegerField(default=0, choices=CHOICES3, verbose_name="B6 - Estancias de investigación en instituciones académicas o de investigación.")
     b6_comentario = models.TextField(
         verbose_name="Retroalimentación de la documentación enviada correspondiente al campo B6 (Minimo 250 caracteres)",
         max_length=2000,
         null=False, blank=False,
         default="",
         validators=[MinLengthValidator(250)])
-    b7 = models.PositiveIntegerField(default=0, null=True, blank=True, verbose_name="B7 - Asignaturas con créditos impartidas en Especialidad, Maestría o Doctorado de programas del SNP.", validators=[MinValueValidator(0), MaxValueValidator(10)])
+    b7 = models.PositiveIntegerField(default=0, choices=CHOICES, verbose_name="B7 - Asignaturas con créditos impartidas en Especialidad, Maestría o Doctorado de programas del SNP.")
     b7_comentario = models.TextField(
         verbose_name="Retroalimentación de la documentación enviada correspondiente al campo B7 (Minimo 250 caracteres)",
         max_length=2000,
         null=False, blank=False,
         default="",
         validators=[MinLengthValidator(250)])
-    b8 = models.PositiveIntegerField(default=0, null=True, blank=True, verbose_name="B8 - Participación en proyectos de investigación con financiamiento interno o externo.", validators=[MinValueValidator(0), MaxValueValidator(10)])
+    b8 = models.PositiveIntegerField(default=0, choices=CHOICES, verbose_name="B8 - Participación en proyectos de investigación con financiamiento interno o externo.")
     b8_comentario = models.TextField(
         verbose_name="Retroalimentación de la documentación enviada correspondiente al campo B8 (Minimo 250 caracteres)",
         max_length=2000,
         null=False, blank=False,
         default="",
         validators=[MinLengthValidator(250)])
-    b9 = models.PositiveIntegerField(default=0, null=True, blank=True, verbose_name="B9 - Publicación de artículos en revistas de divulgación científica o tecnológica no arbitradas.", validators=[MinValueValidator(0), MaxValueValidator(5)])
+    b9 = models.PositiveIntegerField(default=0, choices=CHOICES2, verbose_name="B9 - Publicación de artículos en revistas de divulgación científica o tecnológica no arbitradas.")
     b9_comentario = models.TextField(
         verbose_name="Retroalimentación de la documentación enviada correspondiente al campo B9 (Minimo 250 caracteres)",
         max_length=2000,
         null=False, blank=False,
         default="",
         validators=[MinLengthValidator(250)])
-    b10 = models.PositiveIntegerField(default=0, null=True, blank=True, verbose_name="B10 - Evaluación de trabajos de investigación o proyectos.", validators=[MinValueValidator(0), MaxValueValidator(10)])
+    b10 = models.PositiveIntegerField(default=0, choices=CHOICES, verbose_name="B10 - Evaluación de trabajos de investigación o proyectos.")
     b10_comentario = models.TextField(
         verbose_name="Retroalimentación de la documentación enviada correspondiente al campo B10 (Minimo 250 caracteres)",
         max_length=2000,
